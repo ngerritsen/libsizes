@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "react": "^0.13.3",
+    "immutable": "^3.7.5",
+    "react": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
@@ -14,7 +16,7 @@
   },
   "scripts": {
     "build": "browserify ./js/main.js -t [ babelify --stage 0 ] | uglifyjs > ./bundle.js",
-    "build:dev": "browserify ./js/main.js -t [ babelify --stage 0 ] ./bundle.js"
+    "watch": "watchify ./js/main.js -v -t [ babelify --stage 0 ] -o ./bundle.js"
   },
   "author": "",
   "license": "ISC"

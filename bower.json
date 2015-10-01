@@ -13,7 +13,7 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "bootstrap": "~3.3.5"
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha"
   }
 }

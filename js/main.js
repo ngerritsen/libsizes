@@ -1,8 +1,8 @@
 import React from 'react'
-import LibraryList from './library-list'
-import libraries from './libraries'
+import ReactDOM from 'react-dom'
+import App from './app'
 
-React.render(
-  <LibraryList libraries={libraries}/>,
+ReactDOM.render(
+  <App/>,
   document.getElementById('app-container')
 )
