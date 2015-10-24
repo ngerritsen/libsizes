@@ -4,17 +4,25 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "gzip-size": "^3.0.0",
-    "immutable": "^3.7.5",
-    "react": "^0.14.0-rc1",
-    "react-dom": "^0.14.0-rc1",
-    "underscore": "^1.8.3"
-  },
-  "devDependencies": {
     "babelify": "^6.3.0",
     "browserify": "^11.2.0",
-    "uglifyify": "^3.0.1",
-    "uglifyjs": "^2.4.10"
+    "cli-table": "^0.3.1",
+    "gzip-size": "^3.0.0",
+    "uglifyify": "^3.0.1"
+  },
+  "devDependencies": {
+    "angular": "^1.4.7",
+    "bluebird": "^2.10.2",
+    "immutable": "^3.7.5",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "react": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1",
+    "react-redux": "^4.0.0",
+    "riot": "^2.2.4",
+    "superagent": "^1.4.0",
+    "underscore": "^1.8.3",
+    "whatwg-fetch": "^0.10.0"
   },
   "scripts": {
     "generate": "node generator/generate.js",

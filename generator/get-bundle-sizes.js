@@ -10,10 +10,10 @@ var uglifyOpts = {
 
 module.exports = function getBundleSizes (lib) {
   var deferred = q.defer();
-  var sizesPromises = [getNormalSize(lib), getMinSize(lib), getMinGzipSize(lib)];
+  var sizesPromises = [getNormalSize(lib), getMinGzipSize(lib)];
 
   q.all(sizesPromises).then(function (sizes) {
-    deferred.resolve(mapSizes(sizes, lib))
+    deferred.resolve(Object.assign({ name: lib }, sizes[0], sizes[1]))
   });
 
   return deferred.promise;
@@ -24,20 +24,9 @@ function getNormalSize (lib) {
   var bundler = getNewBundler(lib);
   var bundle = bundler.bundle();
 
-  getBundleSize(bundle, 'size').then(deferred.resolve);
-
-  return deferred.promise;
-}
-
-function getMinSize (lib) {
-  var deferred = q.defer();
-  var bundler = getNewBundler(lib);
-
-  bundler.transform(uglifyOpts, 'uglifyify');
-
-  var bundle = bundler.bundle();
-
-  getBundleSize(bundle, 'min').then(deferred.resolve);
+  getBundleSize(bundle).then(function (buff) {
+    deferred.resolve({ normal: bytesToKbs(buff.length) });
+  });
 
   return deferred.promise;
 }
@@ -50,12 +39,17 @@ function getMinGzipSize (lib) {
 
   var bundle = bundler.bundle();
 
-  getBundleSize(bundle, 'minGzip', true).then(deferred.resolve);
+  getBundleSize(bundle).then(function (buff) {
+    deferred.resolve({
+      min: bytesToKbs(buff.length),
+      mingzip: bytesToKbs(gzipSize.sync(buff))
+    })
+  });
 
   return deferred.promise;
 }
 
-function getBundleSize (bundle, type, gzip) {
+function getBundleSize (bundle, type) {
   var deferred = q.defer();
   var buff;
   var string = '';
@@ -65,10 +59,7 @@ function getBundleSize (bundle, type, gzip) {
   });
 
   bundle.on('end', function () {
-    deferred.resolve({
-      type: type,
-      value: gzip ? gzipSize.sync(buff) : buff.length
-    });
+    deferred.resolve(buff);
   });
 
   return deferred.promise
@@ -80,14 +71,6 @@ function getNewBundler (lib) {
   return bundler;
 }
 
-function mapSizes (sizes, lib) {
-  var libSizes = {
-    lib: lib
-  };
-
-  sizes.forEach(function (size) {
-    libSizes[size.type] = size.value;
-  });
-
-  return libSizes;
+function bytesToKbs (bytes) {
+  return Math.round(bytes / 1024);
 }
