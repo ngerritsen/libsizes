@@ -5,6 +5,7 @@ var colors = require('colors');
 
 var getBundleSizes = require('./get-bundle-sizes');
 var manualSizes = require('./manual-sizes');
+var writeResults = require('./write-results');
 
 var percentage = 0;
 var packageJSON = {};
@@ -26,6 +27,7 @@ fs.readFile('./package.json', function (err, data) {
     var results = dataWithVersions.concat(manualSizes);
 
     logResults(results);
+    writeResults(results);
   });
 });
 

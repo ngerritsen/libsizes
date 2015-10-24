@@ -4,6 +4,7 @@ export default class LibraryRow extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     normal: PropTypes.number.isRequired,
+    version: PropTypes.string.isRequired,
     min: PropTypes.number.isRequired,
     mingzip: PropTypes.number.isRequired,
     onUse: PropTypes.func.isRequired
@@ -22,12 +23,13 @@ export default class LibraryRow extends Component {
   }
 
   render() {
-    const { name, normal, min, mingzip } = this.props
+    const { name, normal, min, mingzip, version } = this.props
 
     return (
       <tr>
         <td><input type="checkbox" onChange={this._handleUse} ref="used"></input></td>
         <td>{name}</td>
+        <td>{version}</td>
         <td>{normal} <span className="unit">kB</span></td>
         <td>{min} <span className="unit">kB</span></td>
         <td>{mingzip} <span className="unit">kB</span></td>

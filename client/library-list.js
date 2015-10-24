@@ -45,6 +45,7 @@ export default class LibraryList extends Component {
           <tr>
             <th>Use</th>
             <th>Name</th>
+            <th>Version</th>
             <th>Size</th>
             <th>Minified</th>
             <th>Min + gzip</th>
@@ -56,6 +57,7 @@ export default class LibraryList extends Component {
               key = {lib.name}
               name = {lib.name}
               normal = {lib.normal}
+              version = {lib.version}
               min = {lib.min}
               mingzip = {lib.mingzip}
               onUse = {this._handleUseLibrary}
