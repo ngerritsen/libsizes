@@ -1,4 +1,6 @@
-var browserify = require('browserify');
+var MemoryFS = require("memory-fs");
+var webpack = require("webpack");
+var path = require('path');
 var gzipSize = require('gzip-size');
 var q = require('q');
 
@@ -21,11 +23,17 @@ module.exports = function getBundleSizes (lib) {
 
 function getNormalSize (lib) {
   var deferred = q.defer();
-  var bundler = getNewBundler(lib);
-  var bundle = bundler.bundle();
+  var fs = new MemoryFS();
+  var config = generateWebpackBaseConfig(lib)
 
-  getBundleSize(bundle).then(function (buff) {
-    deferred.resolve({ normal: bytesToKbs(buff.length) });
+  var compiler = webpack(config);
+
+  compiler.outputFileSystem = fs;
+
+  compiler.run(function(err, stats) {
+    if (err) throw err;
+    var fileContent = fs.readFileSync('/' + lib + '.js');
+    deferred.resolve({ normal: bytesToKbs(fileContent.length) });
   });
 
   return deferred.promise;
@@ -33,42 +41,48 @@ function getNormalSize (lib) {
 
 function getMinGzipSize (lib) {
   var deferred = q.defer();
-  var bundler = getNewBundler(lib);
+  var fs = new MemoryFS();
+  var config = generateWebpackBaseConfig(lib)
 
-  bundler.transform(uglifyOpts, 'uglifyify');
+  var compiler = webpack(
+    Object.assign(config, {
+    plugins: [
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production')
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        compressor: {
+          screw_ie8: true,
+          warnings: false
+        }
+      })
+    ]
+  }));
 
-  var bundle = bundler.bundle();
+  compiler.outputFileSystem = fs;
 
-  getBundleSize(bundle).then(function (buff) {
+  compiler.run(function(err, stats) {
+    if (err) throw err;
+    var fileContent = fs.readFileSync('/' + lib + '.js');
     deferred.resolve({
-      min: bytesToKbs(buff.length),
-      mingzip: bytesToKbs(gzipSize.sync(buff))
-    })
+      min: bytesToKbs(fileContent.length),
+      mingzip: bytesToKbs(gzipSize.sync(fileContent))
+    });
   });
 
   return deferred.promise;
 }
 
-function getBundleSize (bundle, type) {
-  var deferred = q.defer();
-  var buff;
-  var string = '';
-
-  bundle.on('data', function (chunck) {
-    buff += chunck;
-  });
-
-  bundle.on('end', function () {
-    deferred.resolve(buff);
-  });
-
-  return deferred.promise
-}
-
-function getNewBundler (lib) {
-  var bundler = browserify();
-  bundler.require(lib);
-  return bundler;
+function generateWebpackBaseConfig (lib) {
+  return {
+    entry: lib,
+    output: {
+      path: path.join('/'),
+      filename: lib + '.js',
+      libraryTarget: 'umd'
+    }
+  }
 }
 
 function bytesToKbs (bytes) {

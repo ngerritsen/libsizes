@@ -8,7 +8,8 @@
     "browserify": "^11.2.0",
     "cli-table": "^0.3.1",
     "gzip-size": "^3.0.0",
-    "uglifyify": "^3.0.1"
+    "uglifyify": "^3.0.1",
+    "webpack": "^1.12.2"
   },
   "devDependencies": {
     "angular": "^1.4.7",
