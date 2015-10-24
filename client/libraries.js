@@ -7,13 +7,6 @@ export default [
     "version": "1.4.7"
   },
   {
-    "name": "babel-loader",
-    "normal": 3125,
-    "min": 1102,
-    "mingzip": 315,
-    "version": "5.3.2"
-  },
-  {
     "name": "backbone",
     "normal": 376,
     "min": 121,
@@ -110,6 +103,13 @@ export default [
     "min": 84,
     "mingzip": 29,
     "version": "2.1.4"
+  },
+  {
+    "name": "knockout",
+    "normal": 271,
+    "min": 75,
+    "mingzip": 22,
+    "version": "3.3.0"
   },
   {
     "name": "lazy.js",
