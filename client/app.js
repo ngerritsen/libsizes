@@ -7,7 +7,7 @@ export default class App extends Component {
     return (
       <div className="container-fluid">
         <h1 className="title">Lib sizes</h1>
-        <p>Minfied sizes generated with uglify-js with compress and mangle on</p>
+        <p>Minfied sizes are generated using webpack with the uglifyjs plugin.</p>
         <LibraryList libraries={libraries}/>
         <p className="footer-text">{String.fromCharCode(169)} Niels Gerritsen 2015</p>
       </div>

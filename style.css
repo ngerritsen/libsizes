@@ -7,6 +7,10 @@
   font-size: 1.9rem;
 }
 
+.version {
+  color: #999;
+}
+
 .unit {
   font-size: .8em;
   color: #bbb;

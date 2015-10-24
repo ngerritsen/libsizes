@@ -28,8 +28,8 @@ export default class LibraryRow extends Component {
     return (
       <tr>
         <td><input type="checkbox" onChange={this._handleUse} ref="used"></input></td>
-        <td>{name}</td>
-        <td>{version}</td>
+        <td><a target="_blank" href={`http://npmjs.com/package/${name}`}>{name}</a></td>
+        <td className="version">{version}</td>
         <td>{normal} <span className="unit">kB</span></td>
         <td>{min} <span className="unit">kB</span></td>
         <td>{mingzip} <span className="unit">kB</span></td>
