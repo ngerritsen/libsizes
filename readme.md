@@ -1,1 +1,3 @@
-Show the sizes of your favorite libs and calculate the proximate size of your libs combined. Note that I do not assure a precisely correct and up to date library size. The minifying and compression type can also influence the size, as well as the bundling of files. I am willing to accept pull requests for new libraries or updated sizes.
+Selects all dev dependencies in the packages json amd generates a report about the size of each library. Using webpack it gets the minified size. It also calculates the gzipped size. Afterwards a client in React is built showing all the libraries. 
+
+[nielsgerritsen.com/libsizes](http://nielsgerritsen.com/libsizes)
