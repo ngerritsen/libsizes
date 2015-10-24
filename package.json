@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "gzip-size": "^3.0.0",
     "immutable": "^3.7.5",
     "react": "^0.14.0-rc1",
     "react-dom": "^0.14.0-rc1",
@@ -12,11 +13,13 @@
   "devDependencies": {
     "babelify": "^6.3.0",
     "browserify": "^11.2.0",
+    "uglifyify": "^3.0.1",
     "uglifyjs": "^2.4.10"
   },
   "scripts": {
-    "build": "browserify ./js/main.js -t [ babelify --stage 0 ] | uglifyjs > ./bundle.js",
-    "watch": "watchify ./js/main.js -v -t [ babelify --stage 0 ] -o ./bundle.js"
+    "generate": "node generator/generate.js",
+    "build": "browserify ./client/main.js -t [ babelify --stage 0 ] | uglifyjs > ./bundle.js",
+    "watch": "watchify ./client/main.js -v -t [ babelify --stage 0 ] -o ./bundle.js"
   },
   "author": "",
   "license": "ISC"
