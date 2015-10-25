@@ -2,6 +2,19 @@
 
 $library-list--row-height: 3.5rem;
 
+.library-list--search {
+  font-size: 1.5rem;
+  margin: .5rem 0 1.5rem 0;
+  border: 2px solid darken($color-white, 15%);
+  padding: .7rem .9rem;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border: 2px solid darken($color-white, 25%);
+  }
+}
+
 .library-list {
   border-collapse: collapse;
   width: 100%;

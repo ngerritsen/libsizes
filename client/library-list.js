@@ -12,10 +12,14 @@ export default class LibraryList extends Component {
   constructor(props, context) {
     super(props, context)
     this._handleUseLibrary = this._handleUseLibrary.bind(this)
-    this.state = { libraries: List(props.libraries) }
+    this._handleSearch = this._handleSearch.bind(this)
+    this.state = {
+      libraries: List(props.libraries),
+      searchValue: ''
+    }
   }
 
-  _handleUseLibrary(name, used) {
+  _handleUseLibrary (name, used) {
     const libraries = this.state.libraries.map((lib) => {
       if (lib.name === name) {
         return Object.assign({}, lib, { used })
@@ -25,7 +29,25 @@ export default class LibraryList extends Component {
     this.setState({ libraries })
   }
 
-  _calcTotals() {
+  _handleSearch () {
+    const searchValue = this.refs.searchInput.value
+    const processedSearchValue = searchValue.trim().toLowerCase()
+
+    if (processedSearchValue !== this.state.searchValue) {
+      this.setState({ searchValue: processedSearchValue })
+    }
+  }
+
+  _searchLibraries (libraries, searchValue) {
+    return libraries.filter((lib) => this._matchesSearchValue(lib.name, searchValue))
+  }
+
+  _matchesSearchValue (name, searchValue) {
+    const processedName = name.toLowerCase()
+    return processedName.indexOf(searchValue) !== -1
+  }
+
+  _calcTotals () {
     return this.state.libraries
       .toIndexedSeq()
       .filter((lib) => lib.used)
@@ -40,43 +62,56 @@ export default class LibraryList extends Component {
 
   render() {
     const { normal, min, mingzip } = this._calcTotals()
+    const { searchValue, libraries } = this.state
+
+    const librariesToShow =  this._searchLibraries(libraries, searchValue)
 
     return (
-      <table className="library-list">
-        <thead>
-          <tr>
-            <th>Use</th>
-            <th>Name</th>
-            <th>Version</th>
-            <th>Size</th>
-            <th>Minified*</th>
-            <th>Min + gzip</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.libraries.map((lib) =>
-            <LibraryRow
-              key = {lib.name}
-              name = {lib.name}
-              normal = {lib.normal}
-              version = {lib.version}
-              min = {lib.min}
-              mingzip = {lib.mingzip}
-              onUse = {this._handleUseLibrary}
-            />
-          )}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td>Total</td>
-            <td></td>
-            <td>{normal} <span className="unit">kB</span></td>
-            <td>{min} <span className="unit">kB</span></td>
-            <td>{mingzip} <span className="unit">kB</span></td>
-          </tr>
-        </tfoot>
-      </table>
+      <div>
+        <input
+          type="text"
+          className="library-list--search"
+          placeholder="Search"
+          onChange={this._handleSearch}
+          ref="searchInput"
+          />
+
+        <table className="library-list">
+          <thead>
+            <tr>
+              <th>Use</th>
+              <th>Name</th>
+              <th>Version</th>
+              <th>Size</th>
+              <th>Minified*</th>
+              <th>Min + gzip</th>
+            </tr>
+          </thead>
+          <tbody>
+            {librariesToShow.map((lib) =>
+              <LibraryRow
+                key = {lib.name}
+                name = {lib.name}
+                normal = {lib.normal}
+                version = {lib.version}
+                min = {lib.min}
+                mingzip = {lib.mingzip}
+                onUse = {this._handleUseLibrary}
+              />
+            )}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td>Total</td>
+              <td></td>
+              <td>{normal} <span className="unit">kB</span></td>
+              <td>{min} <span className="unit">kB</span></td>
+              <td>{mingzip} <span className="unit">kB</span></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     )
   }
 }
