@@ -148,7 +148,7 @@ export default [
   },
   {
     "name": "parsley",
-    "normal": 217,
+    "normal": 216,
     "min": 76,
     "mingzip": 24,
     "version": "0.1.0"
