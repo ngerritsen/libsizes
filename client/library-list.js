@@ -117,7 +117,7 @@ export default class LibraryList extends Component {
     const { searchValue, libraries, sortProp, sortInversed } = this.state
 
     const searchedLibraries =  this._searchLibraries(libraries, searchValue)
-    let librariesToShow = this._sortLibraries(libraries, sortProp)
+    let librariesToShow = this._sortLibraries(searchedLibraries, sortProp)
 
     if (sortInversed) {
       librariesToShow = librariesToShow.reverse()
