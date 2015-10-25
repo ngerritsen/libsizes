@@ -1,0 +1,125 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'foundation',
+1 verbose cli   '--save-dev' ]
+2 info using npm@3.3.4
+3 info using node@v4.0.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData foundation
+8 silly fetchNamedPackageData foundation
+9 silly mapToRegistry name foundation
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.org/
+12 silly mapToRegistry uri https://registry.npmjs.org/foundation
+13 verbose request uri https://registry.npmjs.org/foundation
+14 verbose request no auth needed
+15 info attempt registry request try #1 at 4:10:16 PM
+16 verbose request using bearer token for auth
+17 verbose request id 0355ae3f805ed22d
+18 verbose etag "5JD60DGRP9PRJ9JN2NQ8F28XB"
+19 http request GET https://registry.npmjs.org/foundation
+20 http 304 https://registry.npmjs.org/foundation
+21 verbose headers { 'cache-control': 'max-age=60',
+21 verbose headers   'accept-ranges': 'bytes',
+21 verbose headers   date: 'Sun, 25 Oct 2015 15:10:18 GMT',
+21 verbose headers   via: '1.1 varnish',
+21 verbose headers   connection: 'keep-alive',
+21 verbose headers   'x-served-by': 'cache-ams4126-AMS',
+21 verbose headers   'x-cache': 'MISS',
+21 verbose headers   'x-cache-hits': '0',
+21 verbose headers   'x-timer': 'S1445785817.507757,VS0,VE668' }
+22 silly get cb [ 304,
+22 silly get   { 'cache-control': 'max-age=60',
+22 silly get     'accept-ranges': 'bytes',
+22 silly get     date: 'Sun, 25 Oct 2015 15:10:18 GMT',
+22 silly get     via: '1.1 varnish',
+22 silly get     connection: 'keep-alive',
+22 silly get     'x-served-by': 'cache-ams4126-AMS',
+22 silly get     'x-cache': 'MISS',
+22 silly get     'x-cache-hits': '0',
+22 silly get     'x-timer': 'S1445785817.507757,VS0,VE668' } ]
+23 verbose etag https://registry.npmjs.org/foundation from cache
+24 verbose get saving foundation to /Users/ncgerritsen/.npm/registry.npmjs.org/foundation/.cache.json
+25 silly install normalizeTree
+26 silly loadCurrentTree Finishing
+27 silly loadIdealTree Starting
+28 silly install loadIdealTree
+29 silly cloneCurrentTree Starting
+30 silly install cloneCurrentTreeToIdealTree
+31 silly cloneCurrentTree Finishing
+32 silly loadShrinkwrap Starting
+33 silly install loadShrinkwrap
+34 silly loadShrinkwrap Finishing
+35 silly loadAllDepsIntoIdealTree Starting
+36 silly install loadAllDepsIntoIdealTree
+37 silly resolveWithNewModule foundation@4.1.6 checking installable status
+38 silly cache add args [ 'foundation', null ]
+39 verbose cache add spec foundation
+40 silly cache add parsed spec Result {
+40 silly cache add   raw: 'foundation',
+40 silly cache add   scope: null,
+40 silly cache add   name: 'foundation',
+40 silly cache add   rawSpec: '',
+40 silly cache add   spec: '*',
+40 silly cache add   type: 'range' }
+41 silly addNamed foundation@*
+42 verbose addNamed "*" is a valid semver range for foundation
+43 silly addNameRange { name: 'foundation', range: '*', hasData: false }
+44 silly mapToRegistry name foundation
+45 silly mapToRegistry using default registry
+46 silly mapToRegistry registry https://registry.npmjs.org/
+47 silly mapToRegistry uri https://registry.npmjs.org/foundation
+48 verbose addNameRange registry:https://registry.npmjs.org/foundation not in flight; fetching
+49 verbose get https://registry.npmjs.org/foundation not expired, no request
+50 silly addNameRange number 2 { name: 'foundation', range: '*', hasData: true }
+51 silly addNameRange versions [ 'foundation',
+51 silly addNameRange   [ '4.0.0-wip',
+51 silly addNameRange     '4.1.1',
+51 silly addNameRange     '4.1.1-s1',
+51 silly addNameRange     '4.1.1-s2',
+51 silly addNameRange     '4.1.2',
+51 silly addNameRange     '4.1.2-stylus1',
+51 silly addNameRange     '4.1.2-stylus2',
+51 silly addNameRange     '4.1.3',
+51 silly addNameRange     '4.1.5',
+51 silly addNameRange     '4.1.5-1',
+51 silly addNameRange     '4.1.5-2',
+51 silly addNameRange     '4.1.6',
+51 silly addNameRange     '4.1.6-1',
+51 silly addNameRange     '4.1.6-2',
+51 silly addNameRange     '4.1.6-3',
+51 silly addNameRange     '4.1.6-4',
+51 silly addNameRange     '4.1.6-5',
+51 silly addNameRange     '4.2.1',
+51 silly addNameRange     '4.2.1-1' ] ]
+52 silly addNamed foundation@4.2.1
+53 verbose addNamed "4.2.1" is a plain semver version for foundation
+54 silly cache afterAdd foundation@4.2.1
+55 verbose afterAdd /Users/ncgerritsen/.npm/foundation/4.2.1/package/package.json not in flight; writing
+56 verbose afterAdd /Users/ncgerritsen/.npm/foundation/4.2.1/package/package.json written
+57 silly rollbackFailedOptional Starting
+58 silly rollbackFailedOptional Finishing
+59 silly runTopLevelLifecycles Starting
+60 silly runTopLevelLifecycles Finishing
+61 silly install printInstalled
+62 verbose stack Error: Error extracting /Users/ncgerritsen/.npm/foundation/4.1.6/package.tgz archive: ENOENT: no such file or directory, open '/Users/ncgerritsen/.npm/foundation/4.1.6/package.tgz'
+62 verbose stack     at ReadStream.<anonymous> (/usr/local/lib/node_modules/npm/lib/fetch-package-metadata.js:276:10)
+62 verbose stack     at emitOne (events.js:77:13)
+62 verbose stack     at ReadStream.emit (events.js:169:7)
+62 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:179:14
+62 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:230:16
+62 verbose stack     at FSReqWrap.oncomplete (fs.js:82:15)
+63 verbose cwd /Users/ncgerritsen/Projects/libsizes
+64 error Darwin 15.0.0
+65 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "foundation" "--save-dev"
+66 error node v4.0.0
+67 error npm  v3.3.4
+68 error code EREADFILE
+69 error Error extracting /Users/ncgerritsen/.npm/foundation/4.1.6/package.tgz archive: ENOENT: no such file or directory, open '/Users/ncgerritsen/.npm/foundation/4.1.6/package.tgz'
+70 error If you need help, you may report this error at:
+70 error     <https://github.com/npm/npm/issues>
+71 verbose exit [ 1, true ]

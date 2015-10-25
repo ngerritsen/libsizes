@@ -21,6 +21,13 @@ export default [
     "version": "2.10.2"
   },
   {
+    "name": "bootstrap",
+    "normal": 71,
+    "min": 36,
+    "mingzip": 9,
+    "version": "3.3.5"
+  },
+  {
     "name": "chart.js",
     "normal": 112,
     "min": 51,
@@ -280,21 +287,14 @@ export default [
     "version": "0.10.0"
   },
   {
-    "name": "BootstrapCSS",
+    "name": "bootstrap css",
     "version": "3.3.5",
     "normal": 147,
     "min": 123,
     "mingzip": 20
   },
   {
-    "name": "BootstrapJS",
-    "version": "3.3.5",
-    "normal": 69,
-    "min": 37,
-    "mingzip": 10
-  },
-  {
-    "name": "Polymer",
+    "name": "polymer",
     "version": "1.2.0",
     "normal": 160,
     "min": 138,
@@ -302,7 +302,7 @@ export default [
     "notes": "Minified size is JS extracted from HTML and minified."
   },
   {
-    "name": "Ember",
+    "name": "ember",
     "version": "0.9.8",
     "normal": 1000,
     "min": 432,
