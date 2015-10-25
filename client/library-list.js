@@ -2,6 +2,8 @@ import { List } from 'immutable'
 import React, { Component, PropTypes } from 'react'
 import LibraryRow from './library-row'
 
+import './styles/library-list.scss'
+
 export default class LibraryList extends Component {
   static propTypes = {
     libraries: PropTypes.arrayOf(React.PropTypes.object).isRequired
@@ -40,14 +42,14 @@ export default class LibraryList extends Component {
     const { normal, min, mingzip } = this._calcTotals()
 
     return (
-      <table className="table table-hover table-sm">
+      <table className="library-list">
         <thead>
           <tr>
             <th>Use</th>
             <th>Name</th>
             <th>Version</th>
             <th>Size</th>
-            <th>Minified</th>
+            <th>Minified*</th>
             <th>Min + gzip</th>
           </tr>
         </thead>
@@ -68,6 +70,7 @@ export default class LibraryList extends Component {
           <tr>
             <td></td>
             <td>Total</td>
+            <td></td>
             <td>{normal} <span className="unit">kB</span></td>
             <td>{min} <span className="unit">kB</span></td>
             <td>{mingzip} <span className="unit">kB</span></td>

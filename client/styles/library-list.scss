@@ -1,0 +1,27 @@
+@import 'colors';
+
+$library-list--row-height: 3.5rem;
+
+.library-list {
+  border-collapse: collapse;
+  width: 100%;
+
+  th,
+  td {
+    text-align: left;
+    border-bottom: 1px solid darken($color-white, 10%);
+
+    input[type="checkbox"] {
+      margin-top: .5rem;
+    }
+  }
+
+  tr {
+    height: $library-list--row-height;
+    line-height: $library-list--row-height;
+  }
+
+  tfoot {
+    font-weight: bold;
+  }
+}

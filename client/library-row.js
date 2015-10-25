@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
+import './styles/library-row.scss';
+
 export default class LibraryRow extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,

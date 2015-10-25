@@ -1,0 +1,18 @@
+@import 'colors';
+
+.header {
+  background-color: $color-red;
+  color: $color-white;
+  padding: 7rem 0;
+  margin-bottom: 1rem;
+}
+
+.header--title {
+  font-size: 3.2rem;
+  margin: 0 0 .5rem;
+}
+
+.header--quote {
+  color: darken($color-white, 10%);
+  margin: 0;
+}

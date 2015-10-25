@@ -1,0 +1,10 @@
+@import 'colors';
+
+.version {
+  color: lighten($color-text, 25%);
+}
+
+.unit {
+  font-size: .8em;
+  color: lighten($color-text, 30%);
+}

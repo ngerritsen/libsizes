@@ -1,0 +1,14 @@
+@import 'colors';
+
+.note {
+  color: lighten($color-text, 30%);
+  font-style: italic;
+  font-size: .9em;
+}
+
+.footer-text {
+  padding: 2.4rem 0 2.6rem;
+  text-align: center;
+  color: lighten($color-text, 40%);
+  font-size: .8em;
+}
