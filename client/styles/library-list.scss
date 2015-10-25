@@ -29,6 +29,18 @@ $library-list--row-height: 3.5rem;
     }
   }
 
+  .sortable {
+    &:hover {
+      cursor: pointer;
+      color: lighten($color-text, 10%);
+    }
+  }
+
+  .sort-icon {
+    font-size: .9em;
+    margin-left: .5rem;
+  }
+
   tr {
     height: $library-list--row-height;
     line-height: $library-list--row-height;

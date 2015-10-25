@@ -13,9 +13,15 @@ export default class LibraryList extends Component {
     super(props, context)
     this._handleUseLibrary = this._handleUseLibrary.bind(this)
     this._handleSearch = this._handleSearch.bind(this)
+    this._handleSortByName = this._handleSortByName.bind(this)
+    this._handleSortByNormal = this._handleSortByNormal.bind(this)
+    this._handleSortByMin = this._handleSortByMin.bind(this)
+    this._handleSortByMinGzip = this._handleSortByMinGzip.bind(this)
     this.state = {
       libraries: List(props.libraries),
-      searchValue: ''
+      searchValue: '',
+      sortProp: 'name',
+      sortInversed: false
     }
   }
 
@@ -39,12 +45,58 @@ export default class LibraryList extends Component {
   }
 
   _searchLibraries (libraries, searchValue) {
-    return libraries.filter((lib) => this._matchesSearchValue(lib.name, searchValue))
+    return libraries.filter(lib => this._matchesSearchValue(lib.name, searchValue))
   }
 
   _matchesSearchValue (name, searchValue) {
     const processedName = name.toLowerCase()
     return processedName.indexOf(searchValue) !== -1
+  }
+
+  _handleSortByName () {
+    const { sortProp, sortInversed } = this.state
+
+    this.setState({
+      sortProp: 'name',
+      sortInversed: sortProp === 'name' && !sortInversed
+    })
+  }
+
+  _handleSortByNormal () {
+    const { sortProp, sortInversed } = this.state
+
+    this.setState({
+      sortProp: 'normal',
+      sortInversed: sortProp === 'normal' && !sortInversed
+    })
+  }
+
+  _handleSortByMin () {
+    const { sortProp, sortInversed } = this.state
+
+    this.setState({
+      sortProp: 'min',
+      sortInversed: sortProp === 'min' && !sortInversed
+    })
+  }
+
+  _handleSortByMinGzip () {
+    const { sortProp, sortInversed } = this.state
+
+    this.setState({
+      sortProp: 'mingzip',
+      sortInversed: sortProp === 'mingzip' && !sortInversed
+    })
+  }
+
+  _sortLibraries (libraries, sortProp) {
+    const sortValue = libraries.get(0)[sortProp]
+
+    if (typeof sortValue === 'string') {
+      return libraries.sortBy(lib => lib[sortProp].toLowerCase())
+    }
+
+    return libraries.sortBy(lib => lib[sortProp])
   }
 
   _calcTotals () {
@@ -62,9 +114,14 @@ export default class LibraryList extends Component {
 
   render() {
     const { normal, min, mingzip } = this._calcTotals()
-    const { searchValue, libraries } = this.state
+    const { searchValue, libraries, sortProp, sortInversed } = this.state
 
-    const librariesToShow =  this._searchLibraries(libraries, searchValue)
+    const searchedLibraries =  this._searchLibraries(libraries, searchValue)
+    let librariesToShow = this._sortLibraries(libraries, sortProp)
+
+    if (sortInversed) {
+      librariesToShow = librariesToShow.reverse()
+    }
 
     return (
       <div>
@@ -80,11 +137,35 @@ export default class LibraryList extends Component {
           <thead>
             <tr>
               <th>Use</th>
-              <th>Name</th>
+              <th className="sortable" onClick={this._handleSortByName}>
+                Name
+                <span className="sort-icon">
+                  {sortProp === 'name' && sortInversed && String.fromCharCode(9660)}
+                  {sortProp === 'name' && !sortInversed && String.fromCharCode(9650)}
+                </span>
+              </th>
               <th>Version</th>
-              <th>Size</th>
-              <th>Minified*</th>
-              <th>Min + gzip</th>
+              <th className="sortable" onClick={this._handleSortByNormal}>
+                Size
+                <span className="sort-icon">
+                  {sortProp === 'normal' && sortInversed && String.fromCharCode(9660)}
+                  {sortProp === 'normal' && !sortInversed && String.fromCharCode(9650)}
+                </span>
+              </th>
+              <th className="sortable" onClick={this._handleSortByMin}>
+                Minified*
+                <span className="sort-icon">
+                  {sortProp === 'min' && sortInversed && String.fromCharCode(9660)}
+                  {sortProp === 'min' && !sortInversed && String.fromCharCode(9650)}
+                </span>
+              </th>
+              <th className="sortable" onClick={this._handleSortByMinGzip}>
+                Min + gzip
+                <span className="sort-icon">
+                  {sortProp === 'mingzip' && sortInversed && String.fromCharCode(9660)}
+                  {sortProp === 'mingzip' && !sortInversed && String.fromCharCode(9650)}
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody>
