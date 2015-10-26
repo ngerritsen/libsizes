@@ -1,0 +1,26 @@
+{
+  "name": "libsizes",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ngerritsen/libsizes",
+  "authors": [
+    "Niels Gerritsen <n.c.gerritsen@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "selectize": "~0.12.1",
+    "normalize-css": "normalize.css#~3.0.3",
+    "foundation": "~5.5.3",
+    "semantic": "semantic-ui#~2.1.4"
+  },
+  "dependencies": {}
+}

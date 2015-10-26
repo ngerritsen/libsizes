@@ -20,11 +20,12 @@ module.exports = function generate () {
     packageJSON = JSON.parse(data);
     libraries = Object.keys(packageJSON.devDependencies);
 
-    console.log('analyzing library sizes...');
+    console.log('analyzing ' + libraries.length + ' library sizes...');
     var stopwatch = new Stopwatch();
 
     getLibrarySizes(libraries).then(function (data) {
-      console.log('\ndone analyzing in: ' + stopwatch.getTime() + 'ms\n');
+      var secondsElapsed = Math.round(stopwatch.getTime() / 1000);
+      console.log('\ndone analyzing in: ' + secondsElapsed + 's\n');
 
       var dataWithVersions = addVersions(data);
       var results = dataWithVersions.concat(manualSizes);

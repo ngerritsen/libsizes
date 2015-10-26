@@ -7,6 +7,13 @@ export default [
     "version": "1.4.7"
   },
   {
+    "name": "async",
+    "normal": 45,
+    "min": 15,
+    "mingzip": 5,
+    "version": "1.5.0"
+  },
+  {
     "name": "backbone",
     "normal": 376,
     "min": 121,
@@ -47,6 +54,27 @@ export default [
     "min": 33,
     "mingzip": 10,
     "version": "4.2.0"
+  },
+  {
+    "name": "ember",
+    "normal": 2572,
+    "min": 1019,
+    "mingzip": 280,
+    "version": "0.9.8"
+  },
+  {
+    "name": "fastclick",
+    "normal": 28,
+    "min": 8,
+    "mingzip": 3,
+    "version": "1.0.6"
+  },
+  {
+    "name": "flight",
+    "normal": 34,
+    "min": 13,
+    "mingzip": 5,
+    "version": ".0.2"
   },
   {
     "name": "flux",
@@ -98,6 +126,20 @@ export default [
     "version": "3.7.5"
   },
   {
+    "name": "intro.js",
+    "normal": 48,
+    "min": 17,
+    "mingzip": 5,
+    "version": "1.1.1"
+  },
+  {
+    "name": "is_js",
+    "normal": 52,
+    "min": 19,
+    "mingzip": 5,
+    "version": "0.7.4"
+  },
+  {
     "name": "jqlite",
     "normal": 44,
     "min": 18,
@@ -110,6 +152,13 @@ export default [
     "min": 84,
     "mingzip": 29,
     "version": "2.1.4"
+  },
+  {
+    "name": "jquery-ui",
+    "normal": 690,
+    "min": 307,
+    "mingzip": 88,
+    "version": "1.10.5"
   },
   {
     "name": "knockout",
@@ -152,6 +201,13 @@ export default [
     "min": 6,
     "mingzip": 2,
     "version": "2.2.0"
+  },
+  {
+    "name": "nvd3",
+    "normal": 549,
+    "min": 214,
+    "mingzip": 43,
+    "version": "1.8.1"
   },
   {
     "name": "parsley",
@@ -252,11 +308,32 @@ export default [
     "version": "0.6.26"
   },
   {
+    "name": "slick-carousel",
+    "normal": 331,
+    "min": 123,
+    "mingzip": 38,
+    "version": "1.5.8"
+  },
+  {
+    "name": "sortable",
+    "normal": 417,
+    "min": 163,
+    "mingzip": 50,
+    "version": "2.0.0"
+  },
+  {
     "name": "superagent",
     "normal": 30,
     "min": 9,
     "mingzip": 3,
     "version": "1.4.0"
+  },
+  {
+    "name": "swiper",
+    "normal": 176,
+    "min": 68,
+    "mingzip": 17,
+    "version": "3.1.7"
   },
   {
     "name": "three",
@@ -266,11 +343,32 @@ export default [
     "version": "0.73.0"
   },
   {
+    "name": "timeline-js",
+    "normal": 13,
+    "min": 6,
+    "mingzip": 2,
+    "version": ".0.2"
+  },
+  {
     "name": "underscore",
     "normal": 55,
     "min": 16,
     "mingzip": 6,
     "version": "1.8.3"
+  },
+  {
+    "name": "velocity-animate",
+    "normal": 215,
+    "min": 35,
+    "mingzip": 12,
+    "version": "1.2.3"
+  },
+  {
+    "name": "vue",
+    "normal": 241,
+    "min": 71,
+    "mingzip": 23,
+    "version": "0.12.16"
   },
   {
     "name": "whatwg-fetch",
@@ -287,18 +385,60 @@ export default [
     "mingzip": 20
   },
   {
+    "name": "foundation css",
+    "version": "5.5.3",
+    "normal": 208,
+    "min": 148,
+    "mingzip": 20
+  },
+  {
+    "name": "foundation",
+    "version": "5.5.3",
+    "normal": 217,
+    "min": 109,
+    "mingzip": 28
+  },
+  {
+    "name": "normalize.css",
+    "version": "3.0.3",
+    "normal": 8,
+    "min": 2,
+    "mingzip": 20
+  },
+  {
+    "name": "semantic-ui css",
+    "version": "3.0.3",
+    "normal": 717,
+    "min": 520,
+    "mingzip": 89
+  },
+  {
+    "name": "semantic-ui",
+    "version": "3.0.3",
+    "normal": 690,
+    "min": 260,
+    "mingzip": 65
+  },
+  {
+    "name": "slick-carrousel css",
+    "version": "1.5.8",
+    "normal": 2,
+    "min": 1,
+    "mingzip": 0.5
+  },
+  {
+    "name": "dropzone css",
+    "version": "4.2.0",
+    "normal": 13,
+    "min": 10,
+    "mingzip": 2
+  },
+  {
     "name": "polymer",
     "version": "1.2.0",
     "normal": 160,
     "min": 138,
     "mingzip": 35,
     "notes": "Minified size is JS extracted from HTML and minified."
-  },
-  {
-    "name": "ember",
-    "version": "0.9.8",
-    "normal": 1000,
-    "min": 432,
-    "mingzip": 110
   }
 ]
