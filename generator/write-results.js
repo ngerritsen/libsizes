@@ -9,9 +9,9 @@ module.exports = function writeResults (results) {
 
   fs.writeFile('./client/libraries.js', fileContents, function (err) {
     if (err) throw err;
-    
+
     console.log('Saved results to ./client/libraries.js');
-    deferred.resolve(true);
+    deferred.resolve(results);
   });
 
   return deferred.promise;

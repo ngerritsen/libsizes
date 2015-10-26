@@ -3,64 +3,52 @@ var fs = require('fs');
 
 var getBundleSizes = require('./get-bundle-sizes');
 var manualSizes = require('./manual-sizes');
-var writeResults = require('./write-results');
-var logResults = require('./log-results');
-var buildClient = require('./build-client');
+var filterDepsFromResults = require('./filter-deps-from-results');
+
+var Stopwatch = require('./stopwatch');
+var Loader = require('./loader');
 
 var percentage = 0;
 var packageJSON = {};
 var libraries = [];
 
-fs.readFile('./package.json', function (err, data) {
-  if (err) throw err;
-  packageJSON = JSON.parse(data);
-  libraries = Object.keys(packageJSON.devDependencies);
+module.exports = function generate () {
+  var deferred = q.defer();
 
-  console.log('analyzing library sizes...');
+  fs.readFile('./package.json', function (err, data) {
+    if (err) throw err;
+    packageJSON = JSON.parse(data);
+    libraries = Object.keys(packageJSON.devDependencies);
 
-  getLibrarySizes(libraries).then(function (data) {
-    console.log('\ndone analyzing!\n');
+    console.log('analyzing library sizes...');
+    var stopwatch = new Stopwatch();
 
-    var dataWithVersions = addVersions(data);
-    var results = dataWithVersions.concat(manualSizes);
+    getLibrarySizes(libraries).then(function (data) {
+      console.log('\ndone analyzing in: ' + stopwatch.getTime() + 'ms\n');
 
-    logResults(results);
-    writeResults(results).then(function () {
-      buildClient();
+      var dataWithVersions = addVersions(data);
+      var results = dataWithVersions.concat(manualSizes);
+      results = filterDepsFromResults(results);
+
+      deferred.resolve(results);
     });
   });
-});
+
+  return deferred.promise;
+}
 
 function getLibrarySizes (libs) {
   var promises = [];
+  var loader = new Loader(libs, 80);
 
   libs.forEach(function (lib) {
     var promise = getBundleSizes(lib);
 
-    promise.then(updatePercentage);
+    promise.then(loader.increment);
     promises.push(promise);
   });
 
   return q.all(promises);
-}
-
-function updatePercentage (data) {
-  var newPercentage = Math.ceil(percentage += 100 / libraries.length);
-  var loaderSize = 70;
-  var loaderPercentage = loaderSize/100 * newPercentage;
-  var loader = '';
-
-  for (var i = 0; i < loaderPercentage; i++) {
-    loader += '-';
-  }
-
-  for (var i = loaderPercentage; i < loaderSize; i++) {
-    loader += ' ';
-  }
-
-  process.stdout.clearLine();
-  process.stdout.cursorTo(0);
-  process.stdout.write(newPercentage + '% [' + loader + ']');
 }
 
 function addVersions (data) {

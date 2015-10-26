@@ -155,7 +155,7 @@ export default [
   },
   {
     "name": "parsley",
-    "normal": 216,
+    "normal": 217,
     "min": 76,
     "mingzip": 24,
     "version": "0.1.0"
@@ -175,24 +175,17 @@ export default [
     "version": "0.14.0"
   },
   {
-    "name": "react-dom",
-    "normal": 628,
-    "min": 121,
-    "mingzip": 35,
-    "version": "0.14.0"
-  },
-  {
     "name": "react-redux",
-    "normal": 697,
-    "min": 140,
-    "mingzip": 41,
+    "normal": 38,
+    "min": 12,
+    "mingzip": 4,
     "version": "4.0.0"
   },
   {
     "name": "react-router",
-    "normal": 757,
-    "min": 163,
-    "mingzip": 46,
+    "normal": 98,
+    "min": 35,
+    "mingzip": 9,
     "version": "0.13.4"
   },
   {
@@ -204,9 +197,9 @@ export default [
   },
   {
     "name": "redux-form",
-    "normal": 744,
-    "min": 158,
-    "mingzip": 46,
+    "normal": 85,
+    "min": 30,
+    "mingzip": 9,
     "version": "2.4.5"
   },
   {
