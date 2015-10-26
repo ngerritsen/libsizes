@@ -136,7 +136,7 @@ export default class LibraryList extends Component {
         <table className="library-list">
           <thead>
             <tr>
-              <th>Use</th>
+              <th><span className="hide-mobile">Use</span></th>
               <th className="sortable" onClick={this._handleSortByName}>
                 Name
                 <span className="sort-icon">
@@ -144,7 +144,7 @@ export default class LibraryList extends Component {
                   {sortProp === 'name' && !sortInversed && String.fromCharCode(9650)}
                 </span>
               </th>
-              <th>Version</th>
+              <th className="hide-mobile">Version</th>
               <th className="sortable" onClick={this._handleSortByNormal}>
                 Size
                 <span className="sort-icon">
@@ -160,7 +160,7 @@ export default class LibraryList extends Component {
                 </span>
               </th>
               <th className="sortable" onClick={this._handleSortByMinGzip}>
-                Min + gzip
+                <span className="hide-mobile">Min + </span>Gzip
                 <span className="sort-icon">
                   {sortProp === 'mingzip' && sortInversed && String.fromCharCode(9660)}
                   {sortProp === 'mingzip' && !sortInversed && String.fromCharCode(9650)}
@@ -185,7 +185,7 @@ export default class LibraryList extends Component {
             <tr>
               <td></td>
               <td>Total</td>
-              <td></td>
+              <td className="hide-mobile"></td>
               <td>{normal} <span className="unit">kB</span></td>
               <td>{min} <span className="unit">kB</span></td>
               <td>{mingzip} <span className="unit">kB</span></td>

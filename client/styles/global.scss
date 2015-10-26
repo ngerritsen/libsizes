@@ -38,3 +38,13 @@ a {
   margin: 0 auto;
   max-width: 1000px;
 }
+
+@media screen and (max-width: 480px) {
+  .container-fluid {
+    padding: 0 .75rem;
+  }
+
+  .hide-mobile {
+    display: none;
+  }
+}

@@ -8,3 +8,9 @@
   font-size: .8em;
   color: lighten($color-text, 30%);
 }
+
+@media screen and (max-width: 480px) {
+  .unit {
+    margin-left: -2px;
+  }
+}

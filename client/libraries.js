@@ -420,7 +420,7 @@ export default [
     "mingzip": 65
   },
   {
-    "name": "slick-carrousel css",
+    "name": "slick-carousel css",
     "version": "1.5.8",
     "normal": 2,
     "min": 1,

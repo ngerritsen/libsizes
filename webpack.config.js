@@ -35,6 +35,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'libsizes - library sizes generated from package.json',
+      template: './client/index-template.html',
+      inject: true,
       hash: true
     })
   ]

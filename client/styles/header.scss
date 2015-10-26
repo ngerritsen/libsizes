@@ -16,3 +16,9 @@
   color: darken($color-white, 10%);
   margin: 0;
 }
+
+@media screen and (max-width: 480px) {
+  .header {
+    padding: 5rem 0;
+  }
+}
