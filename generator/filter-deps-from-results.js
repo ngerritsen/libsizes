@@ -39,9 +39,11 @@ function getLib (libraries, name) {
 function computeNewSizes (lib, deps, libs) {
   deps.forEach(function (dep) {
     var dependency = getLib(libs, dep);
-      lib.normal -= dependency.normal;
-      lib.min -= dependency.min;
-      lib.mingzip -= dependency.mingzip;
+      if (dependency) {
+        lib.normal -= dependency.normal;
+        lib.min -= dependency.min;
+        lib.mingzip -= dependency.mingzip;
+      }
   });
 
   return lib;

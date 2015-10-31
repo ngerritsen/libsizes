@@ -1,5 +1,19 @@
 export default [
   {
+    "name": "cycle/core",
+    "normal": 4,
+    "min": 1,
+    "mingzip": 0,
+    "version": "5.0.1"
+  },
+  {
+    "name": "cycle/dom",
+    "normal": 188,
+    "min": 81,
+    "mingzip": 26,
+    "version": "7.1.1"
+  },
+  {
     "name": "angular",
     "normal": 1068,
     "min": 153,
@@ -134,9 +148,9 @@ export default [
   },
   {
     "name": "is_js",
-    "normal": 52,
-    "min": 19,
-    "mingzip": 5,
+    "normal": 35,
+    "min": 14,
+    "mingzip": 4,
     "version": "0.7.4"
   },
   {
@@ -196,6 +210,13 @@ export default [
     "version": "2.10.6"
   },
   {
+    "name": "mori",
+    "normal": 185,
+    "min": 183,
+    "mingzip": 35,
+    "version": "0.3.2"
+  },
+  {
     "name": "mustache",
     "normal": 21,
     "min": 6,
@@ -211,7 +232,7 @@ export default [
   },
   {
     "name": "parsley",
-    "normal": 217,
+    "normal": 216,
     "min": 76,
     "mingzip": 24,
     "version": "0.1.0"

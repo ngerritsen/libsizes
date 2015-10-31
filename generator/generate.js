@@ -30,6 +30,7 @@ module.exports = function generate () {
       var dataWithVersions = addVersions(data);
       var results = dataWithVersions.concat(manualSizes);
       results = filterDepsFromResults(results);
+      results = replaceAtSigns(results);
 
       deferred.resolve(results);
     });
@@ -72,4 +73,15 @@ function findVersionForLib(libName) {
   });
 
   return foundVersion;
+}
+
+function replaceAtSigns (results) {
+  return results.map(function (result) {
+    var name = result.name;
+
+    if (name[0] === '@') {
+      result.name = name.slice(1, name.length);
+    }
+    return result
+  });
 }

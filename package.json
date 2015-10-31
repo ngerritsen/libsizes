@@ -3,19 +3,28 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "scripts": {
+    "generate": "node generator/main.js; npm run serve",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "serve": "http-server ./dist -p 4012"
+  },
   "dependencies": {
     "babel-loader": "^5.3.2",
     "cli-table": "^0.3.1",
     "css-loader": "^0.21.0",
     "gzip-size": "^3.0.0",
-    "react-dom": "^0.14.0",
     "html-webpack-plugin": "^1.6.2",
+    "http-server": "^0.8.5",
     "node-sass": "^3.4.0",
+    "react-dom": "^0.14.0",
     "sass-loader": "^3.0.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.2"
   },
   "devDependencies": {
+    "@cycle/core": "^5.0.1",
+    "@cycle/dom": "^7.1.1",
     "angular": "^1.4.7",
     "async": "^1.5.0",
     "backbone": "^1.2.3",
@@ -44,6 +53,7 @@
     "lodash": "^3.10.1",
     "modernizr": "^3.1.0",
     "moment": "^2.10.6",
+    "mori": "^0.3.2",
     "mustache": "^2.2.0",
     "nvd3": "^1.8.1",
     "parsley": "^0.1.0",
@@ -70,11 +80,6 @@
     "velocity-animate": "^1.2.3",
     "vue": "^0.12.16",
     "whatwg-fetch": "^0.10.0"
-  },
-  "scripts": {
-    "generate": "node generator/main.js",
-    "build": "webpack",
-    "watch": "webpack --watch"
   },
   "author": "",
   "license": "ISC"
