@@ -19,8 +19,7 @@
   "devDependencies": {
     "selectize": "~0.12.1",
     "normalize-css": "normalize.css#~3.0.3",
-    "foundation": "~5.5.3",
-    "semantic": "semantic-ui#~2.1.4"
+    "foundation": "~5.5.3"
   },
   "dependencies": {}
 }

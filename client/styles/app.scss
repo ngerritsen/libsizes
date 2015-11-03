@@ -12,3 +12,27 @@
   color: lighten($color-text, 40%);
   font-size: .8em;
 }
+
+.footer--github-link,
+.footer--github-link:visited {
+  $github-color: desaturate(darken($color-text, 5%), 5%);
+  color: transparentize($color-text, 0.15);
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  width: 20rem;
+  padding-top: 1.5rem;
+
+  .mega-octicon,
+  .octicon {
+    position: relative;
+    margin-right: .25rem;
+    top: .25rem;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color-text;
+  }
+}
