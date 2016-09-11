@@ -1,15 +1,13 @@
-const librariesConfig = require('../etc/libraries.json');
-const library = require('./library');
 const run = require('./runner');
 const prepare = require('./preparator')
+const libraries = require('../etc/libraries.json');
 
 console.log('Starting generation process\n');
 
-const libraries = librariesConfig.map(library);
-
 prepare()
-  .then(() => run(libraries))
+  .then(() => run(libraries.map(lib => ({ name: lib }))))
+  .then(results => console.log(JSON.stringify(results, null, 2)))
   .catch(err => {
     console.error(err);
     process.exit(1);
-  })
+  });

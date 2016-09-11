@@ -9,11 +9,15 @@ const memFs = new MemoryFS();
 
 function calculate(library) {
   return createEnvironment(library)
-    .then(environment => bundleLibrary(createWebpackConfig(environment), library))
+    .then(environment => bundleLibrary(createWebpackConfig(environment), library)
+      .then(output => ({ output, environment }))
+    )
     .tap(() => console.log(`Compiled ${library.name}.`))
-    .then(output => Object.assign({}, library, {
-      sizes: calculateFileSizes(output)
-    }));
+    .then(({ output, environment }) => Object.assign(
+      {},
+      environment.library,
+      calculateFileSizes(output)
+    ));
 }
 
 function bundleLibrary(config, library) {
