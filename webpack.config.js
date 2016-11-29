@@ -1,24 +1,25 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   context: __dirname,
   entry: './client/main.js',
   output: {
-		path: './dist',
-    filename: 'bundle.js'
+		path: './public',
+    filename: 'bundle.js',
+    publicPath: '/public'
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: { stage: 0 }
+        include: /client/,
+        loader: 'babel'
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!sass'
+        loader: ExtractTextPlugin.extract('css!sass')
       }
     ]
   },
@@ -27,6 +28,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
+    new ExtractTextPlugin('style.css'),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         screw_ie8: true,
@@ -34,8 +36,8 @@ module.exports = {
       }
     }),
     new HtmlWebpackPlugin({
-      title: 'libsizes - library sizes generated from package.json',
-      template: './client/index-template.html',
+      title: 'libsizes - library sizes generated with webpack',
+      template: './client/index.html',
       inject: true,
       hash: true
     })

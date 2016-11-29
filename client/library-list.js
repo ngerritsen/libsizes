@@ -4,11 +4,7 @@ import LibraryRow from './library-row'
 
 import './styles/library-list.scss'
 
-export default class LibraryList extends Component {
-  static propTypes = {
-    libraries: PropTypes.arrayOf(React.PropTypes.object).isRequired
-  }
-
+class LibraryList extends Component {
   constructor(props, context) {
     super(props, context)
     this._handleUseLibrary = this._handleUseLibrary.bind(this)
@@ -196,3 +192,9 @@ export default class LibraryList extends Component {
     )
   }
 }
+
+LibraryList.propTypes = {
+  libraries: PropTypes.arrayOf(PropTypes.object).isRequired
+}
+
+export default LibraryList;

@@ -2,16 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 import './styles/library-row.scss';
 
-export default class LibraryRow extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    normal: PropTypes.number.isRequired,
-    version: PropTypes.string.isRequired,
-    min: PropTypes.number.isRequired,
-    mingzip: PropTypes.number.isRequired,
-    onUse: PropTypes.func.isRequired
-  }
-
+class LibraryRow extends Component {
   constructor(props, context) {
     super(props, context)
     this._handleUse = this._handleUse.bind(this)
@@ -39,3 +30,14 @@ export default class LibraryRow extends Component {
     )
   }
 }
+
+LibraryRow.propTypes = {
+  name: PropTypes.string.isRequired,
+  normal: PropTypes.number.isRequired,
+  version: PropTypes.string.isRequired,
+  min: PropTypes.number.isRequired,
+  mingzip: PropTypes.number.isRequired,
+  onUse: PropTypes.func.isRequired
+}
+
+export default LibraryRow;
