@@ -3,6 +3,12 @@
   "version": "3.0.0-alpha",
   "description": "library sizes generated with webpack",
   "main": "lib/index.js",
+  "author": "Niels Gerritsen",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngerritsen/libsizes.git"
+  },
   "scripts": {
     "start": "node lib",
     "build": "webpack",
@@ -29,12 +35,6 @@
     "html-webpack-plugin": "^2.24.1",
     "node-sass": "^3.4.0",
     "sass-loader": "^4.0.2"
-  },
-  "author": "Niels Gerritsen",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ngerritsen/libsizes.git"
   },
   "engines": {
     "node": ">6.5"
