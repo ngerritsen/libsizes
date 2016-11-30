@@ -1,4 +1,4 @@
-import { SORT, USE, STOP_USING, SEARCH } from './constants';
+import { SORT, USE, STOP_USING, SEARCH, FETCH_LIBRARIES_SUCCEEDED } from './constants';
 
 export function sort(sortBy) {
   return {
@@ -25,5 +25,12 @@ export function search(searchTerms) {
   return {
     type: SEARCH,
     searchTerms
+  };
+}
+
+export function fetchLibrariesSucceeded(libraries) {
+  return {
+    type: FETCH_LIBRARIES_SUCCEEDED,
+    libraries
   };
 }

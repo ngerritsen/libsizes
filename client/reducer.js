@@ -1,10 +1,9 @@
 import { mapReducers } from 'redux-map-reducers';
 
-import libraries from './libraries';
-import { SORT, USE, STOP_USING, SEARCH } from './constants';
+import { SORT, USE, STOP_USING, SEARCH, FETCH_LIBRARIES_SUCCEEDED } from './constants';
 
 const initialState = {
-  libraries,
+  libraries: [],
   sortBy: 'name',
   sortReversed: false,
   usedLibraries: [],
@@ -15,7 +14,8 @@ const reducerMap = {
   [SORT]: sort,
   [USE]: use,
   [STOP_USING]: stopUsing,
-  [SEARCH]: search
+  [SEARCH]: search,
+  [FETCH_LIBRARIES_SUCCEEDED]: fetchLibrariesSucceeded
 };
 
 function sort(state, action) {
@@ -44,6 +44,13 @@ function search(state, action) {
   return {
     ...state,
     searchTerms: action.searchTerms
+  };
+}
+
+function fetchLibrariesSucceeded(state, action) {
+  return {
+    ...state,
+    libraries: action.libraries
   };
 }
 

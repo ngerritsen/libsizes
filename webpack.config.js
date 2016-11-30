@@ -6,7 +6,11 @@ const env = process.env.NODE_ENV;
 
 const config = {
   context: __dirname,
-  entry: './client/main.js',
+  entry: [
+    'babel-polyfill',
+    'whatwg-fetch',
+    './client/main.js'
+  ],
   output: {
     path: './public',
     filename: 'bundle.js',
