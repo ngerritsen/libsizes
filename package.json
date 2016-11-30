@@ -45,6 +45,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.24.1",
     "node-sass": "^3.4.0",
+    "redux-logger": "^2.7.4",
     "sass-loader": "^4.0.2"
   },
   "engines": {
