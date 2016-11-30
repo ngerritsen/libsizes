@@ -5,19 +5,19 @@ const webpack = require('webpack');
 const BPromise = require('bluebird');
 const gzipSize = require('gzip-size');
 const rimraf = require('rimraf');
-const { asyncIteratorRunner } = require('./helpers');
+const { runIteratorAsync } = require('./helpers');
 
 const OUTPUT_FILENAME = 'bundle.js';
 const OUTPUT_FILENAME_MINIFIED = 'bundle.min.js';
 const NODE_MODULES_DIR = 'node_modules';
 const TMP_DIR = '.tmp';
 
-asyncIteratorRunner(run(['redux']));
+runIteratorAsync(run(['redux']));
 
-function *run(libraries) {
+function *run(libraries) { // eslint-disable-line max-statements
   setupDir();
 
-  for(let i = 0; i < libraries.length; i++) {
+  for (let i = 0; i < libraries.length; i += 1) {
     const dir = fs.mkdtempSync(TMP_DIR + path.sep);
     const library = libraries[i];
     console.log(`Started processing "${library}" in working directory: "${dir}".`);
@@ -37,14 +37,14 @@ function *run(libraries) {
 }
 
 function setupDir() {
-  if (!fs.existsSync(TMP_DIR)){
+  if (!fs.existsSync(TMP_DIR)) {
     fs.mkdirSync(TMP_DIR);
   }
 }
 
 function install(library, dir) {
   return new BPromise((resolve, reject) => {
-    exec(`npm init -y; npm install ${library}`, { cwd: dir }, (error, stdout, stderr) => {
+    exec(`npm init -y; npm install ${library}`, { cwd: dir }, error => {
       if (error) {
         reject(`exec error: ${error}`);
       }
@@ -52,7 +52,7 @@ function install(library, dir) {
       console.log(`Installed "${library}".`);
       resolve();
     });
-  })
+  });
 }
 
 function measureFilesizes(dir) {
@@ -63,7 +63,7 @@ function measureFilesizes(dir) {
     normal: Math.round(bundleBuf.length / 1000, 1),
     minified: Math.round(bundleBufMinified.length / 1000, 1),
     minifiedGzipped: Math.round(gzipSize.sync(bundleBufMinified.toString()) / 1000, 1)
-  }
+  };
 }
 
 function buildLibrary(library, dir, minified = false) {
@@ -81,13 +81,13 @@ function buildLibrary(library, dir, minified = false) {
         filename: minified ? OUTPUT_FILENAME_MINIFIED : OUTPUT_FILENAME
       },
       plugins
-    }, (error, stats) => {
+    }, error => {
       if (error) {
         reject(error);
       }
 
       console.log(`${minified ? 'Minified bundle' : 'Bundle'} built for "${library}".`);
       resolve();
-    })
-  })
+    });
+  });
 }

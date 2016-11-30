@@ -13,9 +13,10 @@
   font-size: .8em;
 }
 
-.footer--github-link,
-.footer--github-link:visited {
+.footer__github-link,
+.footer__github-link:visited {
   $github-color: desaturate(darken($color-text, 5%), 5%);
+
   color: transparentize($color-text, 0.15);
   display: block;
   text-align: center;

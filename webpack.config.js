@@ -1,12 +1,14 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = {
+const env = process.env.NODE_ENV;
+
+const config = {
   context: __dirname,
   entry: './client/main.js',
   output: {
-		path: './public',
+    path: './public',
     filename: 'bundle.js',
     publicPath: '/public'
   },
@@ -26,15 +28,13 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    new ExtractTextPlugin('style.css'),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        screw_ie8: true,
-        warnings: false
+      process: {
+        env: {
+          NODE_ENV: JSON.stringify(env)
+        }
       }
     }),
+    new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin({
       title: 'libsizes - library sizes generated with webpack',
       template: './client/index.html',
@@ -43,3 +43,21 @@ module.exports = {
     })
   ]
 };
+
+if (env === 'development') {
+  config.devtool = 'source-map';
+  config.watch = true;
+}
+
+if (env === 'production') {
+  config.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        screw_ie8: true, // eslint-disable-line camelcase
+        warnings: false
+      }
+    })
+  );
+}
+
+module.exports = config;

@@ -1,0 +1,41 @@
+{
+  "extends": [
+    "ngerritsen",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "blockBindings": true,
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "rules": {
+   "no-magic-numbers": 0,
+
+    /**
+     * React & JSX
+     */
+    "react/jsx-pascal-case": 2,
+    "react/jsx-closing-bracket-location": 0,
+    "react/jsx-indent-props": [2, 2],
+    "react/no-multi-comp": 2,
+    "react/prefer-es6-class": 2,
+    "react/prefer-stateless-function": 2,
+    "react/prop-types": [2, {
+      "ignore": [ "children" ]
+    }],
+    "react/self-closing-comp": 2,
+    "react/sort-prop-types": 1
+  }
+}
