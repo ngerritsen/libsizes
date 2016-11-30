@@ -1,21 +1,24 @@
 const express = require('express');
-const app = express();
-const path = require('path');
-const libraries = require('./libraries.json');
+const routing = require('./routing');
+const initializeDb = require('./db');
+const LibraryRepository = require('./library-repository');
 
-const rootPath = path.join(__dirname, '..');
-const port = process.env.PORT || 8022;
+initializeDb()
+  .then(initializeApp)
+  .catch(error => {
+    console.error(error);
+    process.exit(1); // eslint-disable-line no-process-exit
+  });
 
-app.use('/public', express.static(path.join(rootPath, 'public')));
+function initializeApp(dbClient) {
+  const app = express();
+  const port = process.env.PORT || 8022;
 
-app.get('/api/libraries', (req, res) => {
-  res.json(libraries);
-});
+  const libraryRepository = new LibraryRepository(dbClient);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(rootPath, '/public/index.html'));
-});
+  routing(app, libraryRepository);
 
-app.listen(port, () => {
-  console.log(`Listening to port ${port}.`);
-});
+  app.listen(port, () => {
+    console.log(`Listening to port ${port}.`);
+  });
+}
