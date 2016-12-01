@@ -1,4 +1,4 @@
-const { START_ANALYSIS, ANALYSIS_SUCCEEDED, ANALYSIS_FAILED } = require('./constants');
+const { ANALYSIS_STARTED, ANALYSIS_SUCCEEDED, ANALYSIS_FAILED } = require('./constants');
 const { ANALYSIS_STATUS_PENDING, ANALYSIS_STATUS_SUCCEEDED, ANALYSIS_STATUS_FAILED } = require('../shared/constants');
 const { mapReducers } = require('redux-map-reducers');
 
@@ -7,12 +7,12 @@ const initialState = {
 };
 
 const reducerMap = {
-  [START_ANALYSIS]: startAnalysis,
+  [ANALYSIS_STARTED]: analysisStarted,
   [ANALYSIS_SUCCEEDED]: analysisSucceeded,
   [ANALYSIS_FAILED]: analysisFailed
 };
 
-function startAnalysis(state, action) {
+function analysisStarted(state, action) {
   return {
     analyses: [...state.analyses, createAnalysis(action.id)]
   };

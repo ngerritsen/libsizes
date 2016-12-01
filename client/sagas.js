@@ -15,8 +15,8 @@ export default function *rootSaga() {
 }
 
 function *fetchLibrariesSaga() {
-  const result = yield fetch('/api/libraries');
-  const libraries = yield result.json();
+  const libraries = yield fetch('/api/libraries')
+    .then(result => result.json());
   yield put(fetchLibrariesSucceeded(libraries));
 }
 
@@ -27,7 +27,7 @@ function *analyzeSaga() {
 function *analyze(action) {
   const { analysisId, success } = yield fetch(`/api/analyses/${action.libraryString}`, {
     method: 'POST'
-  });
+  }).then(result => result.json());
 
   if (success) {
     yield put(analysisStarted(analysisId));
@@ -41,7 +41,7 @@ function *pollAnalysesSaga() { // eslint-disable-line max-statements
 
     if (analyses.length > 0) {
       const analysesString = analyses.map(analysis => analysis.id).join(',');
-      const serverAnalyses = yield fetch(`/api/analyses/${analysesString}`);
+      const serverAnalyses = yield fetch(`/api/analyses/${analysesString}`).then(result => result.json());
       const actions = determineAnalysisActions(serverAnalyses, analyses);
 
       for (let i = 0; i < actions.length; i += 1) {
@@ -58,7 +58,7 @@ function promiseDelay(interval) {
 }
 
 function determineAnalysisActions(serverAnalyses, analyses) {
-  analyses
+  return analyses
     .map(analysis => ({
       ...analysis,
       server: serverAnalyses.find(({ id }) => id === analysis.id)

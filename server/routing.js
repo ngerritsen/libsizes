@@ -28,10 +28,9 @@ function routing(app, libraryRepository, store) {
     getInfo(req.params.library)
       .then(library => {
         analyze(library, analysisId, libraryRepository, store);
-        console.log({ success: true, analysisId });
         res.json({ success: true, analysisId });
       })
-      .catch(() => res.json({ success: false }));
+      .catch(error => res.json({ success: false, error: error.toString(), a: console.log(error.toString()) }));
   });
 
   app.get('*', (req, res) => {

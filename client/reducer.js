@@ -18,25 +18,28 @@ const reducerMap = {
   [constants.STOP_USING]: stopUsing,
   [constants.SEARCH]: search,
   [constants.FETCH_LIBRARIES_SUCCEEDED]: fetchLibrariesSucceeded,
-  [constants.START_ANALYSIS]: startAnalysis,
+  [constants.ANALYSIS_STARTED]: analysisStarted,
   [constants.ANALYSIS_SUCCEEDED]: analysisSucceeded,
   [constants.ANALYSIS_FAILED]: analysisFailed
 };
 
-function startAnalysis(state, action) {
+function analysisStarted(state, action) {
   return {
+    ...state,
     analyses: [...state.analyses, createAnalysis(action.id)]
   };
 }
 
 function analysisSucceeded(state, action) {
   return {
+    ...state,
     analyses: updateAnalysisState(state.analyses, action.id, ANALYSIS_STATUS_SUCCEEDED)
   };
 }
 
 function analysisFailed(state, action) {
   return {
+    ...state,
     analyses: updateAnalysisState(state.analyses, action.id, ANALYSIS_STATUS_FAILED)
   };
 }

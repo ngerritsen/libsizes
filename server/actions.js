@@ -1,8 +1,8 @@
-const { START_ANALYSIS, ANALYSIS_SUCCEEDED, ANALYSIS_FAILED } = require('./constants');
+const { ANALYSIS_STARTED, ANALYSIS_SUCCEEDED, ANALYSIS_FAILED } = require('./constants');
 
-function startAnalysis(id) {
+function analysisStarted(id) {
   return {
-    type: START_ANALYSIS,
+    type: ANALYSIS_STARTED,
     id
   };
 }
@@ -22,7 +22,7 @@ function analysisFailed(id) {
 }
 
 module.exports = {
-  startAnalysis,
+  analysisStarted,
   analysisSucceeded,
   analysisFailed
 };

@@ -1,8 +1,8 @@
 import * as constants from './constants';
 
-export function startAnalysis(id) {
+export function analysisStarted(id) {
   return {
-    type: constants.START_ANALYSIS,
+    type: constants.ANALYSIS_STARTED,
     id
   };
 }
