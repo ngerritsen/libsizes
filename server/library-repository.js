@@ -5,14 +5,23 @@ class LibraryRepository {
 
   save(library, version, sizes) {
     return this._client.query(`
-      INSERT INTO libraries (library, version, normal, minified, minified_gzipped) VALUES (
+      INSERT INTO libraries (name, version, normal, minified, gzipped) VALUES (
         '${library}',
         '${version}',
         ${sizes.normal},
         ${sizes.minified},
-        ${sizes.minified_gzipped}
-      ) ON CONFLICT DO UPDATE;
+        ${sizes.gzipped}
+      );
     `);
+  }
+
+  get(library, version) {
+    return this._client.query(`
+      SELECT * FROM libraries
+      WHERE name='${library}'
+      AND version='${version}';
+    `)
+      .then(result => result.rows[0]);
   }
 
   getAll() {

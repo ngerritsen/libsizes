@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
+
 import LibraryRow from './library-row';
 import SortableColumnHeading from './sortable-column-heading';
+import LibraryTotals from './library-totals';
 
 import '../styles/library-list.scss';
 
 function LibraryList({ libraries, search, searchTerms, sort, sortBy, sortReversed, stopUsing, totals, use }) {
-  const { normal, min, mingzip } = totals;
   const sortHeadingProps = { sort, sortBy, sortReversed };
   return (
     <div>
@@ -30,16 +31,7 @@ function LibraryList({ libraries, search, searchTerms, sort, sortBy, sortReverse
         <tbody>
           {libraries.map(library => <LibraryRow key={library.name} {...library} stopUsing={stopUsing} use={use}/>)}
         </tbody>
-        <tfoot>
-          <tr>
-            <td/>
-            <td>Total</td>
-            <td className="hide-mobile"/>
-            <td>{normal} <span className="unit">kB</span></td>
-            <td>{min} <span className="unit">kB</span></td>
-            <td>{mingzip} <span className="unit">kB</span></td>
-          </tr>
-        </tfoot>
+        <LibraryTotals {...totals}/>
       </table>
     </div>
   );

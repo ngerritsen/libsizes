@@ -8,7 +8,7 @@ function Header({ libraryCount }) {
       <div className="container-fluid">
         <h1 className="header__title">libsizes</h1>
         <p className="header__quote">
-          {libraryCount} library sizes generated
+          {libraryCount} library {libraryCount === 1 ? 'size' : 'sizes'} analyzed using webpack
           <span className="seperator" />
           <a
             className="header__github-link"

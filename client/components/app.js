@@ -6,6 +6,7 @@ import { sortLibraries, searchLibraries, markUsedLibraries, calculateTotals } fr
 import * as actions from '../actions';
 import LibraryList from './library-list';
 import Header from './header';
+import Analyzer from './analyzer';
 
 import '../styles/app.scss';
 
@@ -14,6 +15,7 @@ function App({ libraries, libraryCount, search, searchTerms, sort, sortBy, sortR
   return (
     <div>
       <Header libraryCount={libraryCount}/>
+      <Analyzer/>
       <div className="container-fluid">
         <LibraryList {...libraryListProps}/>
         <p className="note">

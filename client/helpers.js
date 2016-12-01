@@ -34,10 +34,14 @@ export function calculateTotals(libraries) {
     .reduce((prev, curr) => {
       return {
         normal: prev.normal + curr.normal,
-        min: prev.min + curr.min,
-        mingzip: prev.mingzip + curr.mingzip
+        minified: prev.minified + curr.minfied,
+        gzipped: prev.gzipped + curr.gzipped
       };
-    }, { normal: 0, min: 0, mingzip: 0 });
+    }, { normal: 0, minified: 0, gzipped: 0 });
+}
+
+export function bytesToKb(bytes) {
+  return Math.round(bytes / 1024, 1);
 }
 
 function sortBy(array, getValue) {

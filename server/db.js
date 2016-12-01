@@ -19,12 +19,12 @@ function initializeDb() {
 function initializeTables(client) {
   return client.query(`
     CREATE TABLE IF NOT EXISTS libraries (
-      library           varchar(40) NOT NULL,
-      version           varchar(12) NOT NULL,
-      normal            integer     NOT NULL,
-      minified          integer     NOT NULL,
-      minified_gzipped  integer     NOT NULL,
-      PRIMARY KEY(library, version)
+      name      varchar(40) NOT NULL,
+      version   varchar(12) NOT NULL,
+      normal    integer     NOT NULL,
+      minified  integer     NOT NULL,
+      gzipped   integer     NOT NULL,
+      PRIMARY KEY(name, version)
     );
   `);
 }

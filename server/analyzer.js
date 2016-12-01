@@ -64,7 +64,7 @@ function measureFilesizes(dir) {
   const sizes = {
     normal: bundleBuf.length,
     minified: bundleBufMinified.length,
-    minifiedGzipped: gzipSize.sync(bundleBufMinified.toString())
+    gzipped: gzipSize.sync(bundleBufMinified.toString())
   };
 
   console.log(JSON.stringify(sizes, null, 2));
