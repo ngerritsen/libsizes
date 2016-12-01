@@ -57,5 +57,8 @@
     "filesize",
     "javascript",
     "webpack"
+  ],
+  "pre-commit": [
+    "npm run test"
   ]
 }
