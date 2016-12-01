@@ -29,7 +29,9 @@ function LibraryList({ libraries, search, searchTerms, sort, sortBy, sortReverse
           </tr>
         </thead>
         <tbody>
-          {libraries.map(library => <LibraryRow key={library.name} {...library} stopUsing={stopUsing} use={use}/>)}
+          {libraries.map(library =>
+            <LibraryRow key={library.name + '@' + library.version} {...library} stopUsing={stopUsing} use={use}/>
+          )}
         </tbody>
         <LibraryTotals {...totals}/>
       </table>

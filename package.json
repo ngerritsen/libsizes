@@ -60,5 +60,9 @@
   ],
   "pre-commit": [
     "test"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/ngerritsen/libsizes/issues"
+  },
+  "homepage": "https://github.com/ngerritsen/libsizes#readme"
 }

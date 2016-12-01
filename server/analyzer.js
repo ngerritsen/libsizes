@@ -1,10 +1,11 @@
-const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const BPromise = require('bluebird');
 const gzipSize = require('gzip-size');
 const rimraf = require('rimraf');
+
+const { install } = require('./npm-tools');
 const { runIteratorAsync } = require('./helpers');
 
 const OUTPUT_FILENAME = 'bundle.js';
@@ -13,12 +14,12 @@ const NODE_MODULES_DIR = 'node_modules';
 const TMP_DIR = '.tmp';
 
 function analyzeLibrary(library) {
-  return runIteratorAsync(run(library));
-}
-
-function *run(library) {
   const dir = setupDir(library);
 
+  return runIteratorAsync(run(library, dir));
+}
+
+function *run(library, dir) {
   yield install(library, dir);
   yield buildLibrary(library, dir);
   yield buildLibrary(library, dir, true);
@@ -35,27 +36,14 @@ function setupDir(library) {
   }
 
   const dir = fs.mkdtempSync(TMP_DIR + path.sep);
-  console.log(`Started processing "${library}" in working directory: "${dir}".`);
+  console.log(`Started processing "${library.name}" in working directory: "${dir}".`);
 
   return dir;
 }
 
 function cleanUp(dir, library) {
   rimraf.sync(dir);
-  console.log(`Done processing "${library}"!\n`);
-}
-
-function install(library, dir) {
-  return new BPromise((resolve, reject) => {
-    exec(`npm init -y; npm install ${library}`, { cwd: dir }, error => {
-      if (error) {
-        reject(`exec error: ${error}`);
-      }
-
-      console.log(`Installed "${library}".`);
-      resolve();
-    });
-  });
+  console.log(`Done processing "${library.name}"!\n`);
 }
 
 function measureFilesizes(dir) {
@@ -81,7 +69,7 @@ function buildLibrary(library, dir, minified = false) {
 
   return new BPromise((resolve, reject) => {
     webpack({
-      entry: path.resolve(dir, NODE_MODULES_DIR, library),
+      entry: path.resolve(dir, NODE_MODULES_DIR, library.name),
       output: {
         path: dir,
         filename: minified ? OUTPUT_FILENAME_MINIFIED : OUTPUT_FILENAME
@@ -92,7 +80,7 @@ function buildLibrary(library, dir, minified = false) {
         reject(error);
       }
 
-      console.log(`${minified ? 'Minified bundle' : 'Bundle'} built for "${library}".`);
+      console.log(`${minified ? 'Minified bundle' : 'Bundle'} built for "${library.name}".`);
       resolve();
     });
   });

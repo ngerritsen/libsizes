@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const analyzeLibrary = require('./analyzer');
+const { getInfo } = require('./npm-tools');
 
 const rootPath = path.join(__dirname, '..');
 const FAKE_VERSION = 'FAKE_VERSION';
@@ -25,10 +26,14 @@ function routing(app, libraryRepository) {
   });
 
   app.post('/api/analysis/:library', (req, res) => {
-    analyzeLibrary(req.params.library)
-      .then(result => libraryRepository.save(req.params.library, FAKE_VERSION, result));
+    getInfo(req.params.library)
+      .then(library => {
+        analyzeLibrary(library)
+          .then(result => libraryRepository.save(library.name, library.version, result));
 
-    res.json({ success: true });
+        res.json({ success: true });
+      })
+      .catch(() => res.json({ success: false }));
   });
 
   app.get('*', (req, res) => {
