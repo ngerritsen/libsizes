@@ -59,6 +59,6 @@
     "webpack"
   ],
   "pre-commit": [
-    "npm run test"
+    "test"
   ]
 }

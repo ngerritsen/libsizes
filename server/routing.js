@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const libraries = require('./libraries.json');
 
 const rootPath = path.join(__dirname, '..');
 
