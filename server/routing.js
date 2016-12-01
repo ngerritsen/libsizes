@@ -13,9 +13,8 @@ function routing(app, libraryRepository) {
   });
 
   app.get('/api/analyze/:library', (req, res) => {
-    const library = req.params.library;
-    analyzeLibrary(library)
-      .then(result => res.json(result))
+    analyzeLibrary(req.params.library)
+      .then(result => res.json(result));
   });
 
   app.get('*', (req, res) => {
