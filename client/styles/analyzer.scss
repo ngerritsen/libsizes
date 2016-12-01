@@ -1,15 +1,12 @@
 @import 'colors';
 
 .analyzer {
-  background-color: darken($color-asphalt, 2.5%);
-  color: $color-white;
-  padding: 2rem 0;
-  margin-bottom: 2rem;
+  color: lighten($color-text, 15%);
+  padding: 1rem 0;
 }
 
-.analyzer__title {
-  font-size: 1.7rem;
-  margin-right: 2rem;
+.analyzer__text {
+  margin: 0 0 1rem;
 }
 
 .analyzer__content {
@@ -17,18 +14,31 @@
 }
 
 .analyzer__input {
-  color: $color-white;
   font-size: 1.5rem;
-  margin: .5rem 0 1.5rem 0;
+  margin: 0;
   border-radius: 0;
   box-shadow: none;
-  background-color: $color-asphalt;
-  border: 2px solid lighten($color-asphalt, 5%);
+  background-color: trasparant;
+  border: 2px solid lighten($color-asphalt, 20%);
   padding: .7rem .9rem;
   width: 100%;
 
   &:focus {
     outline: none;
-    border: 2px solid lighten($color-asphalt, 10%);
+    border: 2px solid saturate(lighten($color-asphalt, 15%), 10%);
+  }
+}
+
+.analyzer__button {
+  color: $color-white;
+  font-size: 1.5rem;
+  padding: .7rem .9rem;
+  background-color: lighten($color-asphalt, 20%);
+  border: 0;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    background-color: saturate(lighten($color-asphalt, 15%), 10%);
   }
 }

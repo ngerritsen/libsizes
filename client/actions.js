@@ -1,4 +1,11 @@
-import { SORT, USE, STOP_USING, SEARCH, FETCH_LIBRARIES_SUCCEEDED } from './constants';
+import { ANALYZE, SORT, USE, STOP_USING, SEARCH, FETCH_LIBRARIES_SUCCEEDED } from './constants';
+
+export function analyze(libraryString) {
+  return {
+    type: ANALYZE,
+    libraryString
+  };
+}
 
 export function sort(sortBy) {
   return {

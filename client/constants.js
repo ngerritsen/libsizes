@@ -1,3 +1,4 @@
+export const ANALYZE = 'ANALYZE';
 export const SORT = 'SORT';
 export const USE = 'USE';
 export const STOP_USING = 'STOP_USING';

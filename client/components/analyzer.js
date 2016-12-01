@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import '../styles/analyzer.scss';
 
-function Analyzer() {
+let libraryInput = null;
+
+function Analyzer({ analyze }) {
   return (
     <div className="analyzer">
-      <div className="container-fluid">
-        <div className="analyzer__content">
-          <h2 className="analyzer__title">Analyze</h2>
-          <input type="text" className="analyzer__input"/>
-        </div>
-      </div>
+      <p className="analyzer__text">Did not find what you were looking for? Analyze it:</p>
+      <form className="analyzer__content" onSubmit={event => {
+        event.preventDefault();
+        analyze(libraryInput.value.trim());
+      }}>
+        <input
+          ref={element => {
+            libraryInput = element;
+          }}
+          type="text"
+          className="analyzer__input"
+        />
+        <button className="analyzer__button" type="submit">Analyze</button>
+      </form>
     </div>
   );
 }
+
+Analyzer.propTypes = {
+  analyze: PropTypes.func.isRequired
+};
 
 export default Analyzer;

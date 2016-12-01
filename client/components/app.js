@@ -10,17 +10,20 @@ import Analyzer from './analyzer';
 
 import '../styles/app.scss';
 
-function App({ libraries, libraryCount, search, searchTerms, sort, sortBy, sortReversed, stopUsing, totals, use }) {
+function App({
+  analyze, libraries, libraryCount, search, searchTerms, sort, sortBy, sortReversed, stopUsing, totals, use
+}) {
   const libraryListProps = { libraries, search, searchTerms, sort, sortBy, sortReversed, stopUsing, totals, use };
   return (
     <div>
       <Header libraryCount={libraryCount}/>
-      <Analyzer/>
       <div className="container-fluid">
         <LibraryList {...libraryListProps}/>
+        <Analyzer analyze={analyze}/>
         <p className="note">
           *Sizes may vary according to bundler, minifier and their settings.
-          Here, minified sizes are generated using Webpack with the UglifyJS plugin.</p>
+          Here, minified sizes are generated using Webpack with the UglifyJS plugin.
+        </p>
         <a
           className="footer__github-link"
           href="https://github.com/ngerritsen/libsizes"
@@ -36,6 +39,7 @@ function App({ libraries, libraryCount, search, searchTerms, sort, sortBy, sortR
 }
 
 App.propTypes = {
+  analyze: PropTypes.func.isRequired,
   libraries: PropTypes.array.isRequired,
   libraryCount: PropTypes.number.isRequired,
   search: PropTypes.func.isRequired,

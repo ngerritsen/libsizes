@@ -42,6 +42,7 @@ const config = {
     new HtmlWebpackPlugin({
       title: 'libsizes - library sizes generated with webpack',
       template: './client/index.html',
+      favicon: './client/favicon.png',
       inject: true,
       hash: true
     })
