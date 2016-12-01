@@ -12,14 +12,14 @@ function runIteratorStepAsync(iterator, resolve, reject, previousValue) {
   if (done) {
     resolve(value);
   } else if (value && typeof value.then === 'function') {
-    handlePromise(iterator, value);
+    handlePromise(iterator, resolve, reject, value);
   } else {
-    runIteratorStepAsync(iterator, value);
+    runIteratorStepAsync(iterator, resolve, reject, value);
   }
 }
 
-function handlePromise(iterator, value, reject) {
-  value.then(result => runIteratorStepAsync(iterator, result));
+function handlePromise(iterator, resolve, reject, value) {
+  value.then(result => runIteratorStepAsync(iterator, resolve, reject, result));
   value.catch(error => reject(error));
 }
 

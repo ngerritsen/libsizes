@@ -12,34 +12,37 @@ const OUTPUT_FILENAME_MINIFIED = 'bundle.min.js';
 const NODE_MODULES_DIR = 'node_modules';
 const TMP_DIR = '.tmp';
 
-runIteratorAsync(run(['redux']));
-
-function *run(libraries) { // eslint-disable-line max-statements
-  setupDir();
-
-  for (let i = 0; i < libraries.length; i += 1) {
-    const dir = fs.mkdtempSync(TMP_DIR + path.sep);
-    const library = libraries[i];
-    console.log(`Started processing "${library}" in working directory: "${dir}".`);
-
-    yield install(library, dir);
-    yield buildLibrary(library, dir);
-    yield buildLibrary(library, dir, true);
-
-    const result = measureFilesizes(dir);
-
-    console.log(JSON.stringify(result, null, 2));
-
-    rimraf.sync(dir);
-
-    console.log(`Done processing "${library}"!\n`);
-  }
+function analyzeLibrary(library) {
+  return runIteratorAsync(run(library));
 }
 
-function setupDir() {
+function *run(library) {
+  const dir = setupDir(library);
+
+  yield install(library, dir);
+  yield buildLibrary(library, dir);
+  yield buildLibrary(library, dir, true);
+
+  const sizes = measureFilesizes(dir);
+  cleanUp(dir, library);
+
+  return sizes;
+}
+
+function setupDir(library) {
   if (!fs.existsSync(TMP_DIR)) {
     fs.mkdirSync(TMP_DIR);
   }
+
+  const dir = fs.mkdtempSync(TMP_DIR + path.sep);
+  console.log(`Started processing "${library}" in working directory: "${dir}".`);
+
+  return dir;
+}
+
+function cleanUp(dir, library) {
+  rimraf.sync(dir);
+  console.log(`Done processing "${library}"!\n`);
 }
 
 function install(library, dir) {
@@ -58,12 +61,15 @@ function install(library, dir) {
 function measureFilesizes(dir) {
   const bundleBuf = fs.readFileSync(path.resolve(dir, OUTPUT_FILENAME));
   const bundleBufMinified = fs.readFileSync(path.resolve(dir, OUTPUT_FILENAME_MINIFIED));
-
-  return {
-    normal: Math.round(bundleBuf.length / 1000, 1),
-    minified: Math.round(bundleBufMinified.length / 1000, 1),
-    minifiedGzipped: Math.round(gzipSize.sync(bundleBufMinified.toString()) / 1000, 1)
+  const sizes = {
+    normal: bundleBuf.length,
+    minified: bundleBufMinified.length,
+    minifiedGzipped: gzipSize.sync(bundleBufMinified.toString())
   };
+
+  console.log(JSON.stringify(sizes, null, 2));
+
+  return sizes;
 }
 
 function buildLibrary(library, dir, minified = false) {
@@ -91,3 +97,5 @@ function buildLibrary(library, dir, minified = false) {
     });
   });
 }
+
+module.exports = analyzeLibrary;
