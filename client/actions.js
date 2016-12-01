@@ -1,43 +1,64 @@
-import { ANALYZE, SORT, USE, STOP_USING, SEARCH, FETCH_LIBRARIES_SUCCEEDED } from './constants';
+import * as constants from './constants';
+
+export function startAnalysis(id) {
+  return {
+    type: constants.START_ANALYSIS,
+    id
+  };
+}
+
+export function analysisSucceeded(id) {
+  return {
+    type: constants.ANALYSIS_SUCCEEDED,
+    id
+  };
+}
+
+export function analysisFailed(id) {
+  return {
+    type: constants.ANALYSIS_FAILED,
+    id
+  };
+}
 
 export function analyze(libraryString) {
   return {
-    type: ANALYZE,
+    type: constants.ANALYZE,
     libraryString
   };
 }
 
 export function sort(sortBy) {
   return {
-    type: SORT,
+    type: constants.SORT,
     sortBy
   };
 }
 
 export function use(library) {
   return {
-    type: USE,
+    type: constants.USE,
     library
   };
 }
 
 export function stopUsing(library) {
   return {
-    type: STOP_USING,
+    type: constants.STOP_USING,
     library
   };
 }
 
 export function search(searchTerms) {
   return {
-    type: SEARCH,
+    type: constants.SEARCH,
     searchTerms
   };
 }
 
 export function fetchLibrariesSucceeded(libraries) {
   return {
-    type: FETCH_LIBRARIES_SUCCEEDED,
+    type: constants.FETCH_LIBRARIES_SUCCEEDED,
     libraries
   };
 }

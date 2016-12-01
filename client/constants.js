@@ -1,4 +1,10 @@
+export const ANALYSIS_POLL_INTERVAL = 2000;
+
 export const ANALYZE = 'ANALYZE';
+export const START_ANALYSIS = 'START_ANALYSIS';
+export const ANALYSIS_SUCCEEDED = 'ANALYSIS_SUCCEEDED';
+export const ANALYSIS_FAILED = 'ANALYSIS_FAILED';
+
 export const SORT = 'SORT';
 export const USE = 'USE';
 export const STOP_USING = 'STOP_USING';

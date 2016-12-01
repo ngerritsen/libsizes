@@ -1,8 +1,10 @@
 import { mapReducers } from 'redux-map-reducers';
 
-import { SORT, USE, STOP_USING, SEARCH, FETCH_LIBRARIES_SUCCEEDED } from './constants';
+import * as constants from './constants';
+import { ANALYSIS_STATUS_SUCCEEDED, ANALYSIS_STATUS_FAILED, ANALYSIS_STATUS_PENDING } from '../shared/constants';
 
 const initialState = {
+  analyses: [],
   libraries: [],
   sortBy: 'name',
   sortReversed: false,
@@ -11,12 +13,33 @@ const initialState = {
 };
 
 const reducerMap = {
-  [SORT]: sort,
-  [USE]: use,
-  [STOP_USING]: stopUsing,
-  [SEARCH]: search,
-  [FETCH_LIBRARIES_SUCCEEDED]: fetchLibrariesSucceeded
+  [constants.SORT]: sort,
+  [constants.USE]: use,
+  [constants.STOP_USING]: stopUsing,
+  [constants.SEARCH]: search,
+  [constants.FETCH_LIBRARIES_SUCCEEDED]: fetchLibrariesSucceeded,
+  [constants.START_ANALYSIS]: startAnalysis,
+  [constants.ANALYSIS_SUCCEEDED]: analysisSucceeded,
+  [constants.ANALYSIS_FAILED]: analysisFailed
 };
+
+function startAnalysis(state, action) {
+  return {
+    analyses: [...state.analyses, createAnalysis(action.id)]
+  };
+}
+
+function analysisSucceeded(state, action) {
+  return {
+    analyses: updateAnalysisState(state.analyses, action.id, ANALYSIS_STATUS_SUCCEEDED)
+  };
+}
+
+function analysisFailed(state, action) {
+  return {
+    analyses: updateAnalysisState(state.analyses, action.id, ANALYSIS_STATUS_FAILED)
+  };
+}
 
 function sort(state, action) {
   return {
@@ -52,6 +75,23 @@ function fetchLibrariesSucceeded(state, action) {
     ...state,
     libraries: action.libraries
   };
+}
+
+function createAnalysis(id) {
+  return {
+    status: ANALYSIS_STATUS_PENDING,
+    id
+  };
+}
+
+function updateAnalysisState(analyses, id, status) {
+  return analyses.map(analysis => {
+    if (analysis.id === id) {
+      return Object.assign({}, analysis, { status });
+    }
+
+    return analysis;
+  });
 }
 
 export default mapReducers(reducerMap, initialState);
