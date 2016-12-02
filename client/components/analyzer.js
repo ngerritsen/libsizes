@@ -5,11 +5,19 @@ import * as constants from '../constants';
 import '../styles/analyzer.scss';
 
 let libraryInput = null;
+
 const statusClassMap = {
   [constants.ANALYSIS_STATUS_WAITING]: 'waiting',
   [constants.ANALYSIS_STATUS_PENDING]: 'pending',
   [constants.ANALYSIS_STATUS_SUCCEEDED]: 'succeeded',
   [constants.ANALYSIS_STATUS_FAILED]: 'failed'
+};
+
+const statusIconMap = {
+  [constants.ANALYSIS_STATUS_WAITING]: 'circle-o-notch',
+  [constants.ANALYSIS_STATUS_PENDING]: 'circle-o-notch fa-spin',
+  [constants.ANALYSIS_STATUS_SUCCEEDED]: 'check',
+  [constants.ANALYSIS_STATUS_FAILED]: 'times'
 };
 
 function Analyzer({ analyze, analyses }) {
@@ -39,6 +47,12 @@ function Analyzer({ analyze, analyses }) {
             <li key={id} className="analyzer__analysis">
             {error && <span className="analyzer__analysis-error">{error}</span>}
               <i className={`analyzer__analysis-status analyzer__analysis-status--${statusClassMap[status]}`}/>
+              <span className="analyzer__analysis-status-icon-container">
+                <i className={`
+                  analyzer__analysis-status-icon analyzer__analysis-status-icon--${statusClassMap[status]}
+                  fa fa-${statusIconMap[status]}
+                `}/>
+              </span>
               {libraryString}
             </li>
           )}

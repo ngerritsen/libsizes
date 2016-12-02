@@ -94,6 +94,23 @@
   background-color: $color-green;
 }
 
+.analyzer__analysis-status-icon--pending {
+  color: $color-yellow;
+}
+
+.analyzer__analysis-status-icon--failed {
+  color: $color-red;
+}
+
+.analyzer__analysis-status-icon--succeeded {
+  color: $color-green;
+}
+
+.analyzer__analysis-status-icon-container {
+  display: inline-block;
+  width: 2.5rem;
+}
+
 .analyzer__analysis-error {
   float: right;
   color: $color-red;
