@@ -11,7 +11,7 @@ import Analyzer from './analyzer';
 import '../styles/app.scss';
 
 function App({
-  analyze, libraries, libraryCount, search, searchTerms, sort, sortBy, sortReversed, stopUsing, totals, use
+  analyses, analyze, libraries, libraryCount, search, searchTerms, sort, sortBy, sortReversed, stopUsing, totals, use
 }) {
   const libraryListProps = { libraries, search, searchTerms, sort, sortBy, sortReversed, stopUsing, totals, use };
   return (
@@ -19,7 +19,7 @@ function App({
       <Header libraryCount={libraryCount}/>
       <div className="container-fluid">
         <LibraryList {...libraryListProps}/>
-        <Analyzer analyze={analyze}/>
+        <Analyzer analyze={analyze} analyses={analyses}/>
         <p className="note">
           *Sizes may vary according to bundler, minifier and their settings.
           Here, minified sizes are generated using Webpack with the UglifyJS plugin.
@@ -39,6 +39,7 @@ function App({
 }
 
 App.propTypes = {
+  analyses: PropTypes.array.isRequired,
   analyze: PropTypes.func.isRequired,
   libraries: PropTypes.array.isRequired,
   libraryCount: PropTypes.number.isRequired,
@@ -58,6 +59,7 @@ function mapStateToProps(state) {
   const markedSearchedAndSortedLibraries = sortLibraries(markedSearchedLibraries, state.sortBy, state.sortReversed);
 
   return {
+    analyses: state.analyses,
     libraries: markedSearchedAndSortedLibraries,
     libraryCount: state.libraries.length,
     searchTerms: state.searchTerms,

@@ -1,22 +1,32 @@
 /* eslint-disable no-constant-condition */
 
-import { takeEvery } from 'redux-saga';
-import { put, select } from 'redux-saga/effects';
-import { analysisStarted, analysisSucceeded, analysisFailed, fetchLibrariesSucceeded } from './actions';
-import { ANALYZE, ANALYSIS_POLL_INTERVAL } from './constants';
-import { ANALYSIS_STATUS_SUCCEEDED, ANALYSIS_STATUS_FAILED } from '../shared/constants';
+import io from 'socket.io-client';
+import shortId from 'shortid';
+import { takeEvery, eventChannel } from 'redux-saga';
+import { put, take, call } from 'redux-saga/effects';
+
+import { fetchLibrariesSucceeded } from './actions';
+import { ANALYZE } from './constants';
+import * as request from './request';
+
+import { analysisRequested, analysisStarted, analysisFailed } from '../shared/actions';
+import { ANALYSIS_UPDATED, ANALYSIS_SUCCEEDED } from '../shared/constants';
 
 export default function *rootSaga() {
   yield [
     fetchLibrariesSaga(),
     analyzeSaga(),
-    pollAnalysesSaga()
+    readAnalysesSaga()
   ];
 }
 
 function *fetchLibrariesSaga() {
-  const libraries = yield fetch('/api/libraries')
-    .then(result => result.json());
+  yield* fetchLibraries();
+  yield takeEvery(ANALYSIS_SUCCEEDED, fetchLibraries);
+}
+
+function *fetchLibraries() {
+  const libraries = yield call(request.get, '/api/libraries');
   yield put(fetchLibrariesSucceeded(libraries));
 }
 
@@ -24,56 +34,46 @@ function *analyzeSaga() {
   yield takeEvery(ANALYZE, analyze);
 }
 
-function *analyze(action) {
-  const { analysisId, success } = yield fetch(`/api/analyses/${action.libraryString}`, {
-    method: 'POST'
-  }).then(result => result.json());
+function *analyze({ libraryString }) {
+  const analysisId = shortId.generate();
+
+  yield put(analysisRequested(analysisId, libraryString));
+
+  const { success, error } = yield call(request.post, `/api/analyses/${analysisId}`, { libraryString });
 
   if (success) {
     yield put(analysisStarted(analysisId));
+    return;
   }
+
+  yield put(analysisFailed(analysisId, error));
 }
 
-function *pollAnalysesSaga() { // eslint-disable-line max-statements
+function *readAnalysesSaga() {
+  const socket = yield call(connect);
+  const channel = yield call(createAnalysesReadChannel, socket);
+
   while (true) {
-    yield promiseDelay(ANALYSIS_POLL_INTERVAL);
-    const analyses = yield select(state => state.analyses);
-
-    if (analyses.length > 0) {
-      const analysesString = analyses.map(analysis => analysis.id).join(',');
-      const serverAnalyses = yield fetch(`/api/analyses/${analysesString}`).then(result => result.json());
-      const actions = determineAnalysisActions(serverAnalyses, analyses);
-
-      for (let i = 0; i < actions.length; i += 1) {
-        yield put(actions[i]);
-      }
-    }
+    const action = yield take(channel);
+    yield put(action);
   }
 }
 
-function promiseDelay(interval) {
-  return new Promise(resolve => {
-    setTimeout(resolve, interval);
+function createAnalysesReadChannel(socket) {
+  return eventChannel(emitter => {
+    socket.on(ANALYSIS_UPDATED, action => {
+      emitter(action);
+    });
+
+    return () => ({});
   });
 }
 
-function determineAnalysisActions(serverAnalyses, analyses) {
-  return analyses
-    .map(analysis => ({
-      ...analysis,
-      server: serverAnalyses.find(({ id }) => id === analysis.id)
-    }))
-    .filter(({ status, server }) => server && status !== server.status)
-    .map(({ id, server }) => {
-      if (server.status === ANALYSIS_STATUS_SUCCEEDED) {
-        return analysisSucceeded(id);
-      }
-
-      if (server.status === ANALYSIS_STATUS_FAILED) {
-        return analysisFailed(id);
-      }
-
-      return null;
-    })
-    .filter(action => !!action);
+function connect() {
+  const socket = io('/');
+  return new Promise(resolve => {
+    socket.on('connect', () => {
+      resolve(socket);
+    });
+  });
 }

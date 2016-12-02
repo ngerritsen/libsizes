@@ -1,7 +1,7 @@
 import { mapReducers } from 'redux-map-reducers';
 
 import * as constants from './constants';
-import { ANALYSIS_STATUS_SUCCEEDED, ANALYSIS_STATUS_FAILED, ANALYSIS_STATUS_PENDING } from '../shared/constants';
+import * as sharedConstants from '../shared/constants';
 
 const initialState = {
   analyses: [],
@@ -18,79 +18,89 @@ const reducerMap = {
   [constants.STOP_USING]: stopUsing,
   [constants.SEARCH]: search,
   [constants.FETCH_LIBRARIES_SUCCEEDED]: fetchLibrariesSucceeded,
-  [constants.ANALYSIS_STARTED]: analysisStarted,
-  [constants.ANALYSIS_SUCCEEDED]: analysisSucceeded,
-  [constants.ANALYSIS_FAILED]: analysisFailed
+  [sharedConstants.ANALYSIS_REQUESTED]: analysisRequested,
+  [sharedConstants.ANALYSIS_STARTED]: analysisStarted,
+  [sharedConstants.ANALYSIS_SUCCEEDED]: analysisSucceeded,
+  [sharedConstants.ANALYSIS_FAILED]: analysisFailed
 };
 
-function analysisStarted(state, action) {
+function analysisRequested(state, { id, libraryString }) {
   return {
     ...state,
-    analyses: [...state.analyses, createAnalysis(action.id)]
+    analyses: [...state.analyses, createAnalysis(id, libraryString)]
   };
 }
 
-function analysisSucceeded(state, action) {
+function analysisStarted(state, { id }) {
   return {
     ...state,
-    analyses: updateAnalysisState(state.analyses, action.id, ANALYSIS_STATUS_SUCCEEDED)
+    analyses: updateAnalysisStatus(state.analyses, id, constants.ANALYSIS_STATUS_PENDING)
   };
 }
 
-function analysisFailed(state, action) {
+function analysisSucceeded(state, { id }) {
   return {
     ...state,
-    analyses: updateAnalysisState(state.analyses, action.id, ANALYSIS_STATUS_FAILED)
+    analyses: updateAnalysisStatus(state.analyses, id, constants.ANALYSIS_STATUS_SUCCEEDED)
   };
 }
 
-function sort(state, action) {
+function analysisFailed(state, { id, error }) {
   return {
     ...state,
-    sortBy: action.sortBy,
-    sortReversed: state.sortBy === action.sortBy ? !state.sortReversed : false
+    analyses: updateAnalysisStatus(state.analyses, id, constants.ANALYSIS_STATUS_FAILED, error)
   };
 }
 
-function use(state, action) {
+function sort(state, { sortBy }) {
   return {
     ...state,
-    usedLibraries: [...state.usedLibraries, action.library]
+    sortBy,
+    sortReversed: state.sortBy === sortBy ? !state.sortReversed : false
   };
 }
 
-function stopUsing(state, action) {
+function use(state, { library }) {
   return {
     ...state,
-    usedLibraries: state.usedLibraries.filter(lib => lib.name !== action.library)
+    usedLibraries: [...state.usedLibraries, library]
   };
 }
 
-function search(state, action) {
+function stopUsing(state, { library }) {
   return {
     ...state,
-    searchTerms: action.searchTerms
+    usedLibraries: state.usedLibraries.filter(({ name }) => name !== library)
   };
 }
 
-function fetchLibrariesSucceeded(state, action) {
+function search(state, { searchTerms }) {
   return {
     ...state,
-    libraries: action.libraries
+    searchTerms
   };
 }
 
-function createAnalysis(id) {
+function fetchLibrariesSucceeded(state, { libraries }) {
   return {
-    status: ANALYSIS_STATUS_PENDING,
+    ...state,
+    libraries
+  };
+}
+
+function createAnalysis(id, libraryString) {
+  return {
+    status: constants.ANALYSIS_STATUS_WAITING,
+    libraryString,
+    error: null,
     id
   };
 }
 
-function updateAnalysisState(analyses, id, status) {
+function updateAnalysisStatus(analyses, id, status, error = null) {
   return analyses.map(analysis => {
     if (analysis.id === id) {
-      return Object.assign({}, analysis, { status });
+      return Object.assign({}, analysis, { status, error });
     }
 
     return analysis;

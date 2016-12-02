@@ -1,26 +1,5 @@
 import * as constants from './constants';
 
-export function analysisStarted(id) {
-  return {
-    type: constants.ANALYSIS_STARTED,
-    id
-  };
-}
-
-export function analysisSucceeded(id) {
-  return {
-    type: constants.ANALYSIS_SUCCEEDED,
-    id
-  };
-}
-
-export function analysisFailed(id) {
-  return {
-    type: constants.ANALYSIS_FAILED,
-    id
-  };
-}
-
 export function analyze(libraryString) {
   return {
     type: constants.ANALYZE,

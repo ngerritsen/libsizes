@@ -5,13 +5,36 @@ function getInfo(libraryString) {
   return new BPromise((resolve, reject) => {
     exec(`npm view ${libraryString} --json`, (error, stdout) => {
       if (error) {
-        reject(new Error(`Could not resolve ${libraryString}`));
+        reject(createLibraryResolveError(libraryString));
         return;
       }
 
-      resolve(JSON.parse(stdout));
+      try {
+        const library = processLibraryInfo(stdout, libraryString);
+        resolve(library);
+      } catch (parseError) {
+        reject(createLibraryResolveError(libraryString));
+      }
     });
   });
+}
+
+function processLibraryInfo(rawInfo) {
+  let library = JSON.parse(rawInfo);
+
+  if (Array.isArray(library)) {
+    library = library[library.length - 1];
+  }
+
+  if (!library.name || !library.version) {
+    throw Error('Empty JSON');
+  }
+
+  return library;
+}
+
+function createLibraryResolveError(libraryString) {
+  return new Error(`Could not resolve "${libraryString}"`);
 }
 
 function install(library, dir) {

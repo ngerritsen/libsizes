@@ -14,6 +14,9 @@ function LibraryList({ libraries, search, searchTerms, sort, sortBy, sortReverse
         type="text"
         className="library-list__search"
         placeholder="Search"
+        autoCapitalize="off"
+        autoComplete="off"
+        spellCheck="false"
         value={searchTerms}
         onChange={event => search(event.target.value)}
       />

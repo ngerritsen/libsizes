@@ -41,6 +41,10 @@ export function calculateTotals(libraries) {
 }
 
 export function bytesToKb(bytes) {
+  if (bytes < 10240) {
+    return Math.round(bytes / 102.4) / 10;
+  }
+
   return Math.round(bytes / 1024, 1);
 }
 

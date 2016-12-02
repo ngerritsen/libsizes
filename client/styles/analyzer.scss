@@ -1,8 +1,12 @@
 @import 'colors';
 
 .analyzer {
-  color: lighten($color-text, 15%);
-  padding: 1rem 0;
+  background-color: darken($color-white, 3%);
+  border: 1px solid darken($color-white, 10%);
+  color: lighten($color-text, 10%);
+  padding: 1.8rem 1.6rem;
+  margin: 1.6rem 0;
+  border-radius: 2px;
 }
 
 .analyzer__text {
@@ -11,34 +15,87 @@
 
 .analyzer__content {
   display: flex;
+  margin-bottom: 1.6rem;
 }
 
 .analyzer__input {
+  background-color: $color-white;
+  color: lighten($color-text, 10%);
   font-size: 1.5rem;
   margin: 0;
   border-radius: 0;
   box-shadow: none;
   background-color: trasparant;
-  border: 2px solid lighten($color-asphalt, 20%);
+  border: 2px solid lighten($color-text, 15%);
   padding: .7rem .9rem;
   width: 100%;
 
   &:focus {
     outline: none;
-    border: 2px solid saturate(lighten($color-asphalt, 15%), 10%);
+    border: 2px solid lighten($color-text, 10%);
   }
 }
 
 .analyzer__button {
   color: $color-white;
+  font-weight: bold;
   font-size: 1.5rem;
   padding: .7rem .9rem;
-  background-color: lighten($color-asphalt, 20%);
-  border: 0;
+  border: none;
+  background-color: lighten($color-text, 15%);
 
   &:hover,
   &:focus {
     cursor: pointer;
-    background-color: saturate(lighten($color-asphalt, 15%), 10%);
+    background-color: lighten($color-text, 10%);
   }
+}
+
+.analyzer__analyses {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.analyzer__analysis {
+  position: relative;
+  list-style: none;
+  background-color: darken($color-white, 0%);
+  border-bottom: 1px solid darken($color-white, 10%);
+  padding: 1.2rem 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.analyzer__analysis-status {
+  opacity: 0.8;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 0.5rem;
+  height: 100%;
+  background-color: darken($color-white, 30%);
+}
+
+.analyzer__analysis-status--pending {
+  background-color: $color-yellow;
+}
+
+.analyzer__analysis-status--failed {
+  background-color: $color-red;
+}
+
+.analyzer__analysis-status--succeeded {
+  background-color: $color-green;
+}
+
+.analyzer__analysis-error {
+  float: right;
+  color: $color-red;
+  font-weight: normal;
 }

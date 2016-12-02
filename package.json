@@ -18,6 +18,7 @@
   "dependencies": {
     "babel-polyfill": "^6.16.0",
     "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "gzip-size": "^3.0.0",
     "immutable": "^3.8.1",
@@ -30,6 +31,8 @@
     "redux-saga": "^0.13.0",
     "rimraf": "^2.5.4",
     "shortid": "^2.2.6",
+    "socket.io": "^1.7.1",
+    "socket.io-client": "^1.7.1",
     "webpack": "^1.12.2",
     "whatwg-fetch": "^2.0.1"
   },
