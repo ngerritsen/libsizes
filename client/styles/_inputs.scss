@@ -1,0 +1,29 @@
+@import 'colors';
+@import 'variables';
+
+$input-height: 3.2rem;
+
+.input {
+  -webkit-appearance: none;
+  font-size: inherit;
+  border-radius: 0.3rem;
+  box-shadow: 0 0 0 $color-white;
+  border: 1px solid $color-grey;
+  height: $input-height;
+  line-height: $input-height;
+  padding: 0 $margin-small;
+  width: 100%;
+
+  &:hover {
+    border-color: darken($color-grey, 8%);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: darken($color-grey, 16%);
+  }
+
+  &::-webkit-search-decoration {
+    display: none;
+  }
+}

@@ -1,0 +1,61 @@
+@import 'colors';
+@import 'variables';
+
+.analysis {
+  position: relative;
+  list-style: none;
+  border-bottom: 1px solid $color-light-grey;
+  padding: $margin-small $margin-medium;
+  margin-bottom: 1rem;
+  font-weight: bold;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.analysis__status {
+  opacity: 0.8;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 0.5rem;
+  height: 100%;
+  background-color: darken($color-white, 30%);
+}
+
+.analysis__status--pending {
+  background-color: $color-yellow;
+}
+
+.analysis__status--failed {
+  background-color: $color-red;
+}
+
+.analysis__status--succeeded {
+  background-color: $color-green;
+}
+
+.analysis__status-icon--pending {
+  color: $color-yellow;
+}
+
+.analysis__status-icon--failed {
+  color: $color-red;
+}
+
+.analysis__status-icon--succeeded {
+  color: $color-green;
+}
+
+.analysis__status-icon-container {
+  display: inline-block;
+  width: 2.5rem;
+}
+
+.analysis__error {
+  float: right;
+  color: $color-red;
+  font-weight: normal;
+}

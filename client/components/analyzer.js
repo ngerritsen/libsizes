@@ -1,29 +1,17 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import * as constants from '../constants';
+import * as actions from '../actions';
+import { Analysis } from './index';
 
 import '../styles/analyzer.scss';
 
 let libraryInput = null;
 
-const statusClassMap = {
-  [constants.ANALYSIS_STATUS_WAITING]: 'waiting',
-  [constants.ANALYSIS_STATUS_PENDING]: 'pending',
-  [constants.ANALYSIS_STATUS_SUCCEEDED]: 'succeeded',
-  [constants.ANALYSIS_STATUS_FAILED]: 'failed'
-};
-
-const statusIconMap = {
-  [constants.ANALYSIS_STATUS_WAITING]: 'circle-o-notch',
-  [constants.ANALYSIS_STATUS_PENDING]: 'circle-o-notch fa-spin',
-  [constants.ANALYSIS_STATUS_SUCCEEDED]: 'check',
-  [constants.ANALYSIS_STATUS_FAILED]: 'times'
-};
-
 function Analyzer({ analyze, analyses }) {
   return (
     <div className="analyzer">
-      <p className="analyzer__text">Did not find what you were looking for? Analyze it:</p>
       <form className="analyzer__content" onSubmit={event => {
         event.preventDefault();
         analyze(libraryInput.value.trim());
@@ -33,29 +21,17 @@ function Analyzer({ analyze, analyses }) {
             libraryInput = element;
           }}
           type="text"
-          className="analyzer__input"
+          className="input analyzer__input"
           placeholder="redux@^3.6.0"
           autoCapitalize="off"
           autoComplete="off"
           spellCheck="false"
         />
-        <button className="analyzer__button" type="submit">Analyze</button>
+        <button className="button analyzer__button" type="submit">Analyze</button>
       </form>
 
       <ul className="analyzer__analyses">
-          {analyses.map(({ status, libraryString, id, error }) =>
-            <li key={id} className="analyzer__analysis">
-            {error && <span className="analyzer__analysis-error">{error}</span>}
-              <i className={`analyzer__analysis-status analyzer__analysis-status--${statusClassMap[status]}`}/>
-              <span className="analyzer__analysis-status-icon-container">
-                <i className={`
-                  analyzer__analysis-status-icon analyzer__analysis-status-icon--${statusClassMap[status]}
-                  fa fa-${statusIconMap[status]}
-                `}/>
-              </span>
-              {libraryString}
-            </li>
-          )}
+          {analyses.map(analysis => <Analysis {...analysis}/>)}
       </ul>
     </div>
   );
@@ -66,4 +42,14 @@ Analyzer.propTypes = {
   analyze: PropTypes.func.isRequired
 };
 
-export default Analyzer;
+function mapStateToProps(state) {
+  return {
+    analyses: state.analyses
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Analyzer);

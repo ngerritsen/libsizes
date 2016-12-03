@@ -1,0 +1,23 @@
+@import 'colors';
+@import 'variables';
+
+$button-height: 3.2rem;
+
+.button {
+  -webkit-appearance: none;
+  height: $button-height;
+  line-height: $button-height;
+  background-color: $color-primary;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0 $margin-medium;
+  color: $color-white;
+  font-weight: 600;
+  font-size: 1.4rem;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    background-color: darken($color-primary, 2%);
+  }
+}

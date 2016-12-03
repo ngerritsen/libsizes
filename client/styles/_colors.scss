@@ -1,9 +1,15 @@
 $color-white: #fff;
 $color-black: #000;
+
 $color-blue: #48a2df;
 $color-green: #2ecc71;
 $color-yellow: #f1c40f;
 $color-red: #e74c3c;
-$color-asphalt: desaturate(#34495e, 15%);
-$color-link: $color-blue;
-$color-text: $color-asphalt;
+
+$color-primary: #e8617a;
+
+$color-text: lighten($color-black, 38%);
+$color-light-text: lighten($color-text, 32%);
+$color-grey: darken($color-white, 16%);
+$color-light-grey: darken($color-white, 6.5%);
+$color-link: $color-primary;

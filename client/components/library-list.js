@@ -12,7 +12,7 @@ function LibraryList({ libraries, search, searchTerms, sort, sortBy, sortReverse
     <div>
       <input
         type="text"
-        className="library-list__search"
+        className="input library-list__search"
         placeholder="Search"
         autoCapitalize="off"
         autoComplete="off"
@@ -26,7 +26,7 @@ function LibraryList({ libraries, search, searchTerms, sort, sortBy, sortReverse
             <th><span className="hide-mobile">Use</span></th>
             <SortableColumnHeading {...sortHeadingProps} prop="name" title="Name"/>
             <th className="hide-mobile">Version</th>
-            <SortableColumnHeading {...sortHeadingProps} prop="normal" title="Size"/>
+            <SortableColumnHeading {...sortHeadingProps} prop="normal" title="Normal"/>
             <SortableColumnHeading {...sortHeadingProps} prop="min" title="Minified*"/>
             <SortableColumnHeading {...sortHeadingProps} prop="mingzip" title="Min + Gzip*"/>
           </tr>

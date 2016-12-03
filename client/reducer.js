@@ -31,24 +31,24 @@ function analysisRequested(state, { id, libraryString }) {
   };
 }
 
-function analysisStarted(state, { id }) {
+function analysisStarted(state, { id, message }) {
   return {
     ...state,
-    analyses: updateAnalysisStatus(state.analyses, id, constants.ANALYSIS_STATUS_PENDING)
+    analyses: updateAnalysis(state.analyses, id, { status: constants.ANALYSIS_STATUS_PENDING, message })
   };
 }
 
 function analysisSucceeded(state, { id }) {
   return {
     ...state,
-    analyses: updateAnalysisStatus(state.analyses, id, constants.ANALYSIS_STATUS_SUCCEEDED)
+    analyses: updateAnalysis(state.analyses, id, { status: constants.ANALYSIS_STATUS_SUCCEEDED })
   };
 }
 
 function analysisFailed(state, { id, error }) {
   return {
     ...state,
-    analyses: updateAnalysisStatus(state.analyses, id, constants.ANALYSIS_STATUS_FAILED, error)
+    analyses: updateAnalysis(state.analyses, id, { status: constants.ANALYSIS_STATUS_FAILED, error })
   };
 }
 
@@ -93,14 +93,18 @@ function createAnalysis(id, libraryString) {
     status: constants.ANALYSIS_STATUS_WAITING,
     libraryString,
     error: null,
+    message: null,
     id
   };
 }
 
-function updateAnalysisStatus(analyses, id, status, error = null) {
+function updateAnalysis(analyses, id, updates) {
   return analyses.map(analysis => {
     if (analysis.id === id) {
-      return Object.assign({}, analysis, { status, error });
+      return {
+        ...analysis,
+        ...updates
+      };
     }
 
     return analysis;

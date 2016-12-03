@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import { Router, Route, IndexRoute } from 'react-router';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+
 import reducer from './reducer';
 import createLogger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
+import { App, Browser, Analyzer } from './components';
 
 import './styles/global.scss';
 
@@ -22,7 +25,12 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <Router history={createBrowserHistory()}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Browser}/>
+        <Route path="analyze" component={Analyzer}/>
+      </Route>
+    </Router>
   </Provider>,
   document.getElementById('app-container')
 );

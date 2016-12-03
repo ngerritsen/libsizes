@@ -1,0 +1,28 @@
+@import 'colors';
+@import 'variables';
+
+.footer {
+  text-align: center;
+  padding: $margin-large 0;
+  font-size: 1.3rem;
+}
+
+.footer-text {
+  color: $color-light-text;
+}
+
+.footer__github-link,
+.footer__github-link:visited {
+  color: darken($color-light-text, 10%);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: darken($color-light-text, 20%);
+  }
+}
+
+.footer__github-icon {
+  position: relative;
+  margin-right: 0.15rem;
+}
