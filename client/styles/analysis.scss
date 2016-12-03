@@ -4,37 +4,15 @@
 .analysis {
   position: relative;
   list-style: none;
-  border-bottom: 1px solid $color-light-grey;
-  padding: $margin-small $margin-medium;
-  margin-bottom: 1rem;
-  font-weight: bold;
+  border-color: $color-light-grey;
+  border-style: solid;
+  border-width: 1px 0 0;
+  padding: $margin-medium 0;
+  font-weight: 600;
 
   &:last-child {
-    margin-bottom: 0;
+    border-bottom-width: 1px;
   }
-}
-
-.analysis__status {
-  opacity: 0.8;
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: block;
-  width: 0.5rem;
-  height: 100%;
-  background-color: darken($color-white, 30%);
-}
-
-.analysis__status--pending {
-  background-color: $color-yellow;
-}
-
-.analysis__status--failed {
-  background-color: $color-red;
-}
-
-.analysis__status--succeeded {
-  background-color: $color-green;
 }
 
 .analysis__status-icon--pending {
@@ -54,8 +32,17 @@
   width: 2.5rem;
 }
 
-.analysis__error {
+.analysis__message {
   float: right;
-  color: $color-red;
+  margin-left: 1.5rem;
+  color: darken($color-light-text, 5%);
   font-weight: normal;
+}
+
+.analysis__message--error {
+  color: $color-red;
+}
+
+.analysis__message--success {
+  color: $color-green;
 }

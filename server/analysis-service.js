@@ -1,5 +1,5 @@
 const { getInfo } = require('./npm-tools');
-const { analysisSucceeded, analysisFailed } = require('../shared/actions');
+const { analysisSucceeded, analysisFailed, analysisProgressed } = require('../shared/actions');
 const { ANALYSIS_UPDATED } = require('../shared/constants');
 const analyzeLibrary = require('./analyzer');
 
@@ -21,10 +21,15 @@ class AnalysisService {
     this._socket.emit(ANALYSIS_UPDATED, action);
   }
 
+  _onProgress(analysisId, message) {
+    this._emit(analysisProgressed(analysisId, message));
+  }
+
   _analyze(library, analysisId) {
-    analyzeLibrary(library)
-      .then(result => this._libraryRepository.save(library.name, library.version, result))
-      .then(() => this._emit(analysisSucceeded(analysisId)))
+    analyzeLibrary(library, analysisId, message => this._onProgress(analysisId, message))
+      .tap(() => this._onProgress(analysisId, 'Saving result...'))
+      .tap(result => this._libraryRepository.save(library.name, library.version, result))
+      .then(result => this._emit(analysisSucceeded(analysisId, result)))
       .catch(error => this._emit(analysisFailed(analysisId, error.toString())));
   }
 }

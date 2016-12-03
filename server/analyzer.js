@@ -13,29 +13,37 @@ const OUTPUT_FILENAME_MINIFIED = 'bundle.min.js';
 const NODE_MODULES_DIR = 'node_modules';
 const TMP_DIR = '.tmp';
 
-function analyzeLibrary(library) {
-  const dir = setupDir(library);
-
-  return runIteratorAsync(run(library, dir));
+function analyzeLibrary(library, analysisId, onProgress) {
+  const dir = setupDir(library, analysisId);
+  return runIteratorAsync(run(library, dir, onProgress));
 }
 
-function *run(library, dir) {
-  yield install(library, dir);
+function *run(library, dir, onProgress) { // eslint-disable-line max-statements
+  onProgress(`Installing ${library.name}@${library.version}...`);
+  yield install(library, dir, onProgress);
+
+  onProgress('Running webpack build...');
   yield buildLibrary(library, dir);
+
+  onProgress('Running webpack minfied build...');
   yield buildLibrary(library, dir, true);
 
+  onProgress('Measuring sizes...');
   const sizes = measureFilesizes(dir);
+
+  onProgress('Cleaning up...');
   cleanUp(dir, library);
 
   return sizes;
 }
 
-function setupDir(library) {
+function setupDir(library, analysisId) {
   if (!fs.existsSync(TMP_DIR)) {
     fs.mkdirSync(TMP_DIR);
   }
 
-  const dir = fs.mkdtempSync(TMP_DIR + path.sep);
+  const dir = path.resolve(TMP_DIR + path.sep, analysisId);
+  fs.mkdirSync(dir);
   console.log(`Started processing "${library.name}" in working directory: "${dir}".`);
 
   return dir;

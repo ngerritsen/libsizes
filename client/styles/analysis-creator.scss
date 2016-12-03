@@ -1,0 +1,10 @@
+@import 'variables';
+
+.analysis-creator {
+  display: flex;
+  margin-bottom: $margin-medium;
+}
+
+.analysis-creator__input {
+  margin-right: $margin-x-small;
+}

@@ -20,6 +20,7 @@ const reducerMap = {
   [constants.FETCH_LIBRARIES_SUCCEEDED]: fetchLibrariesSucceeded,
   [sharedConstants.ANALYSIS_REQUESTED]: analysisRequested,
   [sharedConstants.ANALYSIS_STARTED]: analysisStarted,
+  [sharedConstants.ANALYSIS_PROGRESSED]: analysisProgressed,
   [sharedConstants.ANALYSIS_SUCCEEDED]: analysisSucceeded,
   [sharedConstants.ANALYSIS_FAILED]: analysisFailed
 };
@@ -31,17 +32,25 @@ function analysisRequested(state, { id, libraryString }) {
   };
 }
 
-function analysisStarted(state, { id, message }) {
+function analysisStarted(state, { id }) {
+  const message = 'Analysis starting...';
   return {
     ...state,
     analyses: updateAnalysis(state.analyses, id, { status: constants.ANALYSIS_STATUS_PENDING, message })
   };
 }
 
-function analysisSucceeded(state, { id }) {
+function analysisProgressed(state, { id, message }) {
   return {
     ...state,
-    analyses: updateAnalysis(state.analyses, id, { status: constants.ANALYSIS_STATUS_SUCCEEDED })
+    analyses: updateAnalysis(state.analyses, id, { message })
+  };
+}
+
+function analysisSucceeded(state, { id, result }) {
+  return {
+    ...state,
+    analyses: updateAnalysis(state.analyses, id, { status: constants.ANALYSIS_STATUS_SUCCEEDED, result })
   };
 }
 
@@ -93,7 +102,8 @@ function createAnalysis(id, libraryString) {
     status: constants.ANALYSIS_STATUS_WAITING,
     libraryString,
     error: null,
-    message: null,
+    message: 'Waiting for server...',
+    result: null,
     id
   };
 }

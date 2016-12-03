@@ -15,14 +15,23 @@ function analysisStarted(id) {
   };
 }
 
-function analysisSucceeded(id) {
+function analysisProgressed(id, message) {
   return {
-    type: constants.ANALYSIS_SUCCEEDED,
+    type: constants.ANALYSIS_PROGRESSED,
+    message,
     id
   };
 }
 
-function analysisFailed(id, error = 'Unknown error') {
+function analysisSucceeded(id, result) {
+  return {
+    type: constants.ANALYSIS_SUCCEEDED,
+    result,
+    id
+  };
+}
+
+function analysisFailed(id, error) {
   return {
     type: constants.ANALYSIS_FAILED,
     error,
@@ -33,6 +42,7 @@ function analysisFailed(id, error = 'Unknown error') {
 module.exports = {
   analysisRequested,
   analysisStarted,
+  analysisProgressed,
   analysisSucceeded,
   analysisFailed
 };

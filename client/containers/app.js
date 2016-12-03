@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Header, Footer } from './index';
 
-import '../styles/app.scss';
+import { Header, Footer } from '../components';
 
 function App({ children, libraryCount }) {
   return (
     <div>
       <Header libraryCount={libraryCount}/>
-      <div className="container-fluid">
+      <div className="container">
         {children}
       </div>
       <Footer/>

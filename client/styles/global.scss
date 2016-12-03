@@ -35,18 +35,26 @@ a {
   }
 }
 
-.container-fluid {
+.container {
   padding: 0 $margin-medium;
   margin: 0 auto;
   max-width: 100rem;
 }
 
-@media screen and (max-width: 480px) {
-  .container-fluid {
+.hide-desktop {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
     padding: 0 $margin-small;
   }
 
   .hide-mobile {
     display: none;
+  }
+
+  .hide-desktop {
+    display: initial;
   }
 }

@@ -40,6 +40,16 @@ export function calculateTotals(libraries) {
     }, { normal: 0, minified: 0, gzipped: 0 });
 }
 
+export function resultToMessage(result) {
+  if (!result || typeof result !== 'object') {
+    return null;
+  }
+
+  const { normal, minified, gzipped } = result;
+
+  return `Size: ${bytesToKb(normal)}kB, minfied: ${bytesToKb(minified)}kB, gzipped ${bytesToKb(gzipped)}kB.`;
+}
+
 export function bytesToKb(bytes) {
   if (bytes < 10240) {
     return Math.round(bytes / 102.4) / 10;

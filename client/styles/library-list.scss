@@ -44,6 +44,9 @@ $library-list-row-height: 3.5rem;
   }
 }
 
-.library-list__search {
-  margin: 0 0 $margin-medium 0;
+.library-list__note {
+  color: $color-light-text;
+  font-style: italic;
+  font-size: 1.3rem;
+  margin: 1rem 0;
 }

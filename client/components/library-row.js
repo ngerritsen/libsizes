@@ -13,7 +13,11 @@ function LibraryRow({ name, normal, minified, gzipped, stopUsing, use, used, ver
             onChange={() => used ? stopUsing(name) : use(name)}
           />
         </td>
-        <td><a target="_blank" href={`http://npmjs.com/package/${name}`}>{name}</a></td>
+        <td>
+          <a target="_blank" href={`http://npmjs.com/package/${name}`}>
+            {name}<span className="hide-desktop">@{version}</span>
+          </a>
+        </td>
         <td className="version hide-mobile">{version}</td>
         <td>{bytesToKb(normal)} <span className="unit">kB</span></td>
         <td>{bytesToKb(minified)} <span className="unit">kB</span></td>

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import * as constants from '../constants';
+import { resultToMessage } from '../helpers';
 
 import '../styles/analysis.scss';
 
@@ -17,10 +18,15 @@ const statusIconMap = {
   [constants.ANALYSIS_STATUS_FAILED]: 'times'
 };
 
-function Analysis({ id, error, status, libraryString }) {
+function Analysis({ id, error, message, result, status, libraryString }) {
+  const messageToShow = error || resultToMessage(result) || message;
+  const messageClassName = 'analysis__message' +
+    (error ? ' analysis__message--error' : '') +
+    (result ? ' analysis__message--success' : '');
+
   return (
     <li key={id} className="analysis">
-    {error && <span className="analysis__error">{error}</span>}
+      <span className={messageClassName}>{messageToShow}</span>
       <i className={`analysis__status analysis__status--${statusClassMap[status]}`}/>
       <span className="analysis__status-icon-container">
         <i className={`
@@ -37,6 +43,12 @@ Analysis.propTypes = {
   error: PropTypes.string,
   id: PropTypes.string.isRequired,
   libraryString: PropTypes.string.isRequired,
+  message: PropTypes.string,
+  result: PropTypes.shape({
+    normal: PropTypes.number.isRequired,
+    minified: PropTypes.number.isRequired,
+    gzipped: PropTypes.number.isRequired
+  }),
   status: PropTypes.string.isRequired
 };
 

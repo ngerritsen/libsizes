@@ -4,17 +4,14 @@ import { bindActionCreators } from 'redux';
 
 import { sortLibraries, searchLibraries, markUsedLibraries, calculateTotals } from '../helpers';
 import * as actions from '../actions';
-import { LibraryList } from './index';
+import { LibraryList, LibrarySearch } from '../components';
 
 function Browser({ libraries, search, searchTerms, sort, sortBy, sortReversed, stopUsing, totals, use }) {
-  const libraryListProps = { libraries, search, searchTerms, sort, sortBy, sortReversed, stopUsing, totals, use };
+  const libraryListProps = { libraries, sort, sortBy, sortReversed, stopUsing, totals, use };
   return (
     <div>
+      <LibrarySearch search={search} searchTerms={searchTerms}/>
       <LibraryList {...libraryListProps}/>
-      <p className="note">
-        *Sizes may vary according to bundler, minifier and their settings.
-        Here, minified sizes are generated using Webpack with the UglifyJS plugin.
-      </p>
     </div>
   );
 }

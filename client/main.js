@@ -9,7 +9,7 @@ import reducer from './reducer';
 import createLogger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
-import { App, Browser, Analyzer } from './components';
+import { App, Browser, Analyzer } from './containers';
 
 import './styles/global.scss';
 

@@ -6,7 +6,7 @@ import '../styles/header.scss';
 function Header({ libraryCount }) {
   return (
     <div className="header">
-      <div className="container-fluid">
+      <div className="container">
         <p className="header__quote hide-mobile">
           {libraryCount} library {libraryCount === 1 ? 'size' : 'sizes'} analyzed.
         </p>
