@@ -7,9 +7,8 @@ function Header({ libraryCount }) {
   return (
     <div className="header">
       <div className="container-fluid">
-        <p className="header__quote">
-          {libraryCount} library {libraryCount === 1 ? 'size' : 'sizes'} analyzed
-          <span className="seperator" />
+        <p className="header__quote hide-mobile">
+          {libraryCount} library {libraryCount === 1 ? 'size' : 'sizes'} analyzed.
         </p>
         <h1 className="header__title">libsizes</h1>
         <nav className="header__navigation">
