@@ -19,11 +19,14 @@ function initializeDb() {
 function initializeTables(client) {
   return client.query(`
     CREATE TABLE IF NOT EXISTS libraries (
-      name      varchar(40) NOT NULL,
-      version   varchar(12) NOT NULL,
+      name      varchar(64) NOT NULL,
+      version   varchar(64) NOT NULL,
       normal    integer     NOT NULL,
       minified  integer     NOT NULL,
       gzipped   integer     NOT NULL,
+      timestamp timestamp   NOT NULL,
+      analysis  varchar(32) NOT NULL,
+      request   varchar(64),
       PRIMARY KEY(name, version)
     );
   `);

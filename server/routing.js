@@ -15,8 +15,13 @@ function routing(app, libraryRepository, analysisService) {
 
   app.post('/api/analyses/:id', (req, res) => {
     const { params, body } = req;
-    analysisService.startAnalysis(params.id, body.libraryString)
-      .then(() => res.json({ success: true }))
+    analysisService.analyze(params.id, body.libraryString)
+      .then(({ library, existing }) => res.json({
+        success: true,
+        exists: !!existing,
+        version: library.version,
+        existing
+      }))
       .catch(error => res.json({ success: false, error: error.message }));
   });
 

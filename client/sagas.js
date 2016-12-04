@@ -9,7 +9,7 @@ import { fetchLibrariesSucceeded } from './actions';
 import { ANALYZE } from './constants';
 import * as request from './request';
 
-import { analysisRequested, analysisStarted, analysisFailed } from '../shared/actions';
+import { analysisRequested, analysisStarted, analysisFailed, analysisSkipped } from '../shared/actions';
 import { ANALYSIS_UPDATED, ANALYSIS_SUCCEEDED } from '../shared/constants';
 
 export default function *rootSaga() {
@@ -39,14 +39,14 @@ function *analyze({ libraryString }) {
 
   yield put(analysisRequested(analysisId, libraryString));
 
-  const { success, error } = yield call(request.post, `/api/analyses/${analysisId}`, { libraryString });
+  const result = yield call(request.post, `/api/analyses/${analysisId}`, { libraryString });
 
-  if (success) {
-    yield put(analysisStarted(analysisId));
+  if (result.success) {
+    yield put(determineAction(analysisId, result));
     return;
   }
 
-  yield put(analysisFailed(analysisId, error));
+  yield put(analysisFailed(analysisId, result.error));
 }
 
 function *readAnalysesSaga() {
@@ -57,6 +57,10 @@ function *readAnalysesSaga() {
     const action = yield take(channel);
     yield put(action);
   }
+}
+
+function determineAction(analysisId, { exists, existing, version }) {
+  return exists ? analysisSkipped(analysisId, existing, version) : analysisStarted(analysisId, version);
 }
 
 function createAnalysesReadChannel(socket) {

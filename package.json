@@ -13,7 +13,9 @@
     "start": "node server",
     "build": "NODE_ENV=production webpack",
     "watch": "NODE_ENV=development webpack --watch",
-    "test": "eslint ."
+    "test": "eslint .",
+    "start-postgres": "docker-compose up -d",
+    "connect-postgres": "docker exec -it libsizes-postgresql sudo -u postgres psql"
   },
   "dependencies": {
     "babel-polyfill": "^6.16.0",

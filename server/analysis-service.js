@@ -11,14 +11,20 @@ class AnalysisService {
     this._libraryRepository = libraryRepository;
   }
 
-  startAnalysis(analysisId, libraryString) {
-    winston.info(`Started processing "${libraryString}".`, { analysisId });
+  analyze(analysisId, libraryString) {
     return getInfo(libraryString)
-      .then(library => {
-        this._analyze(library, analysisId);
-        return analysisId;
+      .then(library => this._determineLibraryExists(library))
+      .tap(({ existing, library }) => {
+        if (!existing) {
+          this._analyze(library, analysisId, libraryString);
+        }
       })
       .catch(error => winston.error(error.message, { analysisId }));
+  }
+
+  _determineLibraryExists(library) {
+    return this._libraryRepository.get(library.name, library.version)
+      .then(existing => ({ library, existing }));
   }
 
   _emit(action) {
@@ -30,10 +36,12 @@ class AnalysisService {
     this._emit(analysisProgressed(analysisId, message));
   }
 
-  _analyze(library, analysisId) {
+  _analyze(library, analysisId, libraryString) {
+    winston.info(`Started processing "${libraryString}".`, { analysisId });
+
     analyzeLibrary(library, analysisId, message => this._onProgress(analysisId, message))
       .tap(() => this._onProgress(analysisId, 'Saving result...'))
-      .tap(result => this._libraryRepository.save(library.name, library.version, result))
+      .tap(result => this._libraryRepository.save(library.name, library.version, result, libraryString, analysisId))
       .then(result => this._emit(analysisSucceeded(analysisId, result)))
       .catch(error => {
         this._emit(analysisFailed(analysisId, error.message));

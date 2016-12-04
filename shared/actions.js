@@ -8,9 +8,20 @@ function analysisRequested(id, libraryString) {
   };
 }
 
-function analysisStarted(id) {
+function analysisStarted(id, version) {
   return {
     type: constants.ANALYSIS_STARTED,
+    version,
+    id
+  };
+}
+
+function analysisSkipped(id, existing, version) {
+  const { normal, minified, gzipped } = existing;
+  return {
+    type: constants.ANALYSIS_SKIPPED,
+    result: { normal, minified, gzipped },
+    version,
     id
   };
 }
@@ -42,6 +53,7 @@ function analysisFailed(id, error) {
 module.exports = {
   analysisRequested,
   analysisStarted,
+  analysisSkipped,
   analysisProgressed,
   analysisSucceeded,
   analysisFailed
