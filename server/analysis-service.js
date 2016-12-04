@@ -12,6 +12,7 @@ class AnalysisService {
   }
 
   startAnalysis(analysisId, libraryString) {
+    winston.info(`Started processing "${libraryString}".`, { analysisId });
     return getInfo(libraryString)
       .then(library => {
         this._analyze(library, analysisId);

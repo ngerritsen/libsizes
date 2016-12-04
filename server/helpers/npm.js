@@ -10,8 +10,7 @@ function getInfo(libraryString) {
       }
 
       try {
-        const library = processLibraryInfo(stdout, libraryString);
-        resolve(library);
+        resolve(processLibraryInfo(stdout, libraryString));
       } catch (parseError) {
         reject(createLibraryResolveError(libraryString));
       }
@@ -20,17 +19,23 @@ function getInfo(libraryString) {
 }
 
 function processLibraryInfo(rawInfo) {
-  let library = JSON.parse(rawInfo);
-
-  if (Array.isArray(library)) {
-    library = library[library.length - 1];
-  }
+  const library = parseRawLibraryInfo(rawInfo);
 
   if (!library.name || !library.version) {
     throw Error('Empty JSON');
   }
 
   return library;
+}
+
+function parseRawLibraryInfo(rawInfo) {
+  const libraryInfo = JSON.parse(rawInfo);
+
+  if (Array.isArray(libraryInfo)) {
+    return libraryInfo[libraryInfo.length - 1];
+  }
+
+  return libraryInfo;
 }
 
 function createLibraryResolveError(libraryString) {
