@@ -19,6 +19,18 @@ $header-height: 8rem;
   font-weight: 600;
 }
 
+.header__logo {
+  opacity: 0.8;
+  position: relative;
+  display: none;
+  width: 3.4rem;
+  height: 3.4rem;
+  fill: lighten($color-light-text, 12%);
+  stroke: $color-light-text;
+  top: 0.7rem;
+  margin-right: 0.2rem;
+}
+
 .header__quote {
   float: right;
   margin: 0;
