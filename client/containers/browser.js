@@ -4,14 +4,15 @@ import { bindActionCreators } from 'redux';
 
 import { sortLibraries, searchLibraries, markUsedLibraries, calculateTotals } from '../helpers';
 import * as actions from '../actions';
-import { LibraryList, LibrarySearch } from '../components';
+import { LibraryList, LibrarySearch, AnalyzerNotice } from '../components';
 
 function Browser({ libraries, search, searchTerms, sort, sortBy, sortReversed, stopUsing, totals, use }) {
   const libraryListProps = { libraries, sort, sortBy, sortReversed, stopUsing, totals, use };
   return (
     <div>
       <LibrarySearch search={search} searchTerms={searchTerms}/>
-      <LibraryList {...libraryListProps}/>
+      {libraries.length > 0 && <LibraryList {...libraryListProps}/>}
+      <AnalyzerNotice/>
     </div>
   );
 }

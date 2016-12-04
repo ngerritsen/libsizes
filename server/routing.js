@@ -17,7 +17,7 @@ function routing(app, libraryRepository, analysisService) {
     const { params, body } = req;
     analysisService.startAnalysis(params.id, body.libraryString)
       .then(() => res.json({ success: true }))
-      .catch(error => res.json({ success: false, error: error.toString() }));
+      .catch(error => res.json({ success: false, error: error.message }));
   });
 
   app.get('*', (req, res) => {

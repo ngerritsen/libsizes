@@ -1,3 +1,5 @@
+import sortBy from 'lodash/sortBy';
+
 export function sortLibraries(libraries, sortProp, reversed) {
   const sortedLibraries = sortLibrariesRaw(libraries, sortProp);
   return reversed ? sortedLibraries.reverse() : sortedLibraries;
@@ -56,21 +58,4 @@ export function bytesToKb(bytes) {
   }
 
   return Math.round(bytes / 1024, 1);
-}
-
-function sortBy(array, getValue) {
-  return array.slice().sort((a, b) => {
-    const aValue = getValue(a);
-    const bValue = getValue(b);
-
-    if (aValue > bValue) {
-      return 1;
-    }
-
-    if (aValue < bValue) {
-      return -1;
-    }
-
-    return 0;
-  });
 }

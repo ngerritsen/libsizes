@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const co = require('co');
 const BPromise = require('bluebird');
 const gzipSize = require('gzip-size');
 const rimraf = require('rimraf');
@@ -7,14 +8,13 @@ const mkdirp = require('mkdirp');
 
 const { TMP_DIR, OUTPUT_FILENAME, OUTPUT_FILENAME_MINIFIED, PRODUCTION, DEVELOPMENT } = require('./constants');
 const { install } = require('./helpers/npm');
-const { runIteratorAsync } = require('./helpers/generators');
 const { buildLibrary } = require('./helpers/webpack');
 
 const mkdirpAsync = BPromise.promisify(mkdirp);
 const rimrafAsync = BPromise.promisify(rimraf);
 
 function analyzeLibrary(library, analysisId, onProgress) {
-  return runIteratorAsync(run(library, analysisId, onProgress));
+  return BPromise.resolve(co(run(library, analysisId, onProgress)));
 }
 
 function *run(library, analysisId, onProgress) { // eslint-disable-line max-statements

@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import { bytesToKb } from '../helpers';
 
+import '../styles/library-list-totals.scss';
+
 function LibraryTotals({ normal, minified, gzipped }) {
   return (
-    <tfoot>
+    <tfoot className="library-list-totals">
       <tr>
         <td/>
         <td>Total</td>

@@ -17,7 +17,8 @@ class AnalysisService {
       .then(library => {
         this._analyze(library, analysisId);
         return analysisId;
-      });
+      })
+      .catch(error => winston.error(error.message, { analysisId }));
   }
 
   _emit(action) {
@@ -34,7 +35,10 @@ class AnalysisService {
       .tap(() => this._onProgress(analysisId, 'Saving result...'))
       .tap(result => this._libraryRepository.save(library.name, library.version, result))
       .then(result => this._emit(analysisSucceeded(analysisId, result)))
-      .catch(error => this._emit(analysisFailed(analysisId, error.toString())));
+      .catch(error => {
+        this._emit(analysisFailed(analysisId, error.message));
+        winston.error(error.message, { analysisId });
+      });
   }
 }
 

@@ -12,7 +12,13 @@ class LibraryRepository {
         ${sizes.minified},
         ${sizes.gzipped}
       );
-    `);
+    `).catch(error => {
+      if (error.message.indexOf('duplicate') > -1) {
+        throw new Error(`Failed to save "${library}" with version "${version}", because it already exists.`);
+      }
+
+      throw new Error(`Failed to save "${library}" with version "${version}".`);
+    });
   }
 
   get(library, version) {

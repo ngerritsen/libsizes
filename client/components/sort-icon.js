@@ -1,18 +1,13 @@
 import React, { PropTypes } from 'react';
 
-const arrowDown = String.fromCharCode(9660);
-const arrowUp = String.fromCharCode(9650);
+import '../styles/sort-icon.scss';
 
 function SortIcon({ prop, sortBy, sortReversed }) {
-  return (
-    <span className="sort-icon">
-      {(() => {
-        if (sortBy === prop) {
-          return sortReversed ? arrowDown : arrowUp;
-        }
-      })()}
-    </span>
-  );
+  if (sortBy === prop) {
+    return <i className={'sort-icon fa fa-caret-' + (sortReversed ? 'down' : 'up')}/>;
+  }
+
+  return null;
 }
 
 SortIcon.propTypes = {

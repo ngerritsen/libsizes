@@ -1,6 +1,7 @@
 export { default as Analyses } from './analyses';
 export { default as AnalysisCreator } from './analysis-creator';
 export { default as Analysis } from './analysis';
+export { default as AnalyzerNotice } from './analyzer-notice';
 export { default as Footer } from './footer';
 export { default as Header } from './header';
 export { default as LibraryList } from './library-list';

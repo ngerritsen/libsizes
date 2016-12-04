@@ -5,6 +5,7 @@ $button-height: 3.2rem;
 
 .button {
   -webkit-appearance: none;
+  display: inline-block;
   height: $button-height;
   line-height: $button-height;
   background-color: $color-primary;
@@ -19,5 +20,6 @@ $button-height: 3.2rem;
   &:focus {
     cursor: pointer;
     background-color: darken($color-primary, 2%);
+    text-decoration: none;
   }
 }

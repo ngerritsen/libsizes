@@ -1,7 +1,7 @@
 @import 'colors';
 @import 'variables';
 
-$library-list-row-height: 3.5rem;
+$library-list-row-height: 3.7rem;
 
 .library-list {
   border-collapse: collapse;
@@ -22,25 +22,9 @@ $library-list-row-height: 3.5rem;
     font-weight: 600;
   }
 
-  .sortable {
-    &:hover {
-      cursor: pointer;
-      color: lighten($color-text, 10%);
-    }
-  }
-
-  .sort-icon {
-    font-size: .7em;
-    margin-left: .5rem;
-  }
-
   tr {
     height: $library-list-row-height;
     line-height: $library-list-row-height;
-  }
-
-  tfoot {
-    font-weight: 600;
   }
 }
 

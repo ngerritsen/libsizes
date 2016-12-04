@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import SortIcon from './sort-icon';
 
+import '../styles/sortable-column-heading.scss';
+
 function SortableColumnHeading({ prop, sort, sortBy, sortReversed, title, titleMobile }) {
   return (
-    <th className="sortable" onClick={() => sort(prop)}>
+    <th className="sortable-column-heading" onClick={() => sort(prop)}>
       <span className="hide-mobile">{title}</span>
       <span className="hide-desktop">{titleMobile || title}</span>
       <SortIcon prop={prop} sortBy={sortBy} sortReversed={sortReversed}/>
