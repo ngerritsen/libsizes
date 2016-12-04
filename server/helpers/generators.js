@@ -23,4 +23,6 @@ function handlePromise(iterator, resolve, reject, value) {
   value.catch(error => reject(error));
 }
 
-module.exports = { runIteratorAsync };
+module.exports = {
+  runIteratorAsync
+};

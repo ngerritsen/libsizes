@@ -1,4 +1,6 @@
-const { getInfo } = require('./npm-tools');
+const winston = require('winston');
+
+const { getInfo } = require('./helpers/npm');
 const { analysisSucceeded, analysisFailed, analysisProgressed } = require('../shared/actions');
 const { ANALYSIS_UPDATED } = require('../shared/constants');
 const analyzeLibrary = require('./analyzer');
@@ -22,6 +24,7 @@ class AnalysisService {
   }
 
   _onProgress(analysisId, message) {
+    winston.info(message, { analysisId });
     this._emit(analysisProgressed(analysisId, message));
   }
 

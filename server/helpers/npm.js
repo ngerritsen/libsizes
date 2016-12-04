@@ -45,7 +45,6 @@ function install(library, dir) {
         reject(`Install error: ${error}`);
       }
 
-      console.log(`Installed "${name}" with version "${version}".`);
       resolve();
     });
   });

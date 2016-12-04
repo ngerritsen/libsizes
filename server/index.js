@@ -1,6 +1,7 @@
 const express = require('express');
 const { Server } = require('http');
 const socketIo = require('socket.io');
+const winston = require('winston');
 
 const routing = require('./routing');
 const initializeDb = require('./db');
@@ -30,6 +31,6 @@ function initializeApp(dbClient) { // eslint-disable-line max-statements
       throw error;
     }
 
-    console.log(`Libsizes started, listening on port ${port}.`);
+    winston.info(`Libsizes started, listening on port ${port}.`);
   });
 }
