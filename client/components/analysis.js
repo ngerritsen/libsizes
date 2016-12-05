@@ -12,12 +12,6 @@ const statusClassMap = {
   [constants.ANALYSIS_STATUS_FAILED]: 'failed'
 };
 
-const messageClassMap = {
-  [constants.ANALYSIS_STATUS_FAILED]: 'error',
-  [constants.ANALYSIS_STATUS_SUCCEEDED]: 'success',
-  [constants.ANALYSIS_STATUS_SKIPPED]: 'skipped'
-};
-
 const statusIconMap = {
   [constants.ANALYSIS_STATUS_WAITING]: 'circle-o-notch',
   [constants.ANALYSIS_STATUS_PENDING]: 'circle-o-notch fa-spin',
@@ -26,21 +20,19 @@ const statusIconMap = {
   [constants.ANALYSIS_STATUS_FAILED]: 'times'
 };
 
-function Analysis({ id, error, message, result, status, libraryString }) {
-  const messageToShow = error || resultToMessage(result) || message;
-  const messageTypeClassName = messageClassMap[status] ? ' analysis__message--' + messageClassMap[status] : '';
-
+function Analysis({ id, error, message, result, status, libraryString, version }) {
   return (
     <li key={id} className="analysis">
-      <span className={'analysis__message' + messageTypeClassName}>{messageToShow}</span>
-      <i className={`analysis__status analysis__status--${statusClassMap[status]}`}/>
-      <span className="analysis__status-icon-container">
-        <i className={`
-          analysis__status-icon analysis__status-icon--${statusClassMap[status]}
-          fa fa-${statusIconMap[status]}
-        `}/>
-      </span>
-      {libraryString}
+      <h2 className={`analysis__title analysis__title--${statusClassMap[status]}`}>
+        <span className="analysis__icon-container">
+          <i className={`analysis__status-icon fa fa-${statusIconMap[status]}`}/>
+        </span>
+        {libraryString}
+      </h2>
+      <p className="analysis__main-info">
+        <span className="analysis__version">Exact version: {version || '???'}</span><br/>
+        {error || resultToMessage(result) || message}
+      </p>
     </li>
   );
 }
@@ -55,7 +47,8 @@ Analysis.propTypes = {
     minified: PropTypes.number.isRequired,
     gzipped: PropTypes.number.isRequired
   }),
-  status: PropTypes.string.isRequired
+  status: PropTypes.string.isRequired,
+  version: PropTypes.string
 };
 
 module.exports = Analysis;

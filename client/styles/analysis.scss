@@ -1,56 +1,57 @@
 @import 'colors';
 @import 'variables';
 
+$analysis-icon-width: 2.2rem;
+
 .analysis {
   position: relative;
   list-style: none;
   border-color: $color-light-grey;
   border-style: solid;
   border-width: 1px 0 0;
-  padding: $margin-medium 0;
-  font-weight: 600;
+  padding: $margin-medium 1px;
 
   &:last-child {
     border-bottom-width: 1px;
   }
 }
 
-.analysis__status-icon--pending {
+.analysis__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 $margin-x-small * 0.8;
+}
+
+.analysis__title--pending {
   color: $color-yellow;
 }
 
-.analysis__status-icon--failed {
+.analysis__title--failed {
   color: $color-red;
 }
 
-.analysis__status-icon--succeeded {
+.analysis__title--succeeded {
   color: $color-green;
 }
 
-.analysis__status-icon--skipped {
+.analysis__title--skipped {
   color: $color-blue;
 }
 
-.analysis__status-icon-container {
+.analysis__icon-container {
   display: inline-block;
-  width: 2.5rem;
+  width: $analysis-icon-width;
+  font-size: 1.4rem;
 }
 
-.analysis__message {
-  float: right;
-  margin-left: 1.5rem;
-  color: darken($color-light-text, 5%);
-  font-weight: normal;
+.analysis__main-info {
+  margin: 0;
+  font-size: 1.3rem;
+  color: darken($color-light-text, 10%);
+  line-height: 2rem;
+  margin-left: $analysis-icon-width;
 }
 
-.analysis__message--error {
-  color: $color-red;
-}
-
-.analysis__message--success {
-  color: $color-green;
-}
-
-.analysis__message--skipped {
-  color: $color-blue;
+.analysis__version {
+  color: $color-light-text;
 }

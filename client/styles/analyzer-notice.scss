@@ -8,6 +8,7 @@
   margin-bottom: $margin-x-small;
   padding: $margin-small;
   border-radius: 3px;
+  color: lighten($color-text, 5%);
   border: 1px solid $color-light-grey;
   background-color: lighten($color-light-grey, 6%);
 }
