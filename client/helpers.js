@@ -36,7 +36,7 @@ export function calculateTotals(libraries) {
     .reduce((prev, curr) => {
       return {
         normal: prev.normal + curr.normal,
-        minified: prev.minified + curr.minfied,
+        minified: prev.minified + curr.minified,
         gzipped: prev.gzipped + curr.gzipped
       };
     }, { normal: 0, minified: 0, gzipped: 0 });
@@ -49,7 +49,7 @@ export function resultToMessage(result) {
 
   const { normal, minified, gzipped } = result;
 
-  return `Size: ${bytesToKb(normal)}kB, minfied: ${bytesToKb(minified)}kB, gzipped ${bytesToKb(gzipped)}kB.`;
+  return `Size: ${bytesToKb(normal)}kB, minified: ${bytesToKb(minified)}kB, gzipped ${bytesToKb(gzipped)}kB.`;
 }
 
 export function bytesToKb(bytes) {

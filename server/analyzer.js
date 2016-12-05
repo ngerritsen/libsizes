@@ -28,7 +28,7 @@ function *run(library, analysisId, onProgress) { // eslint-disable-line max-stat
   onProgress('Running webpack build...');
   yield buildLibrary(library, dir, DEVELOPMENT);
 
-  onProgress('Running webpack minfied build...');
+  onProgress('Running webpack minified build...');
   yield buildLibrary(library, dir, PRODUCTION);
 
   onProgress('Measuring sizes...');
