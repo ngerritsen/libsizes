@@ -19,24 +19,27 @@ function analyzeLibrary(library, analysisId, onProgress) {
 function *run(library, analysisId, onProgress) { // eslint-disable-line max-statements
   const dir = path.resolve(TMP_DIR, analysisId);
 
-  yield mkdirpAsync(dir);
+  try {
+    yield mkdirpAsync(dir);
 
-  onProgress(`Installing ${library.name}@${library.version}...`);
-  yield install(library, dir, onProgress);
+    onProgress(`Installing ${library.name}@${library.version}...`);
+    yield install(library, dir, onProgress);
 
-  onProgress('Running webpack build...');
-  yield buildLibrary(library, dir, DEVELOPMENT);
+    onProgress('Running webpack build...');
+    yield buildLibrary(library, dir, DEVELOPMENT);
 
-  onProgress('Running webpack minified build...');
-  yield buildLibrary(library, dir, PRODUCTION);
+    onProgress('Running webpack minified build...');
+    yield buildLibrary(library, dir, PRODUCTION);
 
-  onProgress('Measuring sizes...');
-  const sizes = measureFilesizes(dir);
-
-  onProgress('Cleaning up...');
-  yield rimrafAsync(dir);
-
-  return sizes;
+    onProgress('Measuring sizes...');
+    return measureFilesizes(dir);
+  } catch (error) {
+    yield rimrafAsync(dir);
+    throw error;
+  } finally {
+    onProgress('Cleaning up...');
+    yield rimrafAsync(dir);
+  }
 }
 
 module.exports = analyzeLibrary;
