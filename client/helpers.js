@@ -20,7 +20,7 @@ function sortLibrariesRaw(libraries, sortProp) {
 }
 
 export function searchLibraries(libraries, searchValue) {
-  return libraries.filter(library => library.name.toLowerCase().indexOf(searchValue) > -1);
+  return libraries.filter(library => library.name.toLowerCase().indexOf(searchValue) > -1 || library.used);
 }
 
 export function markUsedLibraries(libraries, usedLibraries) {
