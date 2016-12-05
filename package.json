@@ -1,6 +1,6 @@
 {
   "name": "libsizes",
-  "version": "3.0.0-alpha",
+  "version": "3.0.0-beta",
   "description": "library sizes generated with webpack",
   "main": "lib/index.js",
   "author": "Niels Gerritsen",
@@ -62,7 +62,7 @@
     "sass-loader": "^4.0.2"
   },
   "engines": {
-    "node": ">6.5"
+    "node": ">6.9.1"
   },
   "keywords": [
     "library",
