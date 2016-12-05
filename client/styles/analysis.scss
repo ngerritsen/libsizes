@@ -27,6 +27,10 @@
   color: $color-green;
 }
 
+.analysis__status-icon--skipped {
+  color: $color-blue;
+}
+
 .analysis__status-icon-container {
   display: inline-block;
   width: 2.5rem;
@@ -45,4 +49,8 @@
 
 .analysis__message--success {
   color: $color-green;
+}
+
+.analysis__message--skipped {
+  color: $color-blue;
 }
