@@ -20,7 +20,7 @@ const config = {
     loaders: [
       {
         test: /\.js$/,
-        include: /client/,
+        include: /client|shared/,
         loader: 'babel'
       },
       {

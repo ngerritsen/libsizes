@@ -1,12 +1,11 @@
 const path = require('path');
-const fs = require('fs');
 const co = require('co');
 const BPromise = require('bluebird');
-const gzipSize = require('gzip-size');
 const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
 
-const { TMP_DIR, OUTPUT_FILENAME, OUTPUT_FILENAME_MINIFIED, PRODUCTION, DEVELOPMENT } = require('./constants');
+const { measureFilesizes } = require('./helpers/sizes');
+const { TMP_DIR, PRODUCTION, DEVELOPMENT } = require('./constants');
 const { install } = require('./helpers/npm');
 const { buildLibrary } = require('./helpers/webpack');
 
@@ -38,16 +37,6 @@ function *run(library, analysisId, onProgress) { // eslint-disable-line max-stat
   yield rimrafAsync(dir);
 
   return sizes;
-}
-
-function measureFilesizes(dir) {
-  const bundleBuf = fs.readFileSync(path.resolve(dir, OUTPUT_FILENAME));
-  const bundleBufMinified = fs.readFileSync(path.resolve(dir, OUTPUT_FILENAME_MINIFIED));
-  return {
-    normal: bundleBuf.length,
-    minified: bundleBufMinified.length,
-    gzipped: gzipSize.sync(bundleBufMinified.toString())
-  };
 }
 
 module.exports = analyzeLibrary;
