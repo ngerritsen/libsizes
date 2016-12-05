@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { sortLibraries, searchLibraries, markUsedLibraries, calculateTotals } from '../helpers';
+import { sortLibraries, searchLibraries, markUsedLibraries, calculateTotals, collapseLibraries } from '../helpers';
 import * as actions from '../actions';
 import { LibraryList, LibrarySearch, AnalyzerNotice } from '../components';
 
@@ -31,7 +31,8 @@ Browser.propTypes = {
 
 function mapStateToProps(state) {
   const markedLibraries = markUsedLibraries(state.libraries, state.usedLibraries);
-  const markedSearchedLibraries = searchLibraries(markedLibraries, state.searchTerms);
+  const markedCollapsedLibraries = collapseLibraries(markedLibraries);
+  const markedSearchedLibraries = searchLibraries(markedCollapsedLibraries, state.searchTerms);
   const markedSearchedAndSortedLibraries = sortLibraries(markedSearchedLibraries, state.sortBy, state.sortReversed);
 
   return {

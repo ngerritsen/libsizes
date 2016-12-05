@@ -1,4 +1,6 @@
 import sortBy from 'lodash/sortBy';
+import groupBy from 'lodash/groupBy';
+import semver from 'semver';
 
 export function sortLibraries(libraries, sortProp, reversed) {
   const sortedLibraries = sortLibrariesRaw(libraries, sortProp);
@@ -28,6 +30,30 @@ export function markUsedLibraries(libraries, usedLibraries) {
     ...library,
     used: usedLibraries.includes(library.name)
   }));
+}
+
+export function collapseLibraries(libraries) {
+  return groupedLibrariesToArray(groupBy(libraries, library => library.name))
+    .map(libraryVersions => collapseLibrary(libraryVersions));
+}
+
+function collapseLibrary(libraryVersions) {
+  const sortedLibraryVersions = sortByVersion(libraryVersions);
+  return {
+    ...sortedLibraryVersions[0],
+    versions: sortedLibraryVersions
+  };
+}
+
+function sortByVersion(libraryVersions) {
+  return libraryVersions
+    .slice()
+    .sort((a, b) => semver.lt(a.version, b.version));
+}
+
+function groupedLibrariesToArray(groupedLibraries) {
+  return Object.keys(groupedLibraries)
+    .map(key => groupedLibraries[key]);
 }
 
 export function calculateTotals(libraries) {
