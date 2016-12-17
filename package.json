@@ -1,6 +1,6 @@
 {
   "name": "libsizes",
-  "version": "3.0.0-beta",
+  "version": "3.0.1",
   "description": "library sizes generated with webpack",
   "main": "lib/index.js",
   "author": "Niels Gerritsen",
