@@ -9,6 +9,7 @@ function AnalysisCreator({ analyze }) {
     <form className="analysis-creator" onSubmit={event => {
       event.preventDefault();
       analyze(libraryInput.value.trim());
+      libraryInput.value = '';
     }}>
       <input
         ref={element => {

@@ -6,7 +6,12 @@ import '../styles/analyses.scss';
 function Analyses({ analyses }) {
   return (
     <ul className="analyses">
-        {analyses.map(analysis => <Analysis key={analysis.id} {...analysis}/>)}
+        {
+          analyses
+            .slice()
+            .reverse()
+            .map(analysis => <Analysis key={analysis.id} {...analysis}/>)
+        }
     </ul>
   );
 }
