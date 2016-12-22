@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import LibraryRow from './library-row';
-import SortableColumnHeading from './sortable-column-heading';
-import LibraryTotals from './library-totals';
+import { LibraryRow, MinificationNote, LibraryTotals, SortableColumnHeading } from '.';
 
 import '../styles/library-list.scss';
 
@@ -28,10 +26,7 @@ function LibraryList({ libraries, sort, sortBy, sortReversed, stopUsing, totals,
         </tbody>
         <LibraryTotals {...totals}/>
       </table>
-      <p className="library-list__note">
-        *Sizes may vary according to bundler, minifier and their settings.
-        Here, minified sizes are generated using Webpack with the UglifyJS plugin.
-      </p>
+      <MinificationNote/>
     </div>
   );
 }

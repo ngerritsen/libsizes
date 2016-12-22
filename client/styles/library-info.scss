@@ -1,0 +1,16 @@
+@import 'colors';
+@import 'variables';
+
+.library-info {
+  margin-bottom: $margin-medium;
+}
+
+.library-info__title {
+  color: lighten($color-text, 3%);
+  font-size: 2.2rem;
+  margin-bottom: $margin-small;
+}
+
+.library-info__title--not-found {
+  color: lighten($color-text, 40%);
+}

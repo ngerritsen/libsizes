@@ -37,18 +37,18 @@ export function collapseLibraries(libraries) {
     .map(libraryVersions => collapseLibrary(libraryVersions));
 }
 
+export function sortByVersion(libraryVersions) {
+  return libraryVersions
+    .slice()
+    .sort((a, b) => semver.lt(a.version, b.version));
+}
+
 function collapseLibrary(libraryVersions) {
   const sortedLibraryVersions = sortByVersion(libraryVersions);
   return {
     ...sortedLibraryVersions[0],
     versions: sortedLibraryVersions
   };
-}
-
-function sortByVersion(libraryVersions) {
-  return libraryVersions
-    .slice()
-    .sort((a, b) => semver.lt(a.version, b.version));
 }
 
 function groupedLibrariesToArray(groupedLibraries) {

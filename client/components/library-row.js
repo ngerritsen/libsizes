@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+
 import { bytesToKb } from '../helpers';
 
 import '../styles/library-row.scss';
@@ -14,9 +16,9 @@ function LibraryRow({ name, normal, minified, gzipped, stopUsing, use, used, ver
           />
         </td>
         <td>
-          <a target="_blank" href={`http://npmjs.com/package/${name}`}>
+          <Link to={'/library/' + name}>
             {name}<span className="hide-desktop">@{version}</span>
-          </a>
+          </Link>
         </td>
         <td className="version hide-mobile">{version}</td>
         <td>{bytesToKb(normal)} <span className="unit">kB</span></td>

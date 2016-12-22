@@ -15,7 +15,7 @@ function Footer() {
       </a>
 
       <p className="footer-text">
-        {String.fromCharCode(169)} Niels Gerritsen 2015
+        {String.fromCharCode(169)} Niels Gerritsen 2016
       </p>
     </div>
   );

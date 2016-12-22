@@ -12,7 +12,7 @@ function Browser({ libraries, search, searchTerms, sort, sortBy, sortReversed, s
     <div>
       <LibrarySearch search={search} searchTerms={searchTerms}/>
       {libraries.length > 0 && <LibraryList {...libraryListProps}/>}
-      <AnalyzerNotice/>
+      <AnalyzerNotice subject="library"/>
     </div>
   );
 }

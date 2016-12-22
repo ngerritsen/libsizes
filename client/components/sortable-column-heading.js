@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import SortIcon from './sort-icon';
+import { SortIcon } from '.';
 
 import '../styles/sortable-column-heading.scss';
 

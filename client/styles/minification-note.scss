@@ -1,0 +1,9 @@
+@import 'colors';
+@import 'variables';
+
+.minification-note {
+  color: $color-light-text;
+  font-style: italic;
+  font-size: 1.3rem;
+  margin: $margin-medium 0;
+}

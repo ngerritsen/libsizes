@@ -9,7 +9,7 @@ import reducer from './reducer';
 import createLogger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
-import { App, Browser, Analyzer } from './containers';
+import { App, Browser, Analyzer, Details } from './containers';
 
 import './styles/global.scss';
 
@@ -29,6 +29,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={Browser}/>
         <Route path="analyze" component={Analyzer}/>
+        <Route path="library/:library" component={Details}/>
       </Route>
     </Router>
   </Provider>,

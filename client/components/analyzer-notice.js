@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 import '../styles/analyzer-notice.scss';
 
-function AnalyzerNotice() {
+function AnalyzerNotice({ subject }) {
   return (
     <p className="analyzer-notice">
-      Did not find the library you were looking for? Analyze it!<br/>
+      Did not find the {subject} you were looking for? Analyze it!<br/>
       <Link to="/analyze" className="analyzer-notice__button button">Analyze</Link>
     </p>
   );
 }
+
+AnalyzerNotice.propTypes = {
+  subject: PropTypes.string.isRequired
+};
 
 export default AnalyzerNotice;
