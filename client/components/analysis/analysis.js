@@ -51,4 +51,4 @@ Analysis.propTypes = {
   version: PropTypes.string
 }
 
-module.exports = Analysis
+export default Analysis
