@@ -1,7 +1,7 @@
-@import 'colors';
-@import 'variables';
-@import 'buttons';
-@import 'inputs';
+@import 'variables/colors';
+@import 'variables/variables';
+@import 'shared/buttons';
+@import 'shared/inputs';
 
 html {
   font-size: 67.5%;

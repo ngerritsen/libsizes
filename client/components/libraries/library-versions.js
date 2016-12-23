@@ -1,7 +1,9 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
-import { bytesToKb } from '../helpers';
-import { MinificationNote } from '../components';
+import { bytesToKb } from '../../helpers'
+import { MinificationNote } from '..'
+
+import '../../styles/libraries/library-list.scss'
 
 function LibraryVersions({ versions }) {
   return (
@@ -28,11 +30,11 @@ function LibraryVersions({ versions }) {
       </table>
       <MinificationNote/>
     </div>
-  );
+  )
 }
 
 LibraryVersions.propTypes = {
   versions: PropTypes.array.isRequired
-};
+}
 
-export default LibraryVersions;
+export default LibraryVersions

@@ -1,8 +1,8 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV
 
 const config = {
   context: __dirname,
@@ -47,11 +47,11 @@ const config = {
       hash: true
     })
   ]
-};
+}
 
 if (env === 'development') {
-  config.devtool = 'source-map';
-  config.watch = true;
+  config.devtool = 'source-map'
+  config.watch = true
 }
 
 if (env === 'production') {
@@ -62,7 +62,7 @@ if (env === 'production') {
         warnings: false
       }
     })
-  );
+  )
 }
 
-module.exports = config;
+module.exports = config

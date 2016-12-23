@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
-import '../styles/library-info.scss';
+import '../../styles/libraries/library-info.scss'
 
 function LibraryInfo({ library, found }) {
   return (
@@ -15,12 +15,12 @@ function LibraryInfo({ library, found }) {
         </a>
       }
     </div>
-  );
+  )
 }
 
 LibraryInfo.propTypes = {
   found: PropTypes.bool.isRequired,
   library: PropTypes.string.isRequired
-};
+}
 
-export default LibraryInfo;
+export default LibraryInfo

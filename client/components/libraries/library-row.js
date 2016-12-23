@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 
-import { bytesToKb } from '../helpers';
+import { bytesToKb } from '../../helpers'
 
-import '../styles/library-row.scss';
+import '../../styles/libraries/library-row.scss'
 
 function LibraryRow({ name, normal, minified, gzipped, stopUsing, use, used, version }) {
   return (
@@ -25,7 +25,7 @@ function LibraryRow({ name, normal, minified, gzipped, stopUsing, use, used, ver
         <td>{bytesToKb(minified)} <span className="unit">kB</span></td>
         <td>{bytesToKb(gzipped)} <span className="unit">kB</span></td>
       </tr>
-  );
+  )
 }
 
 LibraryRow.propTypes = {
@@ -37,6 +37,6 @@ LibraryRow.propTypes = {
   use: PropTypes.func.isRequired,
   used: PropTypes.bool.isRequired,
   version: PropTypes.string.isRequired
-};
+}
 
-export default LibraryRow;
+export default LibraryRow

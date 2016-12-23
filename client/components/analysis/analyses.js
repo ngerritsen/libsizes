@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react';
-import { Analysis } from '.';
+import React, { PropTypes } from 'react'
+import { Analysis } from '..'
 
-import '../styles/analyses.scss';
+import '../../styles/analysis/analyses.scss'
 
 function Analyses({ analyses }) {
   return (
@@ -13,11 +13,11 @@ function Analyses({ analyses }) {
             .map(analysis => <Analysis key={analysis.id} {...analysis}/>)
         }
     </ul>
-  );
+  )
 }
 
 Analyses.propTypes = {
   analyses: PropTypes.arrayOf(PropTypes.object).isRequired
-};
+}
 
-export default Analyses;
+export default Analyses

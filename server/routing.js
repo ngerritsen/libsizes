@@ -1,20 +1,20 @@
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
+const express = require('express')
+const path = require('path')
+const bodyParser = require('body-parser')
 
-const rootPath = path.join(__dirname, '..');
+const rootPath = path.join(__dirname, '..')
 
 function routing(app, libraryRepository, analysisService) {
-  app.use(bodyParser.json());
-  app.use('/public', express.static(path.join(rootPath, 'public')));
+  app.use(bodyParser.json())
+  app.use('/public', express.static(path.join(rootPath, 'public')))
 
   app.get('/api/libraries', (req, res) => {
     libraryRepository.getAll()
-      .then(result => res.json(result));
-  });
+      .then(result => res.json(result))
+  })
 
   app.post('/api/analyses/:id', (req, res) => {
-    const { params, body } = req;
+    const { params, body } = req
     analysisService.analyze(params.id, body.libraryString)
       .then(({ library, existing }) => res.json({
         success: true,
@@ -22,12 +22,12 @@ function routing(app, libraryRepository, analysisService) {
         version: library.version,
         existing
       }))
-      .catch(error => res.json({ success: false, error: error.message }));
-  });
+      .catch(error => res.json({ success: false, error: error.message }))
+  })
 
   app.get('*', (req, res) => {
-    res.sendFile(path.join(rootPath, '/public/index.html'));
-  });
+    res.sendFile(path.join(rootPath, '/public/index.html'))
+  })
 }
 
-module.exports = routing;
+module.exports = routing

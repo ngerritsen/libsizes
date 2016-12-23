@@ -1,19 +1,19 @@
-const pg = require('pg');
+const pg = require('pg')
 
-const productionConfig = process.env.DATABASE_URL;
+const productionConfig = process.env.DATABASE_URL
 const config = productionConfig || {
   user: 'dev',
   password: 'development',
   database: 'libsizes'
-};
+}
 
 function initializeDb() {
-  pg.defaults.ssl = !!productionConfig;
+  pg.defaults.ssl = !!productionConfig
 
   return pg.connect(config)
     .then(client => initializeTables(client)
       .then(() => client)
-    );
+    )
 }
 
 function initializeTables(client) {
@@ -29,7 +29,7 @@ function initializeTables(client) {
       request   varchar(64),
       PRIMARY KEY(name, version)
     );
-  `);
+  `)
 }
 
-module.exports = initializeDb;
+module.exports = initializeDb

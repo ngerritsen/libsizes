@@ -1,4 +1,4 @@
-@import 'colors';
+@import '../variables/colors';
 
 .version {
   color: lighten($color-text, 25%);

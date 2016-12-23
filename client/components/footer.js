@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import '../styles/footer.scss';
+import '../styles/footer.scss'
 
 function Footer() {
   return (
@@ -18,7 +18,7 @@ function Footer() {
         {String.fromCharCode(169)} Niels Gerritsen 2016
       </p>
     </div>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

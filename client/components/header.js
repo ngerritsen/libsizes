@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 
-import '../styles/header.scss';
+import '../styles/header.scss'
 
 function Header({ libraryCount }) {
   return (
@@ -21,11 +21,11 @@ function Header({ libraryCount }) {
         </nav>
       </div>
     </div>
-  );
+  )
 }
 
 Header.propTypes = {
   libraryCount: PropTypes.number.isRequired
-};
+}
 
-export default Header;
+export default Header

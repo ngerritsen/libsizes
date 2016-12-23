@@ -1,11 +1,11 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
-import { LibraryRow, MinificationNote, LibraryTotals, SortableColumnHeading } from '.';
+import { LibraryRow, MinificationNote, LibraryTotals, SortableColumnHeading } from '..'
 
-import '../styles/library-list.scss';
+import '../../styles/libraries/library-list.scss'
 
 function LibraryList({ libraries, sort, sortBy, sortReversed, stopUsing, totals, use }) {
-  const sortHeadingProps = { sort, sortBy, sortReversed };
+  const sortHeadingProps = { sort, sortBy, sortReversed }
   return (
     <div>
       <table className="library-list">
@@ -28,7 +28,7 @@ function LibraryList({ libraries, sort, sortBy, sortReversed, stopUsing, totals,
       </table>
       <MinificationNote/>
     </div>
-  );
+  )
 }
 
 LibraryList.propTypes = {
@@ -39,6 +39,6 @@ LibraryList.propTypes = {
   stopUsing: PropTypes.func.isRequired,
   totals: PropTypes.object.isRequired,
   use: PropTypes.func.isRequired
-};
+}
 
-export default LibraryList;
+export default LibraryList

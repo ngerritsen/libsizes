@@ -1,9 +1,9 @@
-@import 'colors';
-@import 'variables';
+@import 'variables/colors';
+@import 'variables/variables';
 
 .minification-note {
   color: $color-light-text;
   font-style: italic;
   font-size: 1.3rem;
-  margin: $margin-medium 0;
+  margin: $margin-small 0 $margin-large;
 }

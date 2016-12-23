@@ -1,10 +1,10 @@
-const webpack = require('webpack');
-const BPromise = require('bluebird');
-const path = require('path');
+const webpack = require('webpack')
+const BPromise = require('bluebird')
+const path = require('path')
 
-const { NODE_MODULES_DIR, OUTPUT_FILENAME, OUTPUT_FILENAME_MINIFIED } = require('../constants');
+const { NODE_MODULES_DIR, OUTPUT_FILENAME, OUTPUT_FILENAME_MINIFIED } = require('../constants')
 
-const webpackAsync = BPromise.promisify(webpack);
+const webpackAsync = BPromise.promisify(webpack)
 
 function buildLibrary(library, dir, environment) {
   return webpackAsync({
@@ -14,7 +14,7 @@ function buildLibrary(library, dir, environment) {
       filename: environment === 'production' ? OUTPUT_FILENAME_MINIFIED : OUTPUT_FILENAME
     },
     plugins: createWebpackPlugins(environment)
-  });
+  })
 }
 
 function createWebpackPlugins(environment) {
@@ -24,10 +24,10 @@ function createWebpackPlugins(environment) {
       new webpack.optimize.UglifyJsPlugin(),
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.optimize.DedupePlugin()
-    ];
+    ]
   }
 
-  return [createWebpackEnviromentPlugin(environment)];
+  return [createWebpackEnviromentPlugin(environment)]
 }
 
 function createWebpackEnviromentPlugin(environment) {
@@ -35,9 +35,9 @@ function createWebpackEnviromentPlugin(environment) {
     'process.env': {
       NODE_ENV: `"${environment}"`
     }
-  });
+  })
 }
 
 module.exports = {
   buildLibrary
-};
+}

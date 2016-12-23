@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
-import * as constants from '../constants';
-import { resultToMessage } from '../helpers';
+import React, { PropTypes } from 'react'
+import * as constants from '../../constants'
+import { resultToMessage } from '../../helpers'
 
-import '../styles/analysis.scss';
+import '../../styles/analysis/analysis.scss'
 
 const statusClassMap = {
   [constants.ANALYSIS_STATUS_WAITING]: 'waiting',
@@ -10,7 +10,7 @@ const statusClassMap = {
   [constants.ANALYSIS_STATUS_SUCCEEDED]: 'succeeded',
   [constants.ANALYSIS_STATUS_SKIPPED]: 'skipped',
   [constants.ANALYSIS_STATUS_FAILED]: 'failed'
-};
+}
 
 const statusIconMap = {
   [constants.ANALYSIS_STATUS_WAITING]: 'circle-o-notch',
@@ -18,7 +18,7 @@ const statusIconMap = {
   [constants.ANALYSIS_STATUS_SUCCEEDED]: 'check',
   [constants.ANALYSIS_STATUS_SKIPPED]: 'check',
   [constants.ANALYSIS_STATUS_FAILED]: 'times'
-};
+}
 
 function Analysis({ id, error, message, result, status, libraryString, version }) {
   return (
@@ -34,7 +34,7 @@ function Analysis({ id, error, message, result, status, libraryString, version }
         {error || resultToMessage(result) || message}
       </p>
     </li>
-  );
+  )
 }
 
 Analysis.propTypes = {
@@ -49,6 +49,6 @@ Analysis.propTypes = {
   }),
   status: PropTypes.string.isRequired,
   version: PropTypes.string
-};
+}
 
-module.exports = Analysis;
+module.exports = Analysis

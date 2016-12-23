@@ -1,5 +1,5 @@
-@import 'colors';
-@import 'variables';
+@import '../variables/colors';
+@import '../variables/variables';
 
 $button-height: 3.2rem;
 
@@ -22,4 +22,12 @@ $button-height: 3.2rem;
     background-color: darken($color-primary, 2%);
     text-decoration: none;
   }
+}
+
+.button--is-disabled,
+.button--is-disabled:hover,
+.button--is-disabled:focus {
+  background-color: lighten(desaturate($color-primary, 30%), 20%);
+  outline: none;
+  cursor: not-allowed;
 }

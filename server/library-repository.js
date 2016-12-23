@@ -1,6 +1,6 @@
 class LibraryRepository {
   constructor(client) {
-    this._client = client;
+    this._client = client
   }
 
   save(library, version, sizes, libraryString, analysisId) {
@@ -18,11 +18,11 @@ class LibraryRepository {
       analysisId
     ]).catch(error => {
       if (error.message.indexOf('duplicate') > -1) {
-        throw new Error(`Failed to save "${library}" with version "${version}", because it already exists.`);
+        throw new Error(`Failed to save "${library}" with version "${version}", because it already exists.`)
       }
 
-      throw new Error(`Failed to save "${library}" with version "${version}".`);
-    });
+      throw new Error(`Failed to save "${library}" with version "${version}".`)
+    })
   }
 
   get(library, version) {
@@ -34,13 +34,13 @@ class LibraryRepository {
       library,
       version
     ])
-      .then(result => result.rows[0]);
+      .then(result => result.rows[0])
   }
 
   getAll() {
     return this._client.query('SELECT * FROM libraries;')
-      .then(result => result.rows);
+      .then(result => result.rows)
   }
 }
 
-module.exports = LibraryRepository;
+module.exports = LibraryRepository

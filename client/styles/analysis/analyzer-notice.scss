@@ -1,5 +1,5 @@
-@import 'variables';
-@import 'colors';
+@import '../variables/variables';
+@import '../variables/colors';
 
 .analyzer-notice {
   text-align: center;
@@ -10,7 +10,7 @@
   border-radius: 3px;
   color: lighten($color-text, 5%);
   border: 1px solid $color-light-grey;
-  background-color: lighten($color-light-grey, 6%);
+  background-color: lighten($color-light-grey, 5%);
 }
 
 .analyzer-notice__button {
