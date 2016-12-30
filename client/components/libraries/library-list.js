@@ -15,8 +15,8 @@ function LibraryList({ libraries, sort, sortBy, sortReversed, stopUsing, totals,
             <SortableColumnHeading {...sortHeadingProps} prop="name" title="Name"/>
             <th className="hide-mobile">Version</th>
             <SortableColumnHeading {...sortHeadingProps} prop="normal" title="Normal"/>
-            <SortableColumnHeading {...sortHeadingProps} prop="min" title="Minified*" titleMobile="Min*"/>
-            <SortableColumnHeading {...sortHeadingProps} prop="mingzip" title="Min + gzip*" titleMobile="gzip*"/>
+            <SortableColumnHeading {...sortHeadingProps} prop="minified" title="Minified*" titleMobile="Min*"/>
+            <SortableColumnHeading {...sortHeadingProps} prop="gzipped" title="Min + gzip*" titleMobile="gzip*"/>
           </tr>
         </thead>
         <tbody>
