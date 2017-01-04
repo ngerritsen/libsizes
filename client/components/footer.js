@@ -1,4 +1,5 @@
 import React from 'react'
+import { version } from '../../package.json'
 
 import '../styles/footer.scss'
 
@@ -15,7 +16,7 @@ function Footer() {
       </a>
 
       <p className="footer-text">
-        {String.fromCharCode(169)} Niels Gerritsen 2016
+        {String.fromCharCode(169)} Niels Gerritsen 2016 - version {version}
       </p>
     </div>
   )

@@ -25,6 +25,10 @@ const config = {
         loader: 'babel'
       },
       {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('css!sass')
       }

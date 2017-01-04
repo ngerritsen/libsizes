@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import '../styles/sort-icon.scss'
+import '../../styles/sort-icon.scss'
 
 function SortIcon({ prop, sortBy, sortReversed }) {
   if (sortBy === prop) {
