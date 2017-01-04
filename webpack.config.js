@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const { version } = require('./package.json')
 
 const env = process.env.NODE_ENV
 
@@ -43,8 +44,10 @@ const config = {
       title: 'libsizes - library sizes generated with webpack',
       template: './client/index.html',
       favicon: './client/favicon.png',
+      analytics: 'UA-39696629-2',
       inject: true,
-      hash: true
+      hash: true,
+      version
     })
   ]
 }
