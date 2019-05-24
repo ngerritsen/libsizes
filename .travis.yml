@@ -6,11 +6,12 @@ script:
   - npm test
   - npm run build
 deploy:
-  skip_cleanup: true
   - provider: heroku
     app: libsizes
+    skip_cleanup: true
     api_key:
       secure: $HEROKU_API_KEY
   - provider: firebase
+    skip_cleanup: true
     api_key:
       secure: $FIREBASE_TOKEN
