@@ -1,12 +1,12 @@
-import { mapReducers } from 'redux-map-reducers'
+import { mapReducers } from 'redux-map-reducers';
 
-import * as constants from '../constants'
-import * as sharedConstants from '../../shared/constants'
+import * as constants from '../constants';
+import * as sharedConstants from '../../shared/constants';
 
 const initialState = {
   analyses: [],
   libraryInput: ''
-}
+};
 
 const reducerMap = {
   [sharedConstants.ANALYSIS_REQUESTED]: analysisRequested,
@@ -17,63 +17,77 @@ const reducerMap = {
   [sharedConstants.ANALYSIS_FAILED]: analysisFailed,
   [constants.ANALYZE]: analyze,
   [constants.INPUT_ANALYSIS_LIBRARY]: inputAnalysisLibrary
-}
+};
 
 function inputAnalysisLibrary(state, { libraryInput }) {
   return {
     ...state,
     libraryInput
-  }
+  };
 }
 
 function analyze(state) {
   return {
     ...state,
     libraryInput: ''
-  }
+  };
 }
 
 function analysisRequested(state, { id, libraryString }) {
   return {
     ...state,
     analyses: [...state.analyses, createAnalysis(id, libraryString)]
-  }
+  };
 }
 
 function analysisStarted(state, { id, version }) {
-  const message = 'Analysis starting...'
+  const message = 'Analysis starting...';
   return {
     ...state,
-    analyses: updateAnalysis(state.analyses, id, { status: constants.ANALYSIS_STATUS_PENDING, message, version })
-  }
+    analyses: updateAnalysis(state.analyses, id, {
+      status: constants.ANALYSIS_STATUS_PENDING,
+      message,
+      version
+    })
+  };
 }
 
 function analysisSkipped(state, { id, result, version }) {
   return {
     ...state,
-    analyses: updateAnalysis(state.analyses, id, { status: constants.ANALYSIS_STATUS_SKIPPED, result, version })
-  }
+    analyses: updateAnalysis(state.analyses, id, {
+      status: constants.ANALYSIS_STATUS_SKIPPED,
+      result,
+      version
+    })
+  };
 }
 
 function analysisProgressed(state, { id, message }) {
   return {
     ...state,
     analyses: updateAnalysis(state.analyses, id, { message })
-  }
+  };
 }
 
 function analysisSucceeded(state, { id, result }) {
   return {
     ...state,
-    analyses: updateAnalysis(state.analyses, id, { status: constants.ANALYSIS_STATUS_SUCCEEDED, result })
-  }
+    analyses: updateAnalysis(state.analyses, id, {
+      status: constants.ANALYSIS_STATUS_SUCCEEDED,
+      result
+    })
+  };
 }
 
 function analysisFailed(state, { id, error }) {
   return {
     ...state,
-    analyses: updateAnalysis(state.analyses, id, { status: constants.ANALYSIS_STATUS_FAILED, error })
-  }
+    analyses: updateAnalysis(state.analyses, id, {
+      status: constants.ANALYSIS_STATUS_FAILED,
+      error
+    })
+  };
 }
 
 function createAnalysis(id, libraryString) {
@@ -85,7 +99,7 @@ function createAnalysis(id, libraryString) {
     message: 'Waiting for server...',
     result: null,
     id
-  }
+  };
 }
 
 function updateAnalysis(analyses, id, updates) {
@@ -94,11 +108,11 @@ function updateAnalysis(analyses, id, updates) {
       return {
         ...analysis,
         ...updates
-      }
+      };
     }
 
-    return analysis
-  })
+    return analysis;
+  });
 }
 
-export default mapReducers(reducerMap, initialState)
+export default mapReducers(reducerMap, initialState);

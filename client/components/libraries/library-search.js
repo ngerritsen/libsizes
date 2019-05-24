@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 
-import '../../styles/libraries/library-search.scss'
+import '../../styles/libraries/library-search.scss';
 
 function LibrarySearch({ search, searchTerms }) {
   return (
@@ -14,12 +14,12 @@ function LibrarySearch({ search, searchTerms }) {
       value={searchTerms}
       onChange={event => search(event.target.value)}
     />
-  )
+  );
 }
 
 LibrarySearch.propTypes = {
   search: PropTypes.func.isRequired,
   searchTerms: PropTypes.string.isRequired
-}
+};
 
-export default LibrarySearch
+export default LibrarySearch;

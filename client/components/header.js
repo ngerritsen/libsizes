@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
-import '../styles/header.scss'
+import '../styles/header.scss';
 
 function Header({ libraryCount }) {
   return (
@@ -12,20 +12,25 @@ function Header({ libraryCount }) {
         </p>
         <h1 className="header__title">
           <svg className="header__logo">
-            <use xlinkHref="#polygon"/>
-          </svg> libsizes
+            <use xlinkHref="#polygon" />
+          </svg>{' '}
+          libsizes
         </h1>
         <nav className="header__navigation">
-          <Link to="/" className="header__navigation-item">Browse</Link>
-          <Link to="/analyze" className="header__navigation-item">Analyze</Link>
+          <Link to="/" className="header__navigation-item">
+            Browse
+          </Link>
+          <Link to="/analyze" className="header__navigation-item">
+            Analyze
+          </Link>
         </nav>
       </div>
     </div>
-  )
+  );
 }
 
 Header.propTypes = {
   libraryCount: PropTypes.number.isRequired
-}
+};
 
-export default Header
+export default Header;

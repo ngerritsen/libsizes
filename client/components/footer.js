@@ -1,7 +1,7 @@
-import React from 'react'
-import { version } from '../../package.json'
+import React from 'react';
+import { version } from '../../package.json';
 
-import '../styles/footer.scss'
+import '../styles/footer.scss';
 
 function Footer() {
   return (
@@ -12,14 +12,14 @@ function Footer() {
         target="_blank"
         title="Check out the Github repository"
       >
-        <span className="footer__github-icon octicon octicon-mark-github"/> View on Github
+        <span className="footer__github-icon octicon octicon-mark-github" /> View on Github
       </a>
 
       <p className="footer-text">
         {String.fromCharCode(169)} Niels Gerritsen 2016 - version {version}
       </p>
     </div>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

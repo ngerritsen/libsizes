@@ -1,21 +1,20 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 
-import '../../styles/analysis/analysis-creator.scss'
+import '../../styles/analysis/analysis-creator.scss';
 
-function AnalysisCreator({
-  analyze,
-  inputAnalysisLibrary,
-  libraryInput
-}) {
-  const canSubmit = !!libraryInput.trim()
+function AnalysisCreator({ analyze, inputAnalysisLibrary, libraryInput }) {
+  const canSubmit = !!libraryInput.trim();
   return (
-    <form className="analysis-creator" onSubmit={event => {
-      event.preventDefault()
+    <form
+      className="analysis-creator"
+      onSubmit={event => {
+        event.preventDefault();
 
-      if (canSubmit) {
-        analyze(libraryInput)
-      }
-    }}>
+        if (canSubmit) {
+          analyze(libraryInput);
+        }
+      }}
+    >
       <input
         onChange={event => inputAnalysisLibrary(event.target.value)}
         type="text"
@@ -33,13 +32,13 @@ function AnalysisCreator({
         Analyze
       </button>
     </form>
-  )
+  );
 }
 
 AnalysisCreator.propTypes = {
   analyze: PropTypes.func.isRequired,
   inputAnalysisLibrary: PropTypes.func.isRequired,
   libraryInput: PropTypes.string.isRequired
-}
+};
 
-export default AnalysisCreator
+export default AnalysisCreator;

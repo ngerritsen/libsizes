@@ -5,4 +5,4 @@ module.exports = {
   TMP_DIR: '.tmp',
   PRODUCTION: 'production',
   DEVELOPMENT: 'development'
-}
+};

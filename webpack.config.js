@@ -1,17 +1,13 @@
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const { version } = require('./package.json')
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { version } = require('./package.json');
 
-const env = process.env.NODE_ENV
+const env = process.env.NODE_ENV;
 
 const config = {
   context: __dirname,
-  entry: [
-    'babel-polyfill',
-    'whatwg-fetch',
-    './client/main.js'
-  ],
+  entry: ['babel-polyfill', 'whatwg-fetch', './client/main.js'],
   output: {
     path: './public',
     filename: 'bundle.js',
@@ -54,11 +50,11 @@ const config = {
       version
     })
   ]
-}
+};
 
 if (env === 'development') {
-  config.devtool = 'source-map'
-  config.watch = true
+  config.devtool = 'source-map';
+  config.watch = true;
 }
 
 if (env === 'production') {
@@ -69,7 +65,7 @@ if (env === 'production') {
         warnings: false
       }
     })
-  )
+  );
 }
 
-module.exports = config
+module.exports = config;
