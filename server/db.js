@@ -2,7 +2,10 @@ const pg = require("pg");
 
 const databaseUrl = process.env.DATABASE_URL;
 const config = databaseUrl
-  ? { connectionString: databaseUrl }
+  ? {
+      connectionString: databaseUrl,
+      ssl: { rejectUnauthorized: false },
+    }
   : {
       user: "dev",
       password: "development",
@@ -10,11 +13,7 @@ const config = databaseUrl
     };
 
 function initializeDb() {
-  const client = new pg.Pool({
-    ...config,
-    ssl: Boolean(databaseUrl),
-    rejectUnauthorized: false,
-  });
+  const client = new pg.Pool(config);
 
   return initializeTables(client).then(() => client);
 }
