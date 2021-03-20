@@ -10,7 +10,7 @@ const config = databaseUrl
     };
 
 function initializeDb() {
-  const client = new pg.Pool({ ...config, ssl: Boolean(databaseUrl) });
+  const client = new pg.Pool(config);
 
   return initializeTables(client).then(() => client);
 }
