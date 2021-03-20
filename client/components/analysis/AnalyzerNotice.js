@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "../../styles/analysis/analyzer-notice.scss";
 
-function AnalyzerNotice({ subject }) {
+const AnalyzerNotice = ({ subject }) => {
   return (
     <p className="analyzer-notice">
       Did not find the {subject} you were looking for? Analyze it!

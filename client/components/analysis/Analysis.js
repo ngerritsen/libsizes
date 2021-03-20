@@ -21,7 +21,7 @@ const statusIconMap = {
   [constants.ANALYSIS_STATUS_FAILED]: "times",
 };
 
-function Analysis({
+const Analysis = ({
   id,
   error,
   message,
@@ -29,7 +29,7 @@ function Analysis({
   status,
   libraryString,
   version,
-}) {
+}) => {
   return (
     <li key={id} className="analysis">
       <h2

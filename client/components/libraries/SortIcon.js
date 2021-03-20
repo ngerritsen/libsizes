@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "../../styles/sort-icon.scss";
 
-function SortIcon({ prop, sortBy, sortReversed }) {
+const SortIcon = ({ prop, sortBy, sortReversed }) => {
   if (sortBy === prop) {
     return (
       <i

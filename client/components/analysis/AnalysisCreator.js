@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "../../styles/analysis/analysis-creator.scss";
 
-function AnalysisCreator({ analyze, inputAnalysisLibrary, libraryInput }) {
+const AnalysisCreator = ({ analyze, inputAnalysisLibrary, libraryInput }) => {
   const canSubmit = !!libraryInput.trim();
   return (
     <form

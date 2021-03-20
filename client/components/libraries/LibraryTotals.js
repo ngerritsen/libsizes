@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { bytesToKb } from "../../helpers";
 import "../../styles/libraries/library-list-totals.scss";
 
-function LibraryTotals({ normal, minified, gzipped }) {
+const LibraryTotals = ({ normal, minified, gzipped }) => {
   return (
     <tfoot className="library-list-totals">
       <tr>

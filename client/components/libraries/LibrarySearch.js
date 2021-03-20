@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "../../styles/libraries/library-search.scss";
 
-function LibrarySearch({ search, searchTerms }) {
+const LibrarySearch = ({ search, searchTerms }) => {
   return (
     <input
       type="text"

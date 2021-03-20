@@ -5,7 +5,7 @@ import Analysis from "./Analysis";
 
 import "../../styles/analysis/analyses.scss";
 
-function Analyses({ analyses }) {
+const Analyses = ({ analyses }) => {
   return (
     <ul className="analyses">
       {analyses

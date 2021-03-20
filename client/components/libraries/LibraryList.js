@@ -8,7 +8,7 @@ import SortableColumnHeading from "./SortableColumnHeading";
 
 import "../../styles/libraries/library-list.scss";
 
-function LibraryList({
+const LibraryList = ({
   libraries,
   sort,
   sortBy,
@@ -16,7 +16,7 @@ function LibraryList({
   stopUsing,
   totals,
   use,
-}) {
+}) => {
   const sortHeadingProps = { sort, sortBy, sortReversed };
   return (
     <div>

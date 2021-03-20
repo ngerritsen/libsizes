@@ -7,7 +7,7 @@ import * as actions from "../actions/analysis";
 import Analyses from "./analysis/Analyses";
 import AnalysisCreator from "./analysis/AnalysisCreator";
 
-function Analyzer({ analyze, analyses, inputAnalysisLibrary, libraryInput }) {
+const Analyzer = ({ analyze, analyses, inputAnalysisLibrary, libraryInput }) => {
   return (
     <div>
       <AnalysisCreator

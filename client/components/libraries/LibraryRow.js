@@ -6,7 +6,7 @@ import { bytesToKb } from "../../helpers";
 
 import "../../styles/libraries/library-row.scss";
 
-function LibraryRow({
+const LibraryRow = ({
   name,
   normal,
   minified,
@@ -15,7 +15,7 @@ function LibraryRow({
   use,
   used,
   version,
-}) {
+}) => {
   return (
     <tr>
       <td>

@@ -15,7 +15,7 @@ import AnalyzerNotice from "./analysis/AnalyzerNotice";
 import LibrarySearch from "./libraries/LibrarySearch";
 import LibraryList from "./libraries/LibraryList";
 
-function Browser({
+const Browser = ({
   libraries,
   search,
   searchTerms,
@@ -25,7 +25,7 @@ function Browser({
   stopUsing,
   totals,
   use,
-}) {
+}) => {
   const libraryListProps = {
     libraries,
     sort,

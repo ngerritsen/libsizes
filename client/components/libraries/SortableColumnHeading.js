@@ -4,14 +4,14 @@ import SortIcon from "./SortIcon";
 
 import "../../styles/libraries/sortable-column-heading.scss";
 
-function SortableColumnHeading({
+const SortableColumnHeading = ({
   prop,
   sort,
   sortBy,
   sortReversed,
   title,
   titleMobile,
-}) {
+}) => {
   return (
     <th className="sortable-column-heading" onClick={() => sort(prop)}>
       <span className="hide-mobile">{title}</span>
