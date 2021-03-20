@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node server",
-    "build": "parcel build ./client/index.html  -d ./public",
+    "build": "npm run test; parcel build ./client/index.html  -d ./public",
     "serve": "npm run start-containers; concurrently 'parcel watch ./client/index.html -d ./public' 'nodemon server'",
     "test": "eslint .; prettier --check .",
     "fix": "eslint . --fix; prettier --write .",
