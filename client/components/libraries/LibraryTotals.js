@@ -1,10 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import { bytesToKb } from "../../helpers";
 import "../../styles/libraries/library-list-totals.scss";
+import { useSelector } from "react-redux";
+import { getLibraryTotals } from "../../selectors";
 
-const LibraryTotals = ({ normal, minified, gzipped }) => {
+const LibraryTotals = () => {
+  const { normal, minified, gzipped } = useSelector(getLibraryTotals);
+
   return (
     <tfoot className="library-list-totals">
       <tr>
@@ -24,11 +27,5 @@ const LibraryTotals = ({ normal, minified, gzipped }) => {
     </tfoot>
   );
 }
-
-LibraryTotals.propTypes = {
-  gzipped: PropTypes.number.isRequired,
-  minified: PropTypes.number.isRequired,
-  normal: PropTypes.number.isRequired,
-};
 
 export default LibraryTotals;

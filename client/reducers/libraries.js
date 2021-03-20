@@ -36,7 +36,7 @@ function use(state, { library }) {
 function stopUsing(state, { library }) {
   return {
     ...state,
-    usedLibraries: state.usedLibraries.filter(({ name }) => name !== library),
+    usedLibraries: state.usedLibraries.filter((name) => name !== library),
   };
 }
 

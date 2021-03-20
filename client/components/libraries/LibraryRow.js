@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 
+import { stopUsing, use } from "../../actions/libraries";
 import { bytesToKb } from "../../helpers";
 
 import "../../styles/libraries/library-row.scss";
@@ -11,18 +13,18 @@ const LibraryRow = ({
   normal,
   minified,
   gzipped,
-  stopUsing,
-  use,
   used,
   version,
 }) => {
+  const dispatch = useDispatch();
+
   return (
     <tr>
       <td>
         <input
           type="checkbox"
           value={used}
-          onChange={() => (used ? stopUsing(name) : use(name))}
+          onChange={() => dispatch(used ? stopUsing(name) : use(name))}
         />
       </td>
       <td>
@@ -50,8 +52,6 @@ LibraryRow.propTypes = {
   minified: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   normal: PropTypes.number.isRequired,
-  stopUsing: PropTypes.func.isRequired,
-  use: PropTypes.func.isRequired,
   used: PropTypes.bool.isRequired,
   version: PropTypes.string.isRequired,
 };

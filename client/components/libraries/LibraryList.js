@@ -7,17 +7,12 @@ import LibraryTotals from "./LibraryTotals";
 import SortableColumnHeading from "./SortableColumnHeading";
 
 import "../../styles/libraries/library-list.scss";
+import { getMarkedSearchedAndSortedLibraries } from "../../selectors";
+import { useSelector } from "react-redux";
 
-const LibraryList = ({
-  libraries,
-  sort,
-  sortBy,
-  sortReversed,
-  stopUsing,
-  totals,
-  use,
-}) => {
-  const sortHeadingProps = { sort, sortBy, sortReversed };
+const LibraryList = () => {
+  const libraries = useSelector(getMarkedSearchedAndSortedLibraries);
+
   return (
     <div>
       <table className="library-list">
@@ -27,24 +22,20 @@ const LibraryList = ({
               <span className="hide-mobile">Use</span>
             </th>
             <SortableColumnHeading
-              {...sortHeadingProps}
               prop="name"
               title="Name"
             />
             <th className="hide-mobile">Version</th>
             <SortableColumnHeading
-              {...sortHeadingProps}
               prop="normal"
               title="Normal"
             />
             <SortableColumnHeading
-              {...sortHeadingProps}
               prop="minified"
               title="Minified*"
               titleMobile="Min*"
             />
             <SortableColumnHeading
-              {...sortHeadingProps}
               prop="gzipped"
               title="Min + gzip*"
               titleMobile="gzip*"
@@ -56,26 +47,14 @@ const LibraryList = ({
             <LibraryRow
               key={library.name + "@" + library.version}
               {...library}
-              stopUsing={stopUsing}
-              use={use}
             />
           ))}
         </tbody>
-        <LibraryTotals {...totals} />
+        <LibraryTotals/>
       </table>
       <MinificationNote />
     </div>
   );
 }
-
-LibraryList.propTypes = {
-  libraries: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sort: PropTypes.func.isRequired,
-  sortBy: PropTypes.string.isRequired,
-  sortReversed: PropTypes.bool.isRequired,
-  stopUsing: PropTypes.func.isRequired,
-  totals: PropTypes.object.isRequired,
-  use: PropTypes.func.isRequired,
-};
 
 export default LibraryList;

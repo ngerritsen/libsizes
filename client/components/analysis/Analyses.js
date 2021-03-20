@@ -1,11 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 import Analysis from "./Analysis";
+import { getAnalyses } from "../../selectors";
 
 import "../../styles/analysis/analyses.scss";
 
-const Analyses = ({ analyses }) => {
+const Analyses = () => {
+  const analyses = useSelector(getAnalyses);
   return (
     <ul className="analyses">
       {analyses
@@ -17,9 +19,5 @@ const Analyses = ({ analyses }) => {
     </ul>
   );
 }
-
-Analyses.propTypes = {
-  analyses: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default Analyses;

@@ -1,9 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { search } from "../../actions/libraries";
+import { getSearchTerms } from "../../selectors";
 
 import "../../styles/libraries/library-search.scss";
 
-const LibrarySearch = ({ search, searchTerms }) => {
+const LibrarySearch = () => {
+  const dispatch = useDispatch();
+  const searchTerms = useSelector(getSearchTerms);
+
   return (
     <input
       type="text"
@@ -13,14 +18,9 @@ const LibrarySearch = ({ search, searchTerms }) => {
       autoComplete="off"
       spellCheck="false"
       value={searchTerms}
-      onChange={(event) => search(event.target.value)}
+      onChange={(event) => dispatch(search(event.target.value))}
     />
   );
 }
-
-LibrarySearch.propTypes = {
-  search: PropTypes.func.isRequired,
-  searchTerms: PropTypes.string.isRequired,
-};
 
 export default LibrarySearch;

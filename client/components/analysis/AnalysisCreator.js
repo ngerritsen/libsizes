@@ -1,9 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getLibraryInput } from "../../selectors";
+import { inputAnalysisLibrary, analyze } from "../../actions/analysis";
+
 import "../../styles/analysis/analysis-creator.scss";
 
-const AnalysisCreator = ({ analyze, inputAnalysisLibrary, libraryInput }) => {
-  const canSubmit = !!libraryInput.trim();
+const AnalysisCreator = () => {
+  const dispatch = useDispatch();
+  const libraryInput = useSelector(getLibraryInput);
+  const canSubmit = Boolean(libraryInput.trim());
+
   return (
     <form
       className="analysis-creator"
@@ -11,12 +18,12 @@ const AnalysisCreator = ({ analyze, inputAnalysisLibrary, libraryInput }) => {
         event.preventDefault();
 
         if (canSubmit) {
-          analyze(libraryInput);
+          dispatch(analyze(libraryInput));
         }
       }}
     >
       <input
-        onChange={(event) => inputAnalysisLibrary(event.target.value)}
+        onChange={(event) => dispatch(inputAnalysisLibrary(event.target.value))}
         type="text"
         value={libraryInput}
         className="input analysis-creator__input"
@@ -34,11 +41,5 @@ const AnalysisCreator = ({ analyze, inputAnalysisLibrary, libraryInput }) => {
     </form>
   );
 }
-
-AnalysisCreator.propTypes = {
-  analyze: PropTypes.func.isRequired,
-  inputAnalysisLibrary: PropTypes.func.isRequired,
-  libraryInput: PropTypes.string.isRequired,
-};
 
 export default AnalysisCreator;

@@ -29,29 +29,27 @@ const Analysis = ({
   status,
   libraryString,
   version,
-}) => {
-  return (
-    <li key={id} className="analysis">
-      <h2
-        className={`analysis__title analysis__title--${statusClassMap[status]}`}
-      >
-        <span className="analysis__icon-container">
-          <i
-            className={`analysis__status-icon fa fa-${statusIconMap[status]}`}
-          />
-        </span>
-        {libraryString}
-      </h2>
-      <p className="analysis__main-info">
-        <span className="analysis__version">
-          Exact version: {version || "???"}
-        </span>
-        <br />
-        {error || resultToMessage(result) || message}
-      </p>
-    </li>
-  );
-}
+}) => (
+  <li key={id} className="analysis">
+    <h2
+      className={`analysis__title analysis__title--${statusClassMap[status]}`}
+    >
+      <span className="analysis__icon-container">
+        <i
+          className={`analysis__status-icon fa fa-${statusIconMap[status]}`}
+        />
+      </span>
+      {libraryString}
+    </h2>
+    <p className="analysis__main-info">
+      <span className="analysis__version">
+        Exact version: {version || "???"}
+      </span>
+      <br />
+      {error || resultToMessage(result) || message}
+    </p>
+  </li>
+);
 
 Analysis.propTypes = {
   error: PropTypes.string,
