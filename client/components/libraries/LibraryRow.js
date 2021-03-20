@@ -8,14 +8,7 @@ import { bytesToKb } from "../../helpers";
 
 import "../../styles/libraries/library-row.scss";
 
-const LibraryRow = ({
-  name,
-  normal,
-  minified,
-  gzipped,
-  used,
-  version,
-}) => {
+const LibraryRow = ({ name, normal, minified, gzipped, used, version }) => {
   const dispatch = useDispatch();
 
   return (
@@ -45,7 +38,7 @@ const LibraryRow = ({
       </td>
     </tr>
   );
-}
+};
 
 LibraryRow.propTypes = {
   gzipped: PropTypes.number.isRequired,

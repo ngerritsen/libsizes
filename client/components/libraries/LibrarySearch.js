@@ -21,6 +21,6 @@ const LibrarySearch = () => {
       onChange={(event) => dispatch(search(event.target.value))}
     />
   );
-}
+};
 
 export default LibrarySearch;

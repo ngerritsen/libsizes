@@ -40,6 +40,6 @@ const AnalysisCreator = () => {
       </button>
     </form>
   );
-}
+};
 
 export default AnalysisCreator;

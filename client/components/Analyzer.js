@@ -10,6 +10,6 @@ const Analyzer = () => {
       <Analyses />
     </>
   );
-}
+};
 
 export default Analyzer;

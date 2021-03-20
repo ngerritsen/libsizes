@@ -35,9 +35,7 @@ const Analysis = ({
       className={`analysis__title analysis__title--${statusClassMap[status]}`}
     >
       <span className="analysis__icon-container">
-        <i
-          className={`analysis__status-icon fa fa-${statusIconMap[status]}`}
-        />
+        <i className={`analysis__status-icon fa fa-${statusIconMap[status]}`} />
       </span>
       {libraryString}
     </h2>

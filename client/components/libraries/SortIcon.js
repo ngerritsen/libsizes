@@ -13,7 +13,7 @@ const SortIcon = ({ prop, sortBy, sortReversed }) => {
   }
 
   return null;
-}
+};
 
 SortIcon.propTypes = {
   prop: PropTypes.string.isRequired,

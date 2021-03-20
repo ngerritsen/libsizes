@@ -1,14 +1,16 @@
 const pg = require("pg");
 
-const productionConfig = process.env.DATABASE_URL;
-const config = productionConfig || {
-  user: "dev",
-  password: "development",
-  database: "libsizes",
-};
+const databaseUrl = process.env.DATABASE_URL;
+const config = databaseUrl
+  ? { connectionString: databaseUrl }
+  : {
+      user: "dev",
+      password: "development",
+      database: "libsizes",
+    };
 
 function initializeDb() {
-  const client = new pg.Pool({ ...config, ssl: Boolean(productionConfig) });
+  const client = new pg.Pool({ ...config, ssl: Boolean(databaseUrl) });
 
   return initializeTables(client).then(() => client);
 }

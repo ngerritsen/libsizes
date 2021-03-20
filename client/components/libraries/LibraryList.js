@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import LibraryRow from "./LibraryRow";
 import MinificationNote from "../MinificationNote";
@@ -21,15 +20,9 @@ const LibraryList = () => {
             <th>
               <span className="hide-mobile">Use</span>
             </th>
-            <SortableColumnHeading
-              prop="name"
-              title="Name"
-            />
+            <SortableColumnHeading prop="name" title="Name" />
             <th className="hide-mobile">Version</th>
-            <SortableColumnHeading
-              prop="normal"
-              title="Normal"
-            />
+            <SortableColumnHeading prop="normal" title="Normal" />
             <SortableColumnHeading
               prop="minified"
               title="Minified*"
@@ -50,11 +43,11 @@ const LibraryList = () => {
             />
           ))}
         </tbody>
-        <LibraryTotals/>
+        <LibraryTotals />
       </table>
       <MinificationNote />
     </div>
   );
-}
+};
 
 export default LibraryList;

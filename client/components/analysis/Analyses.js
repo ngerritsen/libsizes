@@ -18,6 +18,6 @@ const Analyses = () => {
         ))}
     </ul>
   );
-}
+};
 
 export default Analyses;

@@ -26,6 +26,6 @@ const LibraryTotals = () => {
       </tr>
     </tfoot>
   );
-}
+};
 
 export default LibraryTotals;
