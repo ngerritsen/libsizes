@@ -1,36 +1,36 @@
-import * as constants from '../constants';
+import * as constants from "../constants";
 
 export function sort(sortBy) {
   return {
     type: constants.SORT,
-    sortBy
+    sortBy,
   };
 }
 
 export function use(library) {
   return {
     type: constants.USE,
-    library
+    library,
   };
 }
 
 export function stopUsing(library) {
   return {
     type: constants.STOP_USING,
-    library
+    library,
   };
 }
 
 export function search(searchTerms) {
   return {
     type: constants.SEARCH,
-    searchTerms
+    searchTerms,
   };
 }
 
 export function fetchLibrariesSucceeded(libraries) {
   return {
     type: constants.FETCH_LIBRARIES_SUCCEEDED,
-    libraries
+    libraries,
   };
 }

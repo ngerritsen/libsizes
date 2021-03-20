@@ -1,21 +1,21 @@
-import * as constants from '../constants';
+import * as constants from "../constants";
 
 export function analyze(libraryString) {
   return {
     type: constants.ANALYZE,
-    libraryString
+    libraryString,
   };
 }
 
 export function inputAnalysisLibrary(libraryInput) {
   return {
     type: constants.INPUT_ANALYSIS_LIBRARY,
-    libraryInput
+    libraryInput,
   };
 }
 
 export function failedAnalysisAttempt() {
   return {
-    type: constants.FAILED_ANALYSIS_ATTEMPT
+    type: constants.FAILED_ANALYSIS_ATTEMPT,
   };
 }

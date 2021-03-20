@@ -1,19 +1,24 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import '../styles/header.scss';
+import "../styles/header.scss";
+import { useSelector } from "react-redux";
+import { getLibraryCount } from "../selectors";
 
-function Header({ libraryCount }) {
+const Header = () => {
+  const libraryCount = useSelector(getLibraryCount);
+
   return (
     <div className="header">
       <div className="container">
         <p className="header__quote hide-mobile">
-          {libraryCount} library {libraryCount === 1 ? 'size' : 'sizes'} analyzed.
+          {libraryCount} library {libraryCount === 1 ? "size" : "sizes"}{" "}
+          analyzed.
         </p>
         <h1 className="header__title">
           <svg className="header__logo">
             <use xlinkHref="#polygon" />
-          </svg>{' '}
+          </svg>{" "}
           libsizes
         </h1>
         <nav className="header__navigation">
@@ -27,10 +32,6 @@ function Header({ libraryCount }) {
       </div>
     </div>
   );
-}
-
-Header.propTypes = {
-  libraryCount: PropTypes.number.isRequired
 };
 
 export default Header;

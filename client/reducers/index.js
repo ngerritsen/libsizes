@@ -1,9 +1,2 @@
-import { combineReducers } from 'redux';
-
-import analysis from './analysis';
-import libraries from './libraries';
-
-export default combineReducers({
-  analysis,
-  libraries
-});
+export { default as analysis } from "./analysis";
+export { default as libraries } from "./libraries";

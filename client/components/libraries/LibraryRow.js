@@ -1,18 +1,32 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-import { bytesToKb } from '../../helpers';
+import { bytesToKb } from "../../helpers";
 
-import '../../styles/libraries/library-row.scss';
+import "../../styles/libraries/library-row.scss";
 
-function LibraryRow({ name, normal, minified, gzipped, stopUsing, use, used, version }) {
+function LibraryRow({
+  name,
+  normal,
+  minified,
+  gzipped,
+  stopUsing,
+  use,
+  used,
+  version,
+}) {
   return (
     <tr>
       <td>
-        <input type="checkbox" value={used} onChange={() => (used ? stopUsing(name) : use(name))} />
+        <input
+          type="checkbox"
+          value={used}
+          onChange={() => (used ? stopUsing(name) : use(name))}
+        />
       </td>
       <td>
-        <Link to={'/library/' + name}>
+        <Link to={"/library/" + name}>
           {name}
           <span className="hide-desktop">@{version}</span>
         </Link>
@@ -39,7 +53,7 @@ LibraryRow.propTypes = {
   stopUsing: PropTypes.func.isRequired,
   use: PropTypes.func.isRequired,
   used: PropTypes.bool.isRequired,
-  version: PropTypes.string.isRequired
+  version: PropTypes.string.isRequired,
 };
 
 export default LibraryRow;

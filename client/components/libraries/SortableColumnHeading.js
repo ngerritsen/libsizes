@@ -1,9 +1,17 @@
-import React, { PropTypes } from 'react';
-import { SortIcon } from '..';
+import React from "react";
+import PropTypes from "prop-types";
+import SortIcon from "./SortIcon";
 
-import '../../styles/libraries/sortable-column-heading.scss';
+import "../../styles/libraries/sortable-column-heading.scss";
 
-function SortableColumnHeading({ prop, sort, sortBy, sortReversed, title, titleMobile }) {
+function SortableColumnHeading({
+  prop,
+  sort,
+  sortBy,
+  sortReversed,
+  title,
+  titleMobile,
+}) {
   return (
     <th className="sortable-column-heading" onClick={() => sort(prop)}>
       <span className="hide-mobile">{title}</span>
@@ -19,7 +27,7 @@ SortableColumnHeading.propTypes = {
   sortBy: PropTypes.string.isRequired,
   sortReversed: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  titleMobile: PropTypes.string
+  titleMobile: PropTypes.string,
 };
 
 export default SortableColumnHeading;

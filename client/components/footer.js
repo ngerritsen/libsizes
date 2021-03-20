@@ -1,7 +1,7 @@
-import React from 'react';
-import { version } from '../../package.json';
+import React from "react";
+import { version } from "../../package.json";
 
-import '../styles/footer.scss';
+import "../styles/footer.scss";
 
 function Footer() {
   return (
@@ -10,9 +10,11 @@ function Footer() {
         className="footer__github-link"
         href="https://github.com/ngerritsen/libsizes"
         target="_blank"
+        rel="noreferrer"
         title="Check out the Github repository"
       >
-        <span className="footer__github-icon octicon octicon-mark-github" /> View on Github
+        <span className="footer__github-icon octicon octicon-mark-github" />{" "}
+        View on Github
       </a>
 
       <p className="footer-text">

@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react';
-import { bytesToKb } from '../../helpers';
+import React from "react";
+import PropTypes from "prop-types";
 
-import '../../styles/libraries/library-list-totals.scss';
+import { bytesToKb } from "../../helpers";
+import "../../styles/libraries/library-list-totals.scss";
 
 function LibraryTotals({ normal, minified, gzipped }) {
   return (
@@ -27,7 +28,7 @@ function LibraryTotals({ normal, minified, gzipped }) {
 LibraryTotals.propTypes = {
   gzipped: PropTypes.number.isRequired,
   minified: PropTypes.number.isRequired,
-  normal: PropTypes.number.isRequired
+  normal: PropTypes.number.isRequired,
 };
 
 export default LibraryTotals;

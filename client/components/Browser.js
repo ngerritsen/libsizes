@@ -1,16 +1,19 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
 
 import {
   sortLibraries,
   searchLibraries,
   markUsedLibraries,
   calculateTotals,
-  collapseLibraries
-} from '../helpers';
-import * as actions from '../actions/libraries';
-import { LibraryList, LibrarySearch, AnalyzerNotice } from '../components';
+  collapseLibraries,
+} from "../helpers";
+import * as actions from "../actions/libraries";
+import AnalyzerNotice from "./analysis/AnalyzerNotice";
+import LibrarySearch from "./libraries/LibrarySearch";
+import LibraryList from "./libraries/LibraryList";
 
 function Browser({
   libraries,
@@ -21,9 +24,17 @@ function Browser({
   sortReversed,
   stopUsing,
   totals,
-  use
+  use,
 }) {
-  const libraryListProps = { libraries, sort, sortBy, sortReversed, stopUsing, totals, use };
+  const libraryListProps = {
+    libraries,
+    sort,
+    sortBy,
+    sortReversed,
+    stopUsing,
+    totals,
+    use,
+  };
   return (
     <div>
       <LibrarySearch search={search} searchTerms={searchTerms} />
@@ -42,13 +53,19 @@ Browser.propTypes = {
   sortReversed: PropTypes.bool.isRequired,
   stopUsing: PropTypes.func.isRequired,
   totals: PropTypes.object.isRequired,
-  use: PropTypes.func.isRequired
+  use: PropTypes.func.isRequired,
 };
 
 function mapStateToProps({ libraries }) {
-  const markedLibraries = markUsedLibraries(libraries.libraries, libraries.usedLibraries);
+  const markedLibraries = markUsedLibraries(
+    libraries.libraries,
+    libraries.usedLibraries
+  );
   const markedCollapsedLibraries = collapseLibraries(markedLibraries);
-  const markedSearchedLibraries = searchLibraries(markedCollapsedLibraries, libraries.searchTerms);
+  const markedSearchedLibraries = searchLibraries(
+    markedCollapsedLibraries,
+    libraries.searchTerms
+  );
   const markedSearchedAndSortedLibraries = sortLibraries(
     markedSearchedLibraries,
     libraries.sortBy,
@@ -61,7 +78,7 @@ function mapStateToProps({ libraries }) {
     searchTerms: libraries.searchTerms,
     sortBy: libraries.sortBy,
     sortReversed: libraries.sortReversed,
-    totals: calculateTotals(markedLibraries)
+    totals: calculateTotals(markedLibraries),
   };
 }
 
@@ -69,7 +86,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(actions, dispatch);
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Browser);
+export default connect(mapStateToProps, mapDispatchToProps)(Browser);

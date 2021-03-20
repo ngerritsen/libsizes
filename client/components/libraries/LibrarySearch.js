@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import '../../styles/libraries/library-search.scss';
+import "../../styles/libraries/library-search.scss";
 
 function LibrarySearch({ search, searchTerms }) {
   return (
@@ -12,14 +13,14 @@ function LibrarySearch({ search, searchTerms }) {
       autoComplete="off"
       spellCheck="false"
       value={searchTerms}
-      onChange={event => search(event.target.value)}
+      onChange={(event) => search(event.target.value)}
     />
   );
 }
 
 LibrarySearch.propTypes = {
   search: PropTypes.func.isRequired,
-  searchTerms: PropTypes.string.isRequired
+  searchTerms: PropTypes.string.isRequired,
 };
 
 export default LibrarySearch;

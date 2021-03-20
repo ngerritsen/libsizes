@@ -1,9 +1,11 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import PropTypes from "prop-types";
 
-import * as actions from '../actions/analysis';
-import { Analyses, AnalysisCreator } from '../components';
+import * as actions from "../actions/analysis";
+import Analyses from "./analysis/Analyses";
+import AnalysisCreator from "./analysis/AnalysisCreator";
 
 function Analyzer({ analyze, analyses, inputAnalysisLibrary, libraryInput }) {
   return (
@@ -22,7 +24,7 @@ Analyzer.propTypes = {
   analyses: PropTypes.arrayOf(PropTypes.object).isRequired,
   analyze: PropTypes.func.isRequired,
   inputAnalysisLibrary: PropTypes.func.isRequired,
-  libraryInput: PropTypes.string.isRequired
+  libraryInput: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -33,7 +35,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(actions, dispatch);
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Analyzer);
+export default connect(mapStateToProps, mapDispatchToProps)(Analyzer);

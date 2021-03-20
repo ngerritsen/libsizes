@@ -1,10 +1,10 @@
-const constants = require('./constants');
+const constants = require("./constants");
 
 function analysisRequested(id, libraryString) {
   return {
     type: constants.ANALYSIS_REQUESTED,
     libraryString,
-    id
+    id,
   };
 }
 
@@ -12,7 +12,7 @@ function analysisStarted(id, version) {
   return {
     type: constants.ANALYSIS_STARTED,
     version,
-    id
+    id,
   };
 }
 
@@ -22,7 +22,7 @@ function analysisSkipped(id, existing, version) {
     type: constants.ANALYSIS_SKIPPED,
     result: { normal, minified, gzipped },
     version,
-    id
+    id,
   };
 }
 
@@ -30,7 +30,7 @@ function analysisProgressed(id, message) {
   return {
     type: constants.ANALYSIS_PROGRESSED,
     message,
-    id
+    id,
   };
 }
 
@@ -38,7 +38,7 @@ function analysisSucceeded(id, result) {
   return {
     type: constants.ANALYSIS_SUCCEEDED,
     result,
-    id
+    id,
   };
 }
 
@@ -46,7 +46,7 @@ function analysisFailed(id, error) {
   return {
     type: constants.ANALYSIS_FAILED,
     error,
-    id
+    id,
   };
 }
 
@@ -56,5 +56,5 @@ module.exports = {
   analysisSkipped,
   analysisProgressed,
   analysisSucceeded,
-  analysisFailed
+  analysisFailed,
 };

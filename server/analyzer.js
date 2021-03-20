@@ -1,46 +1,42 @@
-const path = require('path');
-const co = require('co');
-const BPromise = require('bluebird');
-const rimraf = require('rimraf');
-const mkdirp = require('mkdirp');
+const path = require("path");
+const util = require("util");
+const rimraf = util.promisify(require("rimraf"));
+const mkdirp = util.promisify(require("mkdirp"));
 
-const { measureFilesizes } = require('./helpers/sizes');
-const { TMP_DIR, PRODUCTION, DEVELOPMENT } = require('./constants');
-const { install } = require('./helpers/npm');
-const { buildLibrary } = require('./helpers/webpack');
+const { TMP_DIR, PRODUCTION, DEVELOPMENT } = require("./constants");
 
-const mkdirpAsync = BPromise.promisify(mkdirp);
-const rimrafAsync = BPromise.promisify(rimraf);
+class Analyzer {
+  constructor(npm, webpack, filesizes) {
+    this._npm = npm;
+    this._webpack = webpack;
+    this._filesizes = filesizes;
+  }
 
-function analyzeLibrary(library, analysisId, onProgress) {
-  return BPromise.resolve(co(run(library, analysisId, onProgress)));
-}
+  async analyze(library, analysisId, onProgress) {
+    const dir = path.resolve(TMP_DIR, analysisId);
 
-function* run(library, analysisId, onProgress) {
-  // eslint-disable-line max-statements
-  const dir = path.resolve(TMP_DIR, analysisId);
+    try {
+      await mkdirp(dir);
 
-  try {
-    yield mkdirpAsync(dir);
+      onProgress(`Installing ${library.name}@${library.version}...`);
+      await this._npm.install(library, dir, onProgress);
 
-    onProgress(`Installing ${library.name}@${library.version}...`);
-    yield install(library, dir, onProgress);
+      onProgress("Running webpack build...");
+      await this._webpack.build(library, dir, DEVELOPMENT);
 
-    onProgress('Running webpack build...');
-    yield buildLibrary(library, dir, DEVELOPMENT);
+      onProgress("Running webpack minified build...");
+      await this._webpack.build(library, dir, PRODUCTION);
 
-    onProgress('Running webpack minified build...');
-    yield buildLibrary(library, dir, PRODUCTION);
-
-    onProgress('Measuring sizes...');
-    return measureFilesizes(dir);
-  } catch (error) {
-    yield rimrafAsync(dir);
-    throw error;
-  } finally {
-    onProgress('Cleaning up...');
-    yield rimrafAsync(dir);
+      onProgress("Measuring sizes...");
+      return this._filesizes.measure(dir);
+    } catch (error) {
+      await rimraf(dir);
+      throw error;
+    } finally {
+      onProgress("Cleaning up...");
+      await rimraf(dir);
+    }
   }
 }
 
-module.exports = analyzeLibrary;
+module.exports = Analyzer;

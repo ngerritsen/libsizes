@@ -1,16 +1,16 @@
-const pg = require('pg');
+const pg = require("pg");
 
 const productionConfig = process.env.DATABASE_URL;
 const config = productionConfig || {
-  user: 'dev',
-  password: 'development',
-  database: 'libsizes'
+  user: "dev",
+  password: "development",
+  database: "libsizes",
 };
 
 function initializeDb() {
-  pg.defaults.ssl = !!productionConfig;
+  const client = new pg.Pool({ ...config, ssl: Boolean(productionConfig) });
 
-  return pg.connect(config).then(client => initializeTables(client).then(() => client));
+  return initializeTables(client).then(() => client);
 }
 
 function initializeTables(client) {

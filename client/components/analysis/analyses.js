@@ -1,7 +1,9 @@
-import React, { PropTypes } from 'react';
-import { Analysis } from '..';
+import React from "react";
+import PropTypes from "prop-types";
 
-import '../../styles/analysis/analyses.scss';
+import Analysis from "./Analysis";
+
+import "../../styles/analysis/analyses.scss";
 
 function Analyses({ analyses }) {
   return (
@@ -9,7 +11,7 @@ function Analyses({ analyses }) {
       {analyses
         .slice()
         .reverse()
-        .map(analysis => (
+        .map((analysis) => (
           <Analysis key={analysis.id} {...analysis} />
         ))}
     </ul>
@@ -17,7 +19,7 @@ function Analyses({ analyses }) {
 }
 
 Analyses.propTypes = {
-  analyses: PropTypes.arrayOf(PropTypes.object).isRequired
+  analyses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Analyses;

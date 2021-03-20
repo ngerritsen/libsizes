@@ -1,37 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute } from 'react-router';
-import { createBrowserHistory } from 'history';
+import "regenerator-runtime/runtime";
 
-import reducer from './reducers';
-import createLogger from 'redux-logger';
-import createSagaMiddleware from 'redux-saga';
-import rootSaga from './sagas';
-import { App, Browser, Analyzer, Details } from './containers';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import './styles/global.scss';
+import App from "./components/App";
+import Browser from "./components/Browser";
+import Analyzer from "./components/Analyzer";
+import Details from "./components/Details";
 
-const sagaMiddleware = createSagaMiddleware();
-const middlewares = [sagaMiddleware];
+import store from "./store";
 
-if (process.env.NODE_ENV === 'development') {
-  middlewares.push(createLogger());
-}
-
-const store = createStore(reducer, applyMiddleware(...middlewares));
-sagaMiddleware.run(rootSaga);
+import "./styles/global.scss";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={createBrowserHistory()}>
-      <Route path="/" component={App}>
-        <IndexRoute component={Browser} />
-        <Route path="analyze" component={Analyzer} />
-        <Route path="library/:library" component={Details} />
-      </Route>
-    </Router>
+    <BrowserRouter>
+      <App>
+        <Switch>
+          <Route path="/" exact component={Browser} />
+          <Route path="/analyze" component={Analyzer} />
+          <Route path="/library/:library" component={Details} />
+        </Switch>
+      </App>
+    </BrowserRouter>
   </Provider>,
-  document.getElementById('app-container')
+  document.getElementById("app-container")
 );

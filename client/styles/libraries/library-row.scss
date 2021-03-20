@@ -1,11 +1,11 @@
-@import '../variables/colors';
+@import "../variables/colors";
 
 .version {
   color: lighten($color-text, 25%);
 }
 
 .unit {
-  font-size: .8em;
+  font-size: 0.8em;
   color: lighten($color-text, 30%);
 }
 

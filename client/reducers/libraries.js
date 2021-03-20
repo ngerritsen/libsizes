@@ -1,13 +1,13 @@
-import { mapReducers } from 'redux-map-reducers';
+import { mapReducers } from "redux-map-reducers";
 
-import * as constants from '../constants';
+import * as constants from "../constants";
 
 const initialState = {
   libraries: [],
-  sortBy: 'name',
+  sortBy: "name",
   sortReversed: false,
   usedLibraries: [],
-  searchTerms: ''
+  searchTerms: "",
 };
 
 const reducerMap = {
@@ -15,42 +15,42 @@ const reducerMap = {
   [constants.USE]: use,
   [constants.STOP_USING]: stopUsing,
   [constants.SEARCH]: search,
-  [constants.FETCH_LIBRARIES_SUCCEEDED]: fetchLibrariesSucceeded
+  [constants.FETCH_LIBRARIES_SUCCEEDED]: fetchLibrariesSucceeded,
 };
 
 function sort(state, { sortBy }) {
   return {
     ...state,
     sortBy,
-    sortReversed: state.sortBy === sortBy ? !state.sortReversed : false
+    sortReversed: state.sortBy === sortBy ? !state.sortReversed : false,
   };
 }
 
 function use(state, { library }) {
   return {
     ...state,
-    usedLibraries: [...state.usedLibraries, library]
+    usedLibraries: [...state.usedLibraries, library],
   };
 }
 
 function stopUsing(state, { library }) {
   return {
     ...state,
-    usedLibraries: state.usedLibraries.filter(({ name }) => name !== library)
+    usedLibraries: state.usedLibraries.filter(({ name }) => name !== library),
   };
 }
 
 function search(state, { searchTerms }) {
   return {
     ...state,
-    searchTerms
+    searchTerms,
   };
 }
 
 function fetchLibrariesSucceeded(state, { libraries }) {
   return {
     ...state,
-    libraries
+    libraries,
   };
 }
 

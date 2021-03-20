@@ -1,10 +1,22 @@
-import React, { PropTypes } from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { LibraryRow, MinificationNote, LibraryTotals, SortableColumnHeading } from '..';
+import LibraryRow from "./LibraryRow";
+import MinificationNote from "../MinificationNote";
+import LibraryTotals from "./LibraryTotals";
+import SortableColumnHeading from "./SortableColumnHeading";
 
-import '../../styles/libraries/library-list.scss';
+import "../../styles/libraries/library-list.scss";
 
-function LibraryList({ libraries, sort, sortBy, sortReversed, stopUsing, totals, use }) {
+function LibraryList({
+  libraries,
+  sort,
+  sortBy,
+  sortReversed,
+  stopUsing,
+  totals,
+  use,
+}) {
   const sortHeadingProps = { sort, sortBy, sortReversed };
   return (
     <div>
@@ -14,9 +26,17 @@ function LibraryList({ libraries, sort, sortBy, sortReversed, stopUsing, totals,
             <th>
               <span className="hide-mobile">Use</span>
             </th>
-            <SortableColumnHeading {...sortHeadingProps} prop="name" title="Name" />
+            <SortableColumnHeading
+              {...sortHeadingProps}
+              prop="name"
+              title="Name"
+            />
             <th className="hide-mobile">Version</th>
-            <SortableColumnHeading {...sortHeadingProps} prop="normal" title="Normal" />
+            <SortableColumnHeading
+              {...sortHeadingProps}
+              prop="normal"
+              title="Normal"
+            />
             <SortableColumnHeading
               {...sortHeadingProps}
               prop="minified"
@@ -32,9 +52,9 @@ function LibraryList({ libraries, sort, sortBy, sortReversed, stopUsing, totals,
           </tr>
         </thead>
         <tbody>
-          {libraries.map(library => (
+          {libraries.map((library) => (
             <LibraryRow
-              key={library.name + '@' + library.version}
+              key={library.name + "@" + library.version}
               {...library}
               stopUsing={stopUsing}
               use={use}
@@ -55,7 +75,7 @@ LibraryList.propTypes = {
   sortReversed: PropTypes.bool.isRequired,
   stopUsing: PropTypes.func.isRequired,
   totals: PropTypes.object.isRequired,
-  use: PropTypes.func.isRequired
+  use: PropTypes.func.isRequired,
 };
 
 export default LibraryList;

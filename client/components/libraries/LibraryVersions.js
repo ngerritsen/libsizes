@@ -1,13 +1,20 @@
-import React, { PropTypes } from 'react';
+import React from "react";
 
-import { bytesToKb } from '../../helpers';
-import { MinificationNote } from '..';
+import { bytesToKb } from "../../helpers";
+import MinificationNote from "../MinificationNote";
 
-import '../../styles/libraries/library-list.scss';
+import { useSelector } from "react-redux";
+import { getVersions } from "../../selectors";
+import { useParams } from "react-router-dom";
 
-function LibraryVersions({ versions }) {
+import "../../styles/libraries/library-list.scss";
+
+const LibraryVersions = () => {
+  const params = useParams();
+  const versions = useSelector((state) => getVersions(state, params.library));
+
   return (
-    <div>
+    <>
       <table className="library-list">
         <thead>
           <tr>
@@ -34,13 +41,10 @@ function LibraryVersions({ versions }) {
           ))}
         </tbody>
       </table>
-      <MinificationNote />
-    </div>
-  );
-}
 
-LibraryVersions.propTypes = {
-  versions: PropTypes.array.isRequired
+      <MinificationNote />
+    </>
+  );
 };
 
 export default LibraryVersions;

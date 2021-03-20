@@ -1,5 +1,5 @@
-@import '../variables/colors';
-@import '../variables/variables';
+@import "../variables/colors";
+@import "../variables/variables";
 
 $library-list-row-height: 3.7rem;
 
@@ -14,7 +14,7 @@ $library-list-row-height: 3.7rem;
     border-bottom: 1px solid $color-light-grey;
 
     input[type="checkbox"] {
-      margin-top: .5rem;
+      margin-top: 0.5rem;
     }
   }
 

@@ -1,7 +1,7 @@
-@import 'variables/colors';
-@import 'variables/variables';
-@import 'shared/buttons';
-@import 'shared/inputs';
+@import "variables/colors";
+@import "variables/variables";
+@import "shared/buttons";
+@import "shared/inputs";
 
 html {
   font-size: 67.5%;
@@ -16,11 +16,13 @@ body {
 body {
   background-color: $color-white;
   color: $color-text;
-  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
   font-size: 1.4rem;
 }
 
-*,*:before,*:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 

@@ -1,20 +1,18 @@
-/* eslint-disable no-constant-condition */
+import io from "socket.io-client";
+import shortId from "shortid";
+import { eventChannel } from "redux-saga";
+import { put, take, call, takeEvery } from "redux-saga/effects";
 
-import io from 'socket.io-client';
-import shortId from 'shortid';
-import { takeEvery, eventChannel } from 'redux-saga';
-import { put, take, call } from 'redux-saga/effects';
-
-import { ANALYZE } from '../constants';
-import * as request from '../request';
+import { ANALYZE } from "../constants";
+import * as request from "../request";
 
 import {
   analysisRequested,
   analysisStarted,
   analysisFailed,
-  analysisSkipped
-} from '../../shared/actions';
-import { ANALYSIS_UPDATED } from '../../shared/constants';
+  analysisSkipped,
+} from "../../shared/actions";
+import { ANALYSIS_UPDATED } from "../../shared/constants";
 
 export function* analyzeSaga() {
   yield takeEvery(ANALYZE, analyze);
@@ -35,7 +33,9 @@ function* analyze({ libraryString }) {
 
   yield put(analysisRequested(analysisId, libraryString));
 
-  const result = yield call(request.post, `/api/analyses/${analysisId}`, { libraryString });
+  const result = yield call(request.post, `/api/analyses/${analysisId}`, {
+    libraryString,
+  });
 
   if (result.success) {
     yield put(determineAction(analysisId, result));
@@ -52,8 +52,8 @@ function determineAction(analysisId, { exists, existing, version }) {
 }
 
 function createAnalysesReadChannel(socket) {
-  return eventChannel(emitter => {
-    socket.on(ANALYSIS_UPDATED, action => {
+  return eventChannel((emitter) => {
+    socket.on(ANALYSIS_UPDATED, (action) => {
       emitter(action);
     });
 
@@ -62,9 +62,9 @@ function createAnalysesReadChannel(socket) {
 }
 
 function connect() {
-  const socket = io('/');
-  return new Promise(resolve => {
-    socket.on('connect', () => {
+  const socket = io("/");
+  return new Promise((resolve) => {
+    socket.on("connect", () => {
       resolve(socket);
     });
   });
