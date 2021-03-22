@@ -1,0 +1,13 @@
+{
+  "include": ["client/**/*", "shared/**/*"],
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "strict": true,
+    "jsx": "react",
+    "esModuleInterop": true,
+    "outDir": "public",
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  }
+}

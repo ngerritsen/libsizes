@@ -1,8 +1,14 @@
 "use strict";
 
 module.exports = {
-  extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
-  plugins: ["react"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "prettier",
+  ],
+  plugins: ["@typescript-eslint", "react"],
+  parser: "@typescript-eslint/parser",
   env: {
     browser: true,
     node: true,
