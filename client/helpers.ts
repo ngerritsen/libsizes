@@ -107,5 +107,5 @@ export function bytesToKb(bytes: number): number {
     return Math.round(bytes / 102.4) / 10;
   }
 
-  return Math.round(bytes / 1024, 1);
+  return Math.round(bytes / 1024);
 }
