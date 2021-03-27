@@ -13,8 +13,9 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node lib",
-    "build": "concurrently 'npm run build:client' 'npm run build:server' 'npm test'",
+    "start": "node lib/server",
+    "clean": "rm -rf dist; rm -rf lib",
+    "build": "npm run clean; concurrently 'npm run build:client' 'npm run build:server' 'npm test'",
     "build:client": "parcel build ./client/index.html  -d ./public",
     "build:server": "tsc --project tsconfig.server.json",
     "serve": "npm run serve:db; concurrently 'npm run serve:client' 'npm run serve:server'",
