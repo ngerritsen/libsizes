@@ -19,7 +19,7 @@
     "build:server": "tsc --project tsconfig.server.json",
     "serve": "npm run serve:db; concurrently 'npm run serve:client' 'npm run serve:server'",
     "serve:server": "nodemon --exec ts-node --project tsconfig.server.json ./server/index.ts",
-    "serve:client": "parcel ./client/index.html",
+    "serve:client": "parcel ./client/index.html -d ./public",
     "serve:db": "docker-compose up -d",
     "connect:db": "docker exec -it libsizes-postgresql sudo -u postgres psql",
     "test": "concurrently 'eslint .' 'prettier --check .'",
