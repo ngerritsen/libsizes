@@ -3,6 +3,9 @@ import * as helpers from "./helpers";
 import { RootState } from "./store";
 import { Analysis, Library } from "./types";
 
+export const getLibrariesFetching = (state: RootState): boolean =>
+  state.libraries.fetching;
+
 export const getLibraries = (state: RootState): Library[] =>
   state.libraries.libraries;
 

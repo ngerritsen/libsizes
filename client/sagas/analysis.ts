@@ -53,7 +53,7 @@ function* analyze({ payload: libraryString }: PayloadAction<string>) {
     }
     return;
   }
-console.log(result)
+  console.log(result);
   yield put(
     serverActions.analysisFailed({
       id: analysisId,

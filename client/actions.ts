@@ -11,6 +11,9 @@ export const sort = createAction<string>("libraries/sort");
 export const use = createAction<string>("libraries/use");
 export const stopUsing = createAction<string>("libraries/stopUsing");
 export const search = createAction<string>("libraries/search");
+
+export const fetchLibraries = createAction("libraries/fetch");
 export const fetchLibrariesSucceeded = createAction<AnalyzedLibrary[]>(
   "libraries/fetchSucceeded"
 );
+export const fetchLibrariesFailed = createAction("libraries/fetchFailed");

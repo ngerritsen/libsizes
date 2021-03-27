@@ -8,6 +8,7 @@ type LibrariesState = {
   sortReversed: boolean;
   usedLibraries: string[];
   searchTerms: string;
+  fetching: boolean;
 };
 
 const initialState: LibrariesState = {
@@ -16,6 +17,7 @@ const initialState: LibrariesState = {
   sortReversed: false,
   usedLibraries: [],
   searchTerms: "",
+  fetching: false,
 };
 
 export default createReducer<LibrariesState>(initialState, (builder) =>
@@ -36,7 +38,14 @@ export default createReducer<LibrariesState>(initialState, (builder) =>
     .addCase(actions.search, (state, { payload }) => {
       state.searchTerms = payload;
     })
+    .addCase(actions.fetchLibraries, (state) => {
+      state.fetching = true;
+    })
+    .addCase(actions.fetchLibrariesFailed, (state) => {
+      state.fetching = false;
+    })
     .addCase(actions.fetchLibrariesSucceeded, (state, { payload }) => {
       state.libraries = payload;
+      state.fetching = false;
     })
 );

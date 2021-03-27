@@ -3,6 +3,11 @@
 
 $library-list-row-height: 3.7rem;
 
+.library-list__loader {
+  text-align: center;
+  margin: 10vh 0;
+}
+
 .library-list {
   border-collapse: collapse;
   width: 100%;

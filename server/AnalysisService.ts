@@ -58,7 +58,9 @@ export default class AnalysisService {
     const dir = path.resolve(TMP_DIR, analysisId);
 
     try {
-      this._emit(actions.analysisStarted({ id: analysisId, version: library.version }));
+      this._emit(
+        actions.analysisStarted({ id: analysisId, version: library.version })
+      );
       await mkdirpAsync(dir, undefined);
 
       this._onProgress(

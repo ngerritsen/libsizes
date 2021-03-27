@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import LibraryRow from "./LibraryRow";
 import MinificationNote from "../MinificationNote";
@@ -6,11 +7,22 @@ import LibraryTotals from "./LibraryTotals";
 import SortableColumnHeading from "./SortableColumnHeading";
 
 import "../../styles/libraries/library-list.scss";
-import { getMarkedSearchedAndSortedLibraries } from "../../selectors";
-import { useSelector } from "react-redux";
+import {
+  getLibrariesFetching,
+  getMarkedSearchedAndSortedLibraries,
+} from "../../selectors";
 
 const LibraryList = (): JSX.Element => {
   const libraries = useSelector(getMarkedSearchedAndSortedLibraries);
+  const fetching = useSelector(getLibrariesFetching);
+
+  if (fetching) {
+    return (
+      <div className="library-list__loader">
+        <i className="fa fa-lg fa-circle-o-notch fa-spin" />
+      </div>
+    );
+  }
 
   return (
     <div>
