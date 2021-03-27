@@ -4,7 +4,7 @@ import { put, call, takeEvery, Effect } from "redux-saga/effects";
 import { analysisSucceeded } from "../../shared/actions";
 
 import { fetchLibrariesSucceeded } from "../actions";
-import {host} from "../api";
+import { host } from "../api";
 import * as request from "../request";
 
 export function* fetchLibrariesSaga(): Generator<Effect> {
