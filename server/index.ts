@@ -11,6 +11,7 @@ import AnalysisService from "./AnalysisService";
 import Npm from "./Npm";
 import Webpack from "./Webpack";
 import Filesizes from "./Filesizes";
+import { DEV_SERVER_PORT } from "../shared/constants";
 
 initializeDb()
   .then(initializeApp)
@@ -23,7 +24,7 @@ function initializeApp(client: Pool) {
   const app = express();
   const server = new Server(app);
   const io = socketIo(server);
-  const port = process.env.PORT || 8022;
+  const port = process.env.PORT || DEV_SERVER_PORT;
 
   const libraryRepository = new LibraryRepository(client);
   const analysisService = new AnalysisService(

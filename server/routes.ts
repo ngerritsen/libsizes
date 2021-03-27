@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import cors from "cors";
 import path from "path";
 import LibraryRepository from "./LibraryRepository";
 import AnalysisService from "./AnalysisService";
@@ -12,6 +13,11 @@ export default function routes(
 ): void {
   app.use(express.json());
   app.use(express.static("public"));
+  app.use(
+    cors({
+      origin: true,
+    })
+  );
 
   app.get("/api/libraries", (req, res) => {
     libraryRepository.getAll().then((result) => res.json(result));
