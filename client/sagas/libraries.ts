@@ -4,6 +4,7 @@ import { put, call, takeEvery, Effect } from "redux-saga/effects";
 import { analysisSucceeded } from "../../shared/actions";
 
 import { fetchLibrariesSucceeded } from "../actions";
+import {host} from "../api";
 import * as request from "../request";
 
 export function* fetchLibrariesSaga(): Generator<Effect> {
@@ -12,6 +13,6 @@ export function* fetchLibrariesSaga(): Generator<Effect> {
 }
 
 function* fetchLibraries() {
-  const libraries = yield call(request.get, "/api/libraries");
+  const libraries = yield call(request.get, host + "/api/libraries");
   yield put(fetchLibrariesSucceeded(libraries));
 }

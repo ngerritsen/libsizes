@@ -9,6 +9,7 @@ import * as actions from "../actions";
 import * as serverActions from "../../shared/actions";
 import { ANALYSIS_UPDATED } from "../../shared/constants";
 import { PayloadAction } from "@reduxjs/toolkit";
+import {host} from "../api";
 
 export function* analyzeSaga(): Iterable<Effect> {
   yield takeEvery(String(actions.analyze), analyze);
@@ -32,7 +33,7 @@ function* analyze({ payload: libraryString }: PayloadAction<string>) {
 
   yield put(serverActions.analysisRequested({ id: analysisId, libraryString }));
 
-  const result = yield call(request.post, `/api/analyses/${analysisId}`, {
+  const result = yield call(request.post, `${host}/api/analyses/${analysisId}`, {
     libraryString,
   });
 
@@ -70,7 +71,7 @@ function createAnalysesReadChannel(socket) {
 }
 
 function connect() {
-  const socket = io("/");
+  const socket = io(host + "/");
   return new Promise((resolve) => {
     socket.on("connect", () => {
       resolve(socket);
