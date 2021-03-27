@@ -42,26 +42,24 @@ function* analyze({ payload: libraryString }: PayloadAction<string>) {
   );
 
   if (result.success) {
-    yield put(determineAction(analysisId, result));
+    if (result.exists) {
+      yield put(
+        serverActions.analysisSkipped({
+          id: analysisId,
+          result: result.existing,
+          version: result.version,
+        })
+      );
+    }
     return;
   }
-
+console.log(result)
   yield put(
     serverActions.analysisFailed({
       id: analysisId,
-      error: result.error.message,
+      error: result.error,
     })
   );
-}
-
-function determineAction(analysisId, { exists, existing, version }) {
-  return exists
-    ? serverActions.analysisSkipped({
-        id: analysisId,
-        result: existing,
-        version,
-      })
-    : serverActions.analysisStarted({ id: analysisId, version });
 }
 
 function createAnalysesReadChannel(socket) {

@@ -32,7 +32,7 @@ export default createReducer<AnalysisState>(initialState, (builder) =>
       serverActions.analysisStarted,
       (state, { payload: { id, version } }) => {
         state.analyses = updateAnalysis(state.analyses, id, {
-          status: AnalysisStatus.Pending,
+          status: AnalysisStatus.Waiting,
           version,
         });
       }
@@ -51,7 +51,7 @@ export default createReducer<AnalysisState>(initialState, (builder) =>
       serverActions.analysisProgressed,
       (state, { payload: { id, message } }) => {
         state.analyses = updateAnalysis(state.analyses, id, {
-          status: AnalysisStatus.Skipped,
+          status: AnalysisStatus.Pending,
           message,
         });
       }
@@ -60,7 +60,7 @@ export default createReducer<AnalysisState>(initialState, (builder) =>
       serverActions.analysisSucceeded,
       (state, { payload: { id, result } }) => {
         state.analyses = updateAnalysis(state.analyses, id, {
-          status: AnalysisStatus.Skipped,
+          status: AnalysisStatus.Succeeded,
           result,
         });
       }
@@ -69,7 +69,7 @@ export default createReducer<AnalysisState>(initialState, (builder) =>
       serverActions.analysisFailed,
       (state, { payload: { id, error } }) => {
         state.analyses = updateAnalysis(state.analyses, id, {
-          status: AnalysisStatus.Skipped,
+          status: AnalysisStatus.Failed,
           error,
         });
       }

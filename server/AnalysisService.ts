@@ -58,6 +58,7 @@ export default class AnalysisService {
     const dir = path.resolve(TMP_DIR, analysisId);
 
     try {
+      this._emit(actions.analysisStarted({ id: analysisId, version: library.version }));
       await mkdirpAsync(dir, undefined);
 
       this._onProgress(
@@ -85,6 +86,9 @@ export default class AnalysisService {
         analysisId
       );
 
+      this._onProgress(analysisId, "Cleaning up...");
+      await rimrafAsync(dir);
+
       this._emit(actions.analysisSucceeded({ id: analysisId, result }));
     } catch (error) {
       this._emit(
@@ -93,9 +97,6 @@ export default class AnalysisService {
       winston.error(error.message, { analysisId });
       await rimrafAsync(dir);
       throw error;
-    } finally {
-      this._onProgress(analysisId, "Cleaning up...");
-      await rimrafAsync(dir);
     }
   }
 
