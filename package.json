@@ -32,7 +32,7 @@
     "eslint-config-prettier": "^8.1.0",
     "express": "^4.17.1",
     "gzip-size": "^3.0.0",
-    "lodash": "^4.17.2",
+    "lodash": "^4.17.21",
     "mkdirp": "^0.5.1",
     "parcel-bundler": "^1.12.5",
     "pg": "^8.5.1",
