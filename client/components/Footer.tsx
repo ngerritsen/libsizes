@@ -12,8 +12,7 @@ const Footer = (): JSX.Element => (
       rel="noreferrer"
       title="Check out the Github repository"
     >
-      <span className="footer__github-icon octicon octicon-mark-github" /> View
-      on Github
+      <i className="fa-brands fa-gitlab" /> &nbsp; View on GitLab
     </a>
 
     <p className="footer-text">
